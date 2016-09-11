@@ -215,6 +215,11 @@ static int spl_load_fit_image(struct spl_load_info *info, ulong sector,
 	return 0;
 }
 
+__weak u8 spl_genimg_get_arch_id(const char *arch_str)
+{
+	return IH_ARCH_DEFAULT;
+}
+
 int spl_load_simple_fit(struct spl_image_info *spl_image,
 			struct spl_load_info *info, ulong sector, void *fit)
 {
@@ -227,6 +232,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
 	int images, ret;
 	int base_offset, align_len = ARCH_DMA_MINALIGN - 1;
 	int index = 0;
+	const char *arch_str;
 
 	/*
 	 * For FIT with external data, figure out where the external images
@@ -306,7 +312,9 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
 	if (!fit_image_get_os(fit, node, &spl_image->os))
 		debug("Image OS is %s\n", genimg_get_os_name(spl_image->os));
 #else
+	arch_str = fdt_getprop(fit, node, "arch", NULL);
 	spl_image->os = IH_OS_U_BOOT;
+	spl_image->arch = spl_genimg_get_arch_id(arch_str);
 #endif
 
 	if (!boot_os) {
