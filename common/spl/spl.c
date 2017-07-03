@@ -119,12 +119,12 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
 		}
 		spl_image->os = image_get_os(header);
 		spl_image->name = image_get_name(header);
-		debug("spl: payload image: %.*s load addr: 0x%lx size: %d\n",
+		printf("spl: payload image: %.*s load addr: 0x%lx size: %d\n",
 			(int)sizeof(spl_image->name), spl_image->name,
 			spl_image->load_addr, spl_image->size);
 #else
 		/* LEGACY image not supported */
-		debug("Legacy boot image support not enabled, proceeding to other boot methods");
+		printf("Legacy boot image support not enabled, proceeding to other boot methods");
 		return -EINVAL;
 #endif
 	} else {
@@ -149,7 +149,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
 			spl_image->load_addr = CONFIG_SYS_LOAD_ADDR;
 			spl_image->entry_point = CONFIG_SYS_LOAD_ADDR;
 			spl_image->size = end - start;
-			debug("spl: payload zImage, load addr: 0x%lx size: %d\n",
+			printf("spl: payload zImage, load addr: 0x%lx size: %d\n",
 			      spl_image->load_addr, spl_image->size);
 			return 0;
 		}
@@ -157,12 +157,12 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
 
 #ifdef CONFIG_SPL_RAW_IMAGE_SUPPORT
 		/* Signature not found - assume u-boot.bin */
-		debug("mkimage signature not found - ih_magic = %x\n",
+		printf("mkimage signature not found - ih_magic = %x\n",
 			header->ih_magic);
 		spl_set_header_raw_uboot(spl_image);
 #else
 		/* RAW image not supported, proceed to other boot methods. */
-		debug("Raw boot image support not enabled, proceeding to other boot methods");
+		printf("Raw boot image support not enabled, proceeding to other boot methods");
 		return -EINVAL;
 #endif
 	}
@@ -177,7 +177,7 @@ __weak void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
 	image_entry_noargs_t image_entry =
 		(image_entry_noargs_t)spl_image->entry_point;
 
-	debug("image entry point: 0x%lX\n", spl_image->entry_point);
+	printf("image entry point: 0x%lX\n", spl_image->entry_point);
 	image_entry();
 }
 
@@ -185,7 +185,7 @@ static int spl_common_init(bool setup_malloc)
 {
 	int ret;
 
-	debug("spl_early_init()\n");
+	printf("spl_early_init()\n");
 
 #if defined(CONFIG_SYS_MALLOC_F_LEN)
 	if (setup_malloc) {
@@ -199,7 +199,7 @@ static int spl_common_init(bool setup_malloc)
 	if (CONFIG_IS_ENABLED(OF_CONTROL) && !CONFIG_IS_ENABLED(OF_PLATDATA)) {
 		ret = fdtdec_setup();
 		if (ret) {
-			debug("fdtdec_setup() returned error %d\n", ret);
+			printf("fdtdec_setup() returned error %d\n", ret);
 			return ret;
 		}
 	}
@@ -207,7 +207,7 @@ static int spl_common_init(bool setup_malloc)
 		/* With CONFIG_SPL_OF_PLATDATA, bring in all devices */
 		ret = dm_init_and_scan(!CONFIG_IS_ENABLED(OF_PLATDATA));
 		if (ret) {
-			debug("dm_init_and_scan() returned error %d\n", ret);
+			printf("dm_init_and_scan() returned error %d\n", ret);
 			return ret;
 		}
 	}
@@ -321,7 +321,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 	};
 	struct spl_image_info spl_image;
 
-	debug(">>spl:board_init_r()\n");
+	printf(">>spl:board_init_r()\n");
 
 #if defined(CONFIG_SYS_SPL_MALLOC_START)
 	mem_malloc_init(CONFIG_SYS_SPL_MALLOC_START,
@@ -355,24 +355,24 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 
 	switch (spl_image.os) {
 	case IH_OS_U_BOOT:
-		debug("Jumping to U-Boot\n");
+		printf("Jumping to U-Boot\n");
 		break;
 #ifdef CONFIG_SPL_OS_BOOT
 	case IH_OS_LINUX:
-		debug("Jumping to Linux\n");
+		printf("Jumping to Linux\n");
 		spl_board_prepare_for_linux();
 		jump_to_image_linux(&spl_image,
 				    (void *)CONFIG_SYS_SPL_ARGS_ADDR);
 #endif
 	default:
-		debug("Unsupported OS image.. Jumping nevertheless..\n");
+		printf("Unsupported OS image.. Jumping nevertheless..\n");
 	}
 #if defined(CONFIG_SYS_MALLOC_F_LEN) && !defined(CONFIG_SYS_SPL_MALLOC_SIZE)
-	debug("SPL malloc() used %#lx bytes (%ld KB)\n", gd->malloc_ptr,
+	printf("SPL malloc() used %#lx bytes (%ld KB)\n", gd->malloc_ptr,
 	      gd->malloc_ptr / 1024);
 #endif
 
-	debug("loaded - jumping to U-Boot...\n");
+	printf("loaded - jumping to U-Boot...\n");
 	spl_board_prepare_for_boot();
 	jump_to_image_no_args(&spl_image);
 }

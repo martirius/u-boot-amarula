@@ -549,6 +549,15 @@ static void spl_dram_init(void)
 	udelay(100);
 }
 
+int spl_start_uboot(void)
+{
+        /* break into full u-boot on 'c' */
+        if (serial_tstc() && serial_getc() == 'c')
+                return 1;
+
+        return 0;
+}
+
 void board_init_f(ulong dummy)
 {
 	ccgr_init();
