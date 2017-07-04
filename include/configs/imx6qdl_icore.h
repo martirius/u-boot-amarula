@@ -13,6 +13,12 @@
 #include <linux/sizes.h>
 #include "mx6_common.h"
 
+/* Secure boot (HAB) support */
+#ifdef CONFIG_SECURE_BOOT
+# define CONFIG_CSF_SIZE		0x2000
+# define CONFIG_SYS_FSL_SEC_COMPAT	4
+#endif
+
 /* Falcon Mode */
 #define CONFIG_SPL_FS_LOAD_ARGS_NAME	"args"
 #define CONFIG_SPL_FS_LOAD_KERNEL_NAME	"uImage"
