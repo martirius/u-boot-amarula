@@ -63,6 +63,18 @@ config MACH_SUNXI_H3_H5
 	select SUNXI_GEN_SUN6I
 	select SUPPORT_SPL
 
+config MACH_SUN50I
+	bool
+	select SUNXI_GEN_SUN6I
+	select SUPPORT_SPL
+	select SUNXI_HIGH_SRAM
+	select DM_I2C
+	select SUNXI_DE2
+	select SUNXI_DRAM_DW
+	select SUNXI_DRAM_DW_32BIT
+	select FIT
+	select SPL_LOAD_FIT
+
 choice
 	prompt "Sunxi SoC Variant"
 	optional
@@ -167,18 +179,15 @@ config MACH_SUN9I
 	select SUNXI_GEN_SUN6I
 	select SUPPORT_SPL
 
-config MACH_SUN50I
+config MACH_SUN50I_64
 	bool "sun50i (Allwinner A64)"
+	select MACH_SUN50I
 	select ARM64
-	select DM_I2C
-	select SUNXI_DE2
-	select SUNXI_GEN_SUN6I
-	select SUNXI_HIGH_SRAM
-	select SUPPORT_SPL
-	select SUNXI_DRAM_DW
-	select SUNXI_DRAM_DW_32BIT
-	select FIT
-	select SPL_LOAD_FIT
+
+config MACH_SUN50I_32
+	bool "sun50i (Allwinner A64) SPL-32bit"
+	select MACH_SUN50I
+	select CPU_V7
 
 config MACH_SUN50I_H5
 	bool "sun50i (Allwinner H5)"
