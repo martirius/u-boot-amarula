@@ -1,0 +1,96 @@
+Boot from NAND for i.CoreM6:
+============================
+
+Requirement:
+1) Mainline u-boot and build for nand 
+2) Stub u-boot for nand write commands
+
+1) Mainline u-boot
+# git clone git://git.denx.de/u-boot.git
+# cd u-boot
+# make imx6qdl_icore_nand_defconfig && make -j 4
+
+2) Stub u-boot
+# git clone https://github.com/openedev/u-boot-amarula
+# cd u-boot-amarula
+# git checkout -b icore-nand origin/icore-nand
+# make imx6qdl_icore_mmc_defconfig && make -j 4
+
+COPY SPL and u-boot-dtb.img from setp 1) on to SDCard and 
+boot from MMC.
+
+Flash procedure:
+---------------
+icorem6qdl> mtdparts
+
+device nand0 <gpmi-nand>, # parts = 6
+
+ #: name                size            offset          mask_flags
+
+ 0: spl                 0x00200000      0x00000000      0
+
+ 1: uboot               0x00200000      0x00200000      0
+
+ 2: env                 0x00100000      0x00400000      0
+
+ 3: kernel              0x00400000      0x00500000      0
+
+ 4: dtb                 0x00100000      0x00900000      0
+
+ 5: rootfs              0x1f600000      0x00a00000      0
+
+
+active partition: nand0,0 - (spl) 0x00200000 @ 0x00000000
+
+
+defaults:
+
+mtdids  : nand0=gpmi-nand
+
+mtdparts: mtdparts=gpmi-nand:2m(spl),2m(uboot),1m(env),4m(kernel),1m(dtb),-(rootfs)
+
+icorem6qdl> fatload mmc 0:1 ${loadaddr} SPL
+
+reading SPL
+
+31744 bytes read in 19 ms (1.6 MiB/s)
+
+icorem6qdl> nand bootupdate ${loadaddr} ${filesize}
+
+NAND bootupdate successful
+
+icorem6qdl> nand erase.part uboot
+
+
+NAND erase.part: device 0 offset 0x200000, size 0x200000
+
+Erasing at 0x3c0000 -- 100% complete.
+
+OK
+
+icorem6qdl> nand erase.part env  
+
+
+NAND erase.part: device 0 offset 0x400000, size 0x100000
+
+Erasing at 0x4c0000 -- 100% complete.
+
+OK
+
+icorem6qdl> fatload mmc 0:1 ${loadaddr} u-boot-dtb.img
+
+reading u-boot-dtb.img
+
+508967 bytes read in 48 ms (10.1 MiB/s)
+
+icorem6qdl> nand write ${loadaddr} uboot ${filesize}
+
+
+NAND write: device 0 offset 0x200000, size 0x7c427
+
+ 508967 bytes written: OK
+
+icorem6qdl>
+
+<< Set the NAND Boot mode - JM3 open >>
+<< POR the KIT >>
