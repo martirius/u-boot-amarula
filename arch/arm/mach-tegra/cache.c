@@ -7,6 +7,7 @@
 /* Tegra cache routines */
 
 #include <common.h>
+#include <asm/armv7.h>
 #include <asm/io.h>
 #include <asm/arch-tegra/ap.h>
 #include <asm/arch/gp_padctrl.h>
@@ -30,9 +31,9 @@ void config_cache(void)
 	 * Systems with an architectural L2 cache must not use the PL310.
 	 * Config L2CTLR here for a data RAM latency of 3 cycles.
 	 */
-	asm("mrc p15, 1, %0, c9, c0, 2" : : "r" (reg));
+	reg = read_l2ctlr();
 	reg &= ~7;
 	reg |= 2;
-	asm("mcr p15, 1, %0, c9, c0, 2" : : "r" (reg));
+	write_l2ctlr(reg);
 }
 #endif
