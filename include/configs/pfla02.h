@@ -16,7 +16,7 @@
 #include "imx6_spl.h"
 #endif
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /* Thermal */
 #define CONFIG_IMX_THERMAL

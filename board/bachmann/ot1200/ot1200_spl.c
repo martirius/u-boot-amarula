@@ -6,7 +6,7 @@
 
 #include <common.h>
 #include <spl.h>
-#include <asm/arch/mx6-ddr.h>
+#include <asm/arch/imx6-ddr.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 

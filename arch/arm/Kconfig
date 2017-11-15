@@ -1161,7 +1161,7 @@ source "arch/arm/mach-imx/mx7ulp/Kconfig"
 
 source "arch/arm/mach-imx/mx7/Kconfig"
 
-source "arch/arm/mach-imx/mx6/Kconfig"
+source "arch/arm/mach-imx/imx6/Kconfig"
 
 source "arch/arm/mach-imx/mx5/Kconfig"
 

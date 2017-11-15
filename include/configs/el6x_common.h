@@ -12,7 +12,7 @@
 #define CONFIG_BOARD_NAME		EL6Q
 
 #include <config_distro_defaults.h>
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 #define CONFIG_IMX_THERMAL
 

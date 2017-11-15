@@ -1,0 +1,6 @@
+IMX6CUBOXI BOARD
+M:	Fabio Estevam <fabio.estevam@nxp.com>
+S:	Maintained
+F:	board/solidrun/imx6cuboxi/
+F:	include/configs/imx6cuboxi.h
+F:	configs/imx6cuboxi_defconfig

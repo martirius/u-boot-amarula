@@ -1,0 +1,6 @@
+CGTQIMX6EVAL BOARD
+M:	Otavio Salvador <otavio@ossystems.com.br>
+S:	Maintained
+F:	board/congatec/cgtqimx6eval/
+F:	include/configs/cgtqimx6eval.h
+F:	configs/cgtqimx6eval_defconfig

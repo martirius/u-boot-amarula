@@ -7,14 +7,14 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
-ifeq ($(SOC),$(filter $(SOC),mx25 mx35 mx5 mx6 mx7 vf610))
+ifeq ($(SOC),$(filter $(SOC),mx25 mx35 mx5 imx6 mx7 vf610))
 obj-y	= iomux-v3.o
 endif
-ifeq ($(SOC),$(filter $(SOC),mx5 mx6))
+ifeq ($(SOC),$(filter $(SOC),mx5 imx6))
 obj-y	+= timer.o cpu.o speed.o
 obj-$(CONFIG_SYS_I2C_MXC) += i2c-mxv7.o
 endif
-ifeq ($(SOC),$(filter $(SOC),mx7 mx6 mxs))
+ifeq ($(SOC),$(filter $(SOC),mx7 imx6 mxs))
 obj-y	+= misc.o
 obj-$(CONFIG_SPL_BUILD)	+= spl.o
 endif
@@ -23,7 +23,7 @@ obj-y 	+= cpu.o
 obj-$(CONFIG_SYS_I2C_MXC) += i2c-mxv7.o
 obj-$(CONFIG_SYSCOUNTER_TIMER) += syscounter.o
 endif
-ifeq ($(SOC),$(filter $(SOC),mx6 mx7))
+ifeq ($(SOC),$(filter $(SOC),imx6 mx7))
 obj-y 	+= cache.o init.o
 obj-$(CONFIG_SATA) += sata.o
 obj-$(CONFIG_IMX_VIDEO_SKIP) += video.o
@@ -122,7 +122,7 @@ spl/u-boot-nand-spl.imx: SPL FORCE
 targets += $(addprefix ../../../,$(IMX_CONFIG) SPL u-boot.uim spl/u-boot-nand-spl.imx)
 
 obj-$(CONFIG_MX5) += mx5/
-obj-$(CONFIG_IMX6) += mx6/
+obj-$(CONFIG_IMX6) += imx6/
 obj-$(CONFIG_MX7) += mx7/
 obj-$(CONFIG_ARCH_MX7ULP) += mx7ulp/
 

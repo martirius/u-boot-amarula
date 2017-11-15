@@ -13,7 +13,7 @@
 #define CONSOLE_DEV            "ttymxc0"
 
 #include <config_distro_defaults.h>
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN          (10 * SZ_1M)

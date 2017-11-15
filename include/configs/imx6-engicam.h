@@ -11,7 +11,7 @@
 #define __IMX6_ENGICAM_CONFIG_H
 
 #include <linux/sizes.h>
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN		(16 * SZ_1M)

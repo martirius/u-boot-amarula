@@ -1,0 +1,7 @@
+IMX6SXSABRESD BOARD
+M:	Fabio Estevam <fabio.estevam@nxp.com>
+S:	Maintained
+F:	board/freescale/imx6sxsabresd/
+F:	include/configs/imx6sxsabresd.h
+F:	configs/imx6sxsabresd_defconfig
+F:	configs/imx6sxsabresd_spl_defconfig

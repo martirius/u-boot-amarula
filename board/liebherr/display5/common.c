@@ -6,7 +6,7 @@
  */
 
 #include <asm/mach-imx/iomux-v3.h>
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include "common.h"
 
 iomux_v3_cfg_t const uart_pads[] = {

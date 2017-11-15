@@ -4,7 +4,7 @@
  *
  * Configuration settings for the Embest RIoTboard
  *
- * based on mx6*sabre*.h which are :
+ * based on imx6*sabre*.h which are :
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
  * SPDX-License-Identifier:	GPL-2.0+
@@ -112,7 +112,7 @@
 #define CONFIG_IMX_VIDEO_SKIP
 
 #include <config_distro_defaults.h>
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /* 256M RAM (minimum), 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
  * 1M script, 1M pxe and the ramdisk at the end */

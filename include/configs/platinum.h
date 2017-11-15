@@ -13,7 +13,7 @@
 #define CONFIG_SYS_NAND_U_BOOT_OFFS     (14 * 1024 * 1024)
 
 #include "imx6_spl.h"                  /* common IMX6 SPL configuration */
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /*
  * Hardware configuration

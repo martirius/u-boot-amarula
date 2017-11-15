@@ -51,15 +51,15 @@ config SECOIMX6_4GB
 endchoice
 
 config IMX_CONFIG
-	default "board/seco/mx6quq7/mx6quq7-2g.cfg" if SECOIMX6_UQ7 && SECOIMX6Q && SECOIMX6_2GB
+	default "board/seco/imx6quq7/imx6quq7-2g.cfg" if SECOIMX6_UQ7 && SECOIMX6Q && SECOIMX6_2GB
 
 config SYS_BOARD
-	default "mx6quq7" if SECOIMX6_UQ7 && SECOIMX6Q
+	default "imx6quq7" if SECOIMX6_UQ7 && SECOIMX6Q
 
 config SYS_VENDOR
 	default "seco"
 
 config SYS_CONFIG_NAME
-	default "secomx6quq7" if SECOIMX6_UQ7 && SECOIMX6Q
+	default "secoimx6quq7" if SECOIMX6_UQ7 && SECOIMX6Q
 
 endif

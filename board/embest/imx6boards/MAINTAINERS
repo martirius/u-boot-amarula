@@ -1,0 +1,7 @@
+IMX6BOARDS BOARD
+M:	Eric Bénard <eric@eukrea.com>
+S:	Maintained
+F:	board/embest/imx6boards/
+F:	include/configs/embestimx6boards.h
+F:	configs/marsboard_defconfig
+F:	configs/riotboard_defconfig

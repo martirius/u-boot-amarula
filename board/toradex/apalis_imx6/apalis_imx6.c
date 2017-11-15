@@ -16,8 +16,8 @@
 #include <asm/arch/imx-regs.h>
 #include <asm/arch/iomux.h>
 #include <asm/arch/sys_proto.h>
-#include <asm/arch/mx6-pins.h>
-#include <asm/arch/mx6-ddr.h>
+#include <asm/arch/imx6-pins.h>
+#include <asm/arch/imx6-ddr.h>
 #include <asm/bootm.h>
 #include <asm/gpio.h>
 #include <asm/io.h>

@@ -11,7 +11,7 @@
 #include <asm/arch/imx-regs.h>
 #include <asm/arch/iomux.h>
 #include <malloc.h>
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include <asm/mach-imx/iomux-v3.h>
 #include <asm/mach-imx/sata.h>
 #include <asm/mach-imx/mxc_i2c.h>

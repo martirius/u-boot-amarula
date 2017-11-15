@@ -4,7 +4,7 @@ U-Boot for Wandboard
 This file contains information for the port of U-Boot to the Wandboard.
 
 Wandboard is a development board that has three variants based on the following
-SoCs: mx6 quad, mx6 dual lite and mx6 solo.
+SoCs: imx6 quad, imx6 dual lite and imx6 solo.
 
 For more details about Wandboard, please refer to:
 http://www.wandboard.org/
@@ -32,7 +32,7 @@ $ sudo dd if=SPL of=/dev/mmcblk0 bs=1k seek=1; sync
 sudo dd if=u-boot.img of=/dev/mmcblk0 bs=1k seek=69; sync
 
 - Insert the SD card into the slot located in the bottom of the board (same side
-as the mx6 processor)
+as the imx6 processor)
 
 - Connect the serial cable to the host PC
 

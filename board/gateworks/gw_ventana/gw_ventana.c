@@ -10,7 +10,7 @@
 #include <asm/arch/clock.h>
 #include <asm/arch/crm_regs.h>
 #include <asm/arch/iomux.h>
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include <asm/arch/mxc_hdmi.h>
 #include <asm/arch/sys_proto.h>
 #include <asm/gpio.h>

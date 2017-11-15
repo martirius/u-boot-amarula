@@ -9,7 +9,7 @@
 #ifndef __OPOS6ULDEV_CONFIG_H
 #define __OPOS6ULDEV_CONFIG_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 #ifdef CONFIG_SPL
 #include "imx6_spl.h"

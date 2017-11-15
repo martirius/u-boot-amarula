@@ -11,7 +11,7 @@
 #ifndef __CONFIG_CM_FX6_H
 #define __CONFIG_CM_FX6_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /* Machine config */
 #define CONFIG_SYS_LITTLE_ENDIAN

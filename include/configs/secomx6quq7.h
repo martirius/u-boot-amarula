@@ -9,7 +9,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 #define CONFIG_BOARD_REVISION_TAG
 

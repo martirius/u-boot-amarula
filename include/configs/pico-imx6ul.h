@@ -11,7 +11,7 @@
 
 #include <asm/arch/imx-regs.h>
 #include <linux/sizes.h>
-#include "mx6_common.h"
+#include "imx6_common.h"
 #include <asm/mach-imx/gpio.h>
 
 /* Network support */

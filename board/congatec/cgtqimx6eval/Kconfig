@@ -1,0 +1,12 @@
+if TARGET_CGTQIMX6EVAL
+
+config SYS_BOARD
+	default "cgtqimx6eval"
+
+config SYS_VENDOR
+	default "congatec"
+
+config SYS_CONFIG_NAME
+	default "cgtqimx6eval"
+
+endif

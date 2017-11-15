@@ -5,7 +5,7 @@
  */
 
 #include <asm/arch/clock.h>
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include <asm/arch/opos6ul.h>
 #include <asm/arch/sys_proto.h>
 #include <asm/gpio.h>

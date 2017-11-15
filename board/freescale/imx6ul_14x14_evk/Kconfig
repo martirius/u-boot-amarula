@@ -1,0 +1,12 @@
+if TARGET_IMX6UL_14X14_EVK || TARGET_IMX6UL_9X9_EVK
+
+config SYS_BOARD
+	default "imx6ul_14x14_evk"
+
+config SYS_VENDOR
+	default "freescale"
+
+config SYS_CONFIG_NAME
+	default "imx6ul_14x14_evk"
+
+endif

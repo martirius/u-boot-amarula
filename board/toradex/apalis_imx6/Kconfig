@@ -10,7 +10,7 @@ config SYS_CPU
 	default "armv7"
 
 config SYS_SOC
-	default "mx6"
+	default "imx6"
 
 config SYS_VENDOR
 	default "toradex"

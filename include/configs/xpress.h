@@ -8,7 +8,7 @@
 #ifndef __XPRESS_CONFIG_H
 #define __XPRESS_CONFIG_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 #include <asm/mach-imx/gpio.h>
 
 /* SPL options */

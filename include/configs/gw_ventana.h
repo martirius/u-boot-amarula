@@ -23,7 +23,7 @@
 #define CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR	0x1000	/* 2MB */
 
 #include "imx6_spl.h"                  /* common IMX6 SPL configuration */
-#include "mx6_common.h"
+#include "imx6_common.h"
 #define CONFIG_DISPLAY_BOARDINFO_LATE
 
 #define CONFIG_MACH_TYPE	4520   /* Gateworks Ventana Platform */

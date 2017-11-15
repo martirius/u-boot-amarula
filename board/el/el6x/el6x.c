@@ -9,7 +9,7 @@
 #include <asm/arch/clock.h>
 #include <asm/arch/imx-regs.h>
 #include <asm/arch/iomux.h>
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include <linux/errno.h>
 #include <asm/gpio.h>
 #include <asm/mach-imx/mxc_i2c.h>
@@ -28,7 +28,7 @@
 #include <input.h>
 #include <power/pmic.h>
 #include <power/pfuze100_pmic.h>
-#include <asm/arch/mx6-ddr.h>
+#include <asm/arch/imx6-ddr.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 

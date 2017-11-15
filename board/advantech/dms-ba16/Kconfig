@@ -23,7 +23,7 @@ config SYS_VENDOR
 	default "advantech"
 
 config SYS_SOC
-	default "mx6"
+	default "imx6"
 
 config SYS_CONFIG_NAME
 	default "advantech_dms-ba16"

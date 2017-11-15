@@ -6,7 +6,7 @@
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include <asm/arch/clock.h>
 
 #define UART_PAD_CTRL  (PAD_CTL_PUS_100K_UP |	\

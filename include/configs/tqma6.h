@@ -24,7 +24,7 @@
 #define CONFIG_SYS_TEXT_BASE		0x4fc00000
 #endif
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 #if defined(CONFIG_TQMA6S)
 #define PHYS_SDRAM_SIZE			(512u * SZ_1M)

@@ -8,7 +8,7 @@
 #include <asm/arch/clock.h>
 #include <asm/arch/imx-regs.h>
 #include <asm/arch/iomux.h>
-#include <asm/arch/mx6-pins.h>
+#include <asm/arch/imx6-pins.h>
 #include <errno.h>
 #include <asm/gpio.h>
 #include <asm/mach-imx/iomux-v3.h>
@@ -23,7 +23,7 @@
 DECLARE_GLOBAL_DATA_PTR;
 
 #if defined(CONFIG_SPL_BUILD)
-#include <asm/arch/mx6-ddr.h>
+#include <asm/arch/imx6-ddr.h>
 /*
  * Driving strength:
  *   0x30 == 40 Ohm

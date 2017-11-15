@@ -10,7 +10,7 @@ config SYS_VENDOR
 	default "liebherr"
 
 config SYS_SOC
-	default "mx6"
+	default "imx6"
 
 config SYS_CONFIG_NAME
 	default "display5"

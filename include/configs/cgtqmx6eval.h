@@ -13,7 +13,7 @@
 #ifndef __CONFIG_CGTQIMX6EVAL_H
 #define __CONFIG_CGTQIMX6EVAL_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 #define CONFIG_MACH_TYPE	4122
 
@@ -159,9 +159,9 @@
 		"fi;\0" \
 	"findfdt="\
 		"if test $board_rev = IMX6Q ; then " \
-			"setenv fdtfile imx6q-qmx6.dtb; fi; " \
+			"setenv fdtfile imx6q-qimx6.dtb; fi; " \
 		"if test $board_rev = IMX6DL ; then " \
-			"setenv fdtfile imx6dl-qmx6.dtb; fi; " \
+			"setenv fdtfile imx6dl-qimx6.dtb; fi; " \
 		"if test $fdtfile = undefined; then " \
 			"echo WARNING: Could not determine dtb to use; fi; \0" \
 	"netargs=setenv bootargs console=${console},${baudrate} " \

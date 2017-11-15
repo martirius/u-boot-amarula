@@ -1,0 +1,12 @@
+if TARGET_IMX6SXSABRESD
+
+config SYS_BOARD
+	default "imx6sxsabresd"
+
+config SYS_VENDOR
+	default "freescale"
+
+config SYS_CONFIG_NAME
+	default "imx6sxsabresd"
+
+endif

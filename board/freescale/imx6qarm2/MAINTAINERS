@@ -1,0 +1,10 @@
+IMX6QARM2 BOARD
+M:	Jason Liu <jason.hui.liu@nxp.com>
+M:	Ye Li <ye.li@nxp.com>
+S:	Maintained
+F:	board/freescale/imx6qarm2/
+F:	include/configs/imx6qarm2.h
+F:	configs/imx6qarm2_defconfig
+F:	configs/imx6dlarm2_defconfig
+F:	configs/imx6qarm2_lpddr2_defconfig
+F:	configs/imx6dlarm2_lpddr2_defconfig

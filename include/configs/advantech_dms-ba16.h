@@ -24,7 +24,7 @@
 
 #define CONFIG_SUPPORT_EMMC_BOOT
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 #include <linux/sizes.h>
 
 #define CONFIG_CMDLINE_TAG

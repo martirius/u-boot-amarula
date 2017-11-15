@@ -9,7 +9,7 @@
 #ifndef __TBS2910_CONFIG_H
 #define __TBS2910_CONFIG_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 /* General configuration */
 

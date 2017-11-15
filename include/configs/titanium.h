@@ -4,7 +4,7 @@
  * Configuration settings for the ProjectionDesign / Barco
  * Titanium board.
  *
- * Based on mx6qsabrelite.h which is:
+ * Based on imx6qsabrelite.h which is:
  * Copyright (C) 2010-2011 Freescale Semiconductor, Inc.
  *
  * SPDX-License-Identifier:	GPL-2.0+
@@ -13,7 +13,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#include "mx6_common.h"
+#include "imx6_common.h"
 
 #define CONFIG_IMX6Q
 
