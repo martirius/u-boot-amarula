@@ -27,7 +27,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #define GSC_EEPROM_DDR_SIZE	0x2B	/* enum (512,1024,2048) MB */
 #define GSC_EEPROM_DDR_WIDTH	0x2D	/* enum (32,64) bit */
 
-/* configure MX6Q/DUAL mmdc DDR io registers */
+/* configure IMX6Q/DUAL mmdc DDR io registers */
 struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	/* SDCLK[0:1], CAS, RAS, Reset: Differential input, 40ohm */
 	.dram_sdclk_0 = 0x00020030,
@@ -64,7 +64,7 @@ struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_dqm7 = 0x00020030,
 };
 
-/* configure MX6Q/DUAL mmdc GRP io registers */
+/* configure IMX6Q/DUAL mmdc GRP io registers */
 struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	/* DDR3 */
 	.grp_ddr_type = 0x000c0000,
@@ -87,7 +87,7 @@ struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_b7ds = 0x00000030,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc DDR io registers */
+/* configure IMX6SOLO/DUALLITE mmdc DDR io registers */
 struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	/* SDCLK[0:1], CAS, RAS, Reset: Differential input, 40ohm */
 	.dram_sdclk_0 = 0x00020030,
@@ -124,7 +124,7 @@ struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_dqm7 = 0x00020030,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc GRP io registers */
+/* configure IMX6SOLO/DUALLITE mmdc GRP io registers */
 struct mx6sdl_iomux_grp_regs mx6sdl_grp_ioregs = {
 	/* DDR3 */
 	.grp_ddr_type = 0x000c0000,
@@ -464,7 +464,7 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 	 */
 	if (width == 16 && size_mb == 128) {
 		mem = &mt41k64m16jt_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			;
 		else
 			calib = &mx6sdl_64x16_mmdc_calib;
@@ -472,14 +472,14 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 	} else if (width == 16 && size_mb == 256) {
 		/* 1x 2Gb density chip - same calib as 2x 2Gb */
 		mem = &mt41k128m16jt_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_128x32_mmdc_calib;
 		else
 			calib = &mx6sdl_128x32_mmdc_calib;
 		debug("2gB density\n");
 	} else if (width == 16 && size_mb == 512) {
 		mem = &mt41k256m16ha_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_256x16_mmdc_calib;
 		else
 			calib = &mx6sdl_256x16_mmdc_calib;
@@ -487,28 +487,28 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 	} else if (width == 32 && size_mb == 256) {
 		/* Same calib as width==16, size==128 */
 		mem = &mt41k64m16jt_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			;
 		else
 			calib = &mx6sdl_64x16_mmdc_calib;
 		debug("1gB density\n");
 	} else if (width == 32 && size_mb == 512) {
 		mem = &mt41k128m16jt_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_128x32_mmdc_calib;
 		else
 			calib = &mx6sdl_128x32_mmdc_calib;
 		debug("2gB density\n");
 	}  else if (width == 32 && size_mb == 1024) {
 		mem = &mt41k256m16ha_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_256x32_mmdc_calib;
 		else
 			calib = &mx6sdl_256x32_mmdc_calib;
 		debug("4gB density\n");
 	} else if (width == 32 && size_mb == 2048) {
 		mem = &mt41k512m16ha_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_512x32_mmdc_calib;
 		debug("8gB density\n");
 	} else if (width == 64 && size_mb == 512) {
@@ -516,14 +516,14 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 		debug("1gB density\n");
 	} else if (width == 64 && size_mb == 1024) {
 		mem = &mt41k128m16jt_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_128x64_mmdc_calib;
 		else
 			calib = &mx6sdl_128x64_mmdc_calib;
 		debug("2gB density\n");
 	} else if (width == 64 && size_mb == 2048) {
 		mem = &mt41k256m16ha_125;
-		if (is_cpu_type(MXC_CPU_MX6Q))
+		if (is_cpu_type(MXC_CPU_IMX6Q))
 			calib = &mx6dq_256x64_mmdc_calib;
 		else
 			calib = &mx6sdl_256x64_mmdc_calib;
@@ -534,7 +534,7 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 			/* 8xMT41K256M16 (4GiB) fly-by mirrored 2-chipsels */
 			mem = &mt41k256m16ha_125;
 			debug("4gB density\n");
-			if (!is_cpu_type(MXC_CPU_MX6Q)) {
+			if (!is_cpu_type(MXC_CPU_IMX6Q)) {
 				calib = &mx6sdl_256x64x2_mmdc_calib;
 				sysinfo.ncs = 2;
 				sysinfo.cs_density = 18; /* CS0_END=71 */
@@ -543,7 +543,7 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 			break;
 		default:
 			mem = &mt41k512m16ha_125;
-			if (is_cpu_type(MXC_CPU_MX6Q))
+			if (is_cpu_type(MXC_CPU_IMX6Q))
 				calib = &mx6dq_512x64_mmdc_calib;
 			debug("8gB density\n");
 			break;
@@ -555,13 +555,13 @@ static void spl_dram_init(int width, int size_mb, int board_model)
 		printf("MEM    : %s\n", mem ? "OKAY" : "NULL");
 		printf("CALIB  : %s\n", calib ? "OKAY" : "NULL");
 		printf("CPUTYPE: %s\n",
-		       is_cpu_type(MXC_CPU_MX6Q) ? "IMX6Q" : "IMX6DL");
+		       is_cpu_type(MXC_CPU_IMX6Q) ? "IMX6Q" : "IMX6DL");
 		printf("SIZE_MB: %d\n", size_mb);
 		printf("WIDTH  : %d\n", width);
 		hang();
 	}
 
-	if (is_cpu_type(MXC_CPU_MX6Q))
+	if (is_cpu_type(MXC_CPU_IMX6Q))
 		mx6dq_dram_iocfg(width, &mx6dq_ddr_ioregs,
 				 &mx6dq_grp_ioregs);
 	else

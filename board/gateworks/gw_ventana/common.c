@@ -89,25 +89,25 @@ static iomux_v3_cfg_t const usdhc3_pads[] = {
 /* I2C1: GSC */
 static struct i2c_pads_info mx6q_i2c_pad_info0 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_EIM_D21__I2C1_SCL | PC,
-		.gpio_mode = MX6Q_PAD_EIM_D21__GPIO3_IO21 | PC,
+		.i2c_mode = IMX6Q_PAD_EIM_D21__I2C1_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_EIM_D21__GPIO3_IO21 | PC,
 		.gp = IMX_GPIO_NR(3, 21)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_EIM_D28__I2C1_SDA | PC,
-		.gpio_mode = MX6Q_PAD_EIM_D28__GPIO3_IO28 | PC,
+		.i2c_mode = IMX6Q_PAD_EIM_D28__I2C1_SDA | PC,
+		.gpio_mode = IMX6Q_PAD_EIM_D28__GPIO3_IO28 | PC,
 		.gp = IMX_GPIO_NR(3, 28)
 	}
 };
 static struct i2c_pads_info mx6dl_i2c_pad_info0 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_EIM_D21__I2C1_SCL | PC,
-		.gpio_mode = MX6DL_PAD_EIM_D21__GPIO3_IO21 | PC,
+		.i2c_mode = IMX6DL_PAD_EIM_D21__I2C1_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_EIM_D21__GPIO3_IO21 | PC,
 		.gp = IMX_GPIO_NR(3, 21)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_EIM_D28__I2C1_SDA | PC,
-		.gpio_mode = MX6DL_PAD_EIM_D28__GPIO3_IO28 | PC,
+		.i2c_mode = IMX6DL_PAD_EIM_D28__I2C1_SDA | PC,
+		.gpio_mode = IMX6DL_PAD_EIM_D28__GPIO3_IO28 | PC,
 		.gp = IMX_GPIO_NR(3, 28)
 	}
 };
@@ -115,25 +115,25 @@ static struct i2c_pads_info mx6dl_i2c_pad_info0 = {
 /* I2C2: PMIC/PCIe Switch/PCIe Clock/Mezz */
 static struct i2c_pads_info mx6q_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_KEY_COL3__I2C2_SCL | PC,
-		.gpio_mode = MX6Q_PAD_KEY_COL3__GPIO4_IO12 | PC,
+		.i2c_mode = IMX6Q_PAD_KEY_COL3__I2C2_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_KEY_COL3__GPIO4_IO12 | PC,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
-		.gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		.i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
+		.gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
 static struct i2c_pads_info mx6dl_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_KEY_COL3__I2C2_SCL | PC,
-		.gpio_mode = MX6DL_PAD_KEY_COL3__GPIO4_IO12 | PC,
+		.i2c_mode = IMX6DL_PAD_KEY_COL3__I2C2_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_KEY_COL3__GPIO4_IO12 | PC,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
-		.gpio_mode = MX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		.i2c_mode = IMX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
+		.gpio_mode = IMX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
@@ -141,32 +141,32 @@ static struct i2c_pads_info mx6dl_i2c_pad_info1 = {
 /* I2C3: Misc/Expansion */
 static struct i2c_pads_info mx6q_i2c_pad_info2 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_GPIO_3__I2C3_SCL | PC,
-		.gpio_mode = MX6Q_PAD_GPIO_3__GPIO1_IO03 | PC,
+		.i2c_mode = IMX6Q_PAD_GPIO_3__I2C3_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_GPIO_3__GPIO1_IO03 | PC,
 		.gp = IMX_GPIO_NR(1, 3)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_GPIO_6__I2C3_SDA | PC,
-		.gpio_mode = MX6Q_PAD_GPIO_6__GPIO1_IO06 | PC,
+		.i2c_mode = IMX6Q_PAD_GPIO_6__I2C3_SDA | PC,
+		.gpio_mode = IMX6Q_PAD_GPIO_6__GPIO1_IO06 | PC,
 		.gp = IMX_GPIO_NR(1, 6)
 	}
 };
 static struct i2c_pads_info mx6dl_i2c_pad_info2 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_GPIO_3__I2C3_SCL | PC,
-		.gpio_mode = MX6DL_PAD_GPIO_3__GPIO1_IO03 | PC,
+		.i2c_mode = IMX6DL_PAD_GPIO_3__I2C3_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_GPIO_3__GPIO1_IO03 | PC,
 		.gp = IMX_GPIO_NR(1, 3)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_GPIO_6__I2C3_SDA | PC,
-		.gpio_mode = MX6DL_PAD_GPIO_6__GPIO1_IO06 | PC,
+		.i2c_mode = IMX6DL_PAD_GPIO_6__I2C3_SDA | PC,
+		.gpio_mode = IMX6DL_PAD_GPIO_6__GPIO1_IO06 | PC,
 		.gp = IMX_GPIO_NR(1, 6)
 	}
 };
 
 void setup_ventana_i2c(void)
 {
-	if (is_cpu_type(MXC_CPU_MX6Q)) {
+	if (is_cpu_type(MXC_CPU_IMX6Q)) {
 		setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &mx6q_i2c_pad_info0);
 		setup_i2c(1, CONFIG_SYS_I2C_SPEED, 0x7f, &mx6q_i2c_pad_info1);
 		setup_i2c(2, CONFIG_SYS_I2C_SPEED, 0x7f, &mx6q_i2c_pad_info2);
@@ -217,7 +217,7 @@ static iomux_v3_cfg_t const gw52xx_gpio_pads[] = {
 	IOMUX_PADS(PAD_EIM_A20__GPIO2_IO18 | MUX_PAD_CTRL(IRQ_PAD_CTRL)),
 	/* CAN_STBY */
 	IOMUX_PADS(PAD_GPIO_9__GPIO1_IO09 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_KEY_ROW4__GPIO4_IO15 | DIO_PAD_CFG),
 	/* GPS_SHDN */
 	IOMUX_PADS(PAD_ENET_RXD0__GPIO1_IO27 | DIO_PAD_CFG),
@@ -250,7 +250,7 @@ static iomux_v3_cfg_t const gw53xx_gpio_pads[] = {
 	IOMUX_PADS(PAD_KEY_COL0__GPIO4_IO06 | DIO_PAD_CFG),
 	/* PANLEDR# */
 	IOMUX_PADS(PAD_KEY_ROW0__GPIO4_IO07 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_KEY_ROW4__GPIO4_IO15 | DIO_PAD_CFG),
 	/* IOEXP_PWREN# */
 	IOMUX_PADS(PAD_EIM_A19__GPIO2_IO19 | DIO_PAD_CFG),
@@ -283,7 +283,7 @@ static iomux_v3_cfg_t const gw54xx_gpio_pads[] = {
 	IOMUX_PADS(PAD_KEY_COL0__GPIO4_IO06 | DIO_PAD_CFG),
 	/* PANLEDR# */
 	IOMUX_PADS(PAD_KEY_ROW0__GPIO4_IO07 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_KEY_ROW4__GPIO4_IO15 | DIO_PAD_CFG),
 	/* USB_HUBRST# */
 	IOMUX_PADS(PAD_SD1_DAT0__GPIO1_IO16 | DIO_PAD_CFG),
@@ -329,11 +329,11 @@ static iomux_v3_cfg_t const gw552x_gpio_pads[] = {
 	IOMUX_PADS(PAD_KEY_COL0__GPIO4_IO06 | DIO_PAD_CFG),
 	/* PANLEDR# */
 	IOMUX_PADS(PAD_KEY_ROW0__GPIO4_IO07 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_KEY_ROW4__GPIO4_IO15 | DIO_PAD_CFG),
 	/* PCI_RST# */
 	IOMUX_PADS(PAD_ENET_TXD1__GPIO1_IO29 | DIO_PAD_CFG),
-	/* MX6_DIO[4:9] */
+	/* IMX6_DIO[4:9] */
 	IOMUX_PADS(PAD_CSI0_PIXCLK__GPIO5_IO18 | DIO_PAD_CFG),
 	IOMUX_PADS(PAD_CSI0_DATA_EN__GPIO5_IO20 | DIO_PAD_CFG),
 	IOMUX_PADS(PAD_CSI0_VSYNC__GPIO5_IO21 | DIO_PAD_CFG),
@@ -374,7 +374,7 @@ static iomux_v3_cfg_t const gw560x_gpio_pads[] = {
 	IOMUX_PADS(PAD_KEY_COL0__GPIO4_IO06 | DIO_PAD_CFG),
 	/* PANLEDR# */
 	IOMUX_PADS(PAD_KEY_ROW0__GPIO4_IO07 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_KEY_ROW4__GPIO4_IO15 | DIO_PAD_CFG),
 	/* IOEXP_PWREN# */
 	IOMUX_PADS(PAD_EIM_A19__GPIO2_IO19 | DIO_PAD_CFG),
@@ -417,7 +417,7 @@ static iomux_v3_cfg_t const gw5903_gpio_pads[] = {
 	IOMUX_PADS(PAD_DISP0_DAT23__GPIO5_IO17 | DIO_PAD_CFG),
 	/* UART1_TEN# */
 	IOMUX_PADS(PAD_CSI0_DAT12__GPIO5_IO30 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_NANDF_CS1__GPIO6_IO14 | DIO_PAD_CFG),
 	/* LVDS_BKLEN # */
 	IOMUX_PADS(PAD_GPIO_17__GPIO7_IO12 | DIO_PAD_CFG),
@@ -436,7 +436,7 @@ static iomux_v3_cfg_t const gw5904_gpio_pads[] = {
 	IOMUX_PADS(PAD_KEY_COL0__GPIO4_IO06 | DIO_PAD_CFG),
 	/* PANLEDR# */
 	IOMUX_PADS(PAD_KEY_ROW0__GPIO4_IO07 | DIO_PAD_CFG),
-	/* MX6_LOCLED# */
+	/* IMX6_LOCLED# */
 	IOMUX_PADS(PAD_KEY_ROW4__GPIO4_IO15 | DIO_PAD_CFG),
 	/* IOEXP_PWREN# */
 	IOMUX_PADS(PAD_EIM_A19__GPIO2_IO19 | DIO_PAD_CFG),
@@ -1172,7 +1172,7 @@ void setup_board_gpio(int board, struct ventana_board_info *info)
 	}
 
 	/* MSATA Enable */
-	if (gpio_cfg[board].msata_en && is_cpu_type(MXC_CPU_MX6Q)) {
+	if (gpio_cfg[board].msata_en && is_cpu_type(MXC_CPU_IMX6Q)) {
 		gpio_direction_output(GP_MSATA_SEL,
 				      (hwconfig("msata")) ? 1 : 0);
 	}
@@ -1190,7 +1190,7 @@ void setup_board_gpio(int board, struct ventana_board_info *info)
 	for (i = 0; i < gpio_cfg[board].dio_num; i++) {
 		struct dio_cfg *cfg = &gpio_cfg[board].dio_cfg[i];
 		iomux_v3_cfg_t ctrl = DIO_PAD_CFG;
-		unsigned cputype = is_cpu_type(MXC_CPU_MX6Q) ? 0 : 1;
+		unsigned cputype = is_cpu_type(MXC_CPU_IMX6Q) ? 0 : 1;
 
 		if (!cfg->gpio_padmux[0] && !cfg->gpio_padmux[1])
 			continue;
@@ -1228,7 +1228,7 @@ void setup_board_gpio(int board, struct ventana_board_info *info)
 	}
 
 	if (!quiet) {
-		if (gpio_cfg[board].msata_en && is_cpu_type(MXC_CPU_MX6Q)) {
+		if (gpio_cfg[board].msata_en && is_cpu_type(MXC_CPU_IMX6Q)) {
 			printf("MSATA: %s\n", (hwconfig("msata") ?
 			       "enabled" : "disabled"));
 		}

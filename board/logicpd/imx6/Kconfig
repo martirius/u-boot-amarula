@@ -1,4 +1,4 @@
-if TARGET_MX6LOGICPD
+if TARGET_IMX6LOGICPD
 
 config SYS_BOARD
        default "imx6"

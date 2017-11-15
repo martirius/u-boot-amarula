@@ -1,19 +1,19 @@
 /*
  * Copyright (C) 2015 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6UL 14x14 EVK board.
+ * Configuration settings for the Freescale i.IMX6UL 14x14 EVK board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#ifndef __MX6UL_14X14_EVK_CONFIG_H
-#define __MX6UL_14X14_EVK_CONFIG_H
+#ifndef __IMX6UL_14X14_EVK_CONFIG_H
+#define __IMX6UL_14X14_EVK_CONFIG_H
 
 #include <asm/arch/imx-regs.h>
 #include <linux/sizes.h>
 #include "mx6_common.h"
 #include <asm/mach-imx/gpio.h>
 
-#define is_mx6ul_9x9_evk()	CONFIG_IS_ENABLED(TARGET_MX6UL_9X9_EVK)
+#define is_mx6ul_9x9_evk()	CONFIG_IS_ENABLED(TARGET_IMX6UL_9X9_EVK)
 
 /* SPL options */
 #include "imx6_spl.h"
@@ -219,7 +219,7 @@
 #define CONFIG_BMP_16BPP
 #define CONFIG_VIDEO_BMP_RLE8
 #define CONFIG_VIDEO_BMP_LOGO
-#define MXS_LCDIF_BASE MX6UL_LCDIF1_BASE_ADDR
+#define MXS_LCDIF_BASE IMX6UL_LCDIF1_BASE_ADDR
 #endif
 #endif
 

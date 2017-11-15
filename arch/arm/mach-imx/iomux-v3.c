@@ -31,7 +31,7 @@ void imx_iomux_v3_setup_pad(iomux_v3_cfg_t pad)
 		(pad & MUX_PAD_CTRL_OFS_MASK) >> MUX_PAD_CTRL_OFS_SHIFT;
 	u32 pad_ctrl = (pad & MUX_PAD_CTRL_MASK) >> MUX_PAD_CTRL_SHIFT;
 
-#if defined(CONFIG_MX6SL) || defined(CONFIG_MX6SLL)
+#if defined(CONFIG_IMX6SL) || defined(CONFIG_IMX6SLL)
 	/* Check whether LVE bit needs to be set */
 	if (pad_ctrl & PAD_CTL_LVE) {
 		pad_ctrl &= ~PAD_CTL_LVE;
@@ -73,7 +73,7 @@ void imx_iomux_v3_setup_pad(iomux_v3_cfg_t pad)
 #else
 	if (!(pad_ctrl & NO_PAD_CTRL) && pad_ctrl_ofs)
 		__raw_writel(pad_ctrl, base + pad_ctrl_ofs);
-#if defined(CONFIG_MX6SLL)
+#if defined(CONFIG_IMX6SLL)
 	else if ((pad_ctrl & NO_PAD_CTRL) && pad_ctrl_ofs)
 		clrbits_le32(base + pad_ctrl_ofs, PAD_CTL_IPD_BIT);
 #endif
@@ -94,7 +94,7 @@ void imx_iomux_v3_setup_multiple_pads(iomux_v3_cfg_t const *pad_list,
 	int stride;
 	int i;
 
-#if defined(CONFIG_MX6QDL)
+#if defined(CONFIG_IMX6QDL)
 	stride = 2;
 	if (!is_mx6dq() && !is_mx6dqp())
 		p += 1;

@@ -3,7 +3,7 @@ on MXC
 
 This IP can be found on the following SoCs:
  - Vybrid VF610,
- - i.MX6.
+ - i.IMX6.
 
 Note that this IP is different from albeit similar to the IPs of the same name
 that can be found on the following SoCs:
@@ -11,7 +11,7 @@ that can be found on the following SoCs:
  - i.MX28,
  - i.MX50.
 
-The section numbers in this file refer to the i.MX6 Reference Manual.
+The section numbers in this file refer to the i.IMX6 Reference Manual.
 
 A fuse word contains 32 fuse bit slots, as explained in 46.2.1.
 

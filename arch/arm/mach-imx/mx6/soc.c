@@ -71,29 +71,29 @@ u32 get_cpu_rev(void)
 	u32 type = ((reg >> 16) & 0xff);
 	u32 major, cfg = 0;
 
-	if (type != MXC_CPU_MX6SL) {
+	if (type != MXC_CPU_IMX6SL) {
 		reg = readl(&anatop->digprog);
 		struct scu_regs *scu = (struct scu_regs *)SCU_BASE_ADDR;
 		cfg = readl(&scu->config) & 3;
 		type = ((reg >> 16) & 0xff);
-		if (type == MXC_CPU_MX6DL) {
+		if (type == MXC_CPU_IMX6DL) {
 			if (!cfg)
-				type = MXC_CPU_MX6SOLO;
+				type = MXC_CPU_IMX6SOLO;
 		}
 
-		if (type == MXC_CPU_MX6Q) {
+		if (type == MXC_CPU_IMX6Q) {
 			if (cfg == 1)
-				type = MXC_CPU_MX6D;
+				type = MXC_CPU_IMX6D;
 		}
 
 	}
 	major = ((reg >> 8) & 0xff);
 	if ((major >= 1) &&
-	    ((type == MXC_CPU_MX6Q) || (type == MXC_CPU_MX6D))) {
+	    ((type == MXC_CPU_IMX6Q) || (type == MXC_CPU_IMX6D))) {
 		major--;
-		type = MXC_CPU_MX6QP;
+		type = MXC_CPU_IMX6QP;
 		if (cfg == 1)
-			type = MXC_CPU_MX6DP;
+			type = MXC_CPU_IMX6DP;
 	}
 	reg &= 0xff;		/* mx6 silicon revision */
 	return (type << 12) | (reg + (0x10 * (major + 1)));
@@ -110,13 +110,13 @@ u32 get_cpu_rev(void)
 #define OCOTP_CFG3_SPEED_1P2GHZ	3
 
 /*
- * For i.MX6UL
+ * For i.IMX6UL
  */
 #define OCOTP_CFG3_SPEED_528MHZ 1
 #define OCOTP_CFG3_SPEED_696MHZ 2
 
 /*
- * For i.MX6ULL
+ * For i.IMX6ULL
  */
 #define OCOTP_CFG3_SPEED_792MHZ 2
 #define OCOTP_CFG3_SPEED_900MHZ 3
@@ -215,11 +215,11 @@ u32 __weak get_board_rev(void)
 {
 	u32 cpurev = get_cpu_rev();
 	u32 type = ((cpurev >> 12) & 0xff);
-	if (type == MXC_CPU_MX6SOLO)
-		cpurev = (MXC_CPU_MX6DL) << 12 | (cpurev & 0xFFF);
+	if (type == MXC_CPU_IMX6SOLO)
+		cpurev = (MXC_CPU_IMX6DL) << 12 | (cpurev & 0xFFF);
 
-	if (type == MXC_CPU_MX6D)
-		cpurev = (MXC_CPU_MX6Q) << 12 | (cpurev & 0xFFF);
+	if (type == MXC_CPU_IMX6D)
+		cpurev = (MXC_CPU_IMX6Q) << 12 | (cpurev & 0xFFF);
 
 	return cpurev;
 }
@@ -345,7 +345,7 @@ static void init_bandgap(void)
 	 */
 	writel(BM_ANADIG_ANA_MISC0_REFTOP_SELBIASOFF, &anatop->ana_misc0_set);
 	/*
-	 * On i.MX6ULL,we need to set VBGADJ bits according to the
+	 * On i.IMX6ULL,we need to set VBGADJ bits according to the
 	 * REFTOP_TRIM[3:0] in fuse table
 	 *	000 - set REFTOP_VBGADJ[2:0] to 3b'110,
 	 *	110 - set REFTOP_VBGADJ[2:0] to 3b'000,
@@ -388,7 +388,7 @@ int arch_cpu_init(void)
 		 * freq, so we need to ensure AHB freq is 132MHz in such
 		 * scenario.
 		 *
-		 * To i.MX6UL, when power up, default ARM core and
+		 * To i.IMX6UL, when power up, default ARM core and
 		 * AHB rate is 396M and 132M.
 		 */
 		if (mxc_get_clock(MXC_ARM_CLK) == 396000000)
@@ -399,7 +399,7 @@ int arch_cpu_init(void)
 		if (is_soc_rev(CHIP_REV_1_0) == 0) {
 			/*
 			 * According to the design team's requirement on
-			 * i.MX6UL,the PMIC_STBY_REQ PAD should be configured
+			 * i.IMX6UL,the PMIC_STBY_REQ PAD should be configured
 			 * as open drain 100K (0x0000b8a0).
 			 * Only exists on TO1.0
 			 */
@@ -412,9 +412,9 @@ int arch_cpu_init(void)
 			 * to disable internal pull up.It can save about
 			 * 30uA power in SNVS mode.
 			 */
-			writel((readl(MX6UL_SNVS_LP_BASE_ADDR + 0x10) &
+			writel((readl(IMX6UL_SNVS_LP_BASE_ADDR + 0x10) &
 			       (~0x1400)) | 0x400,
-			       MX6UL_SNVS_LP_BASE_ADDR + 0x10);
+			       IMX6UL_SNVS_LP_BASE_ADDR + 0x10);
 		}
 	}
 
@@ -425,11 +425,11 @@ int arch_cpu_init(void)
 		 * 2'b01 : PUP100K when PMIC_ON_REQ or SOC_NOT_FAIL
 		 * 2'b10 : always disable PUP100K
 		 * 2'b11 : PDN100K when SOC_FAIL, PUP100K when SOC_NOT_FAIL
-		 * register offset is different from i.MX6UL, since
-		 * i.MX6UL is fixed by ECO.
+		 * register offset is different from i.IMX6UL, since
+		 * i.IMX6UL is fixed by ECO.
 		 */
-		writel(readl(MX6UL_SNVS_LP_BASE_ADDR) |
-			0x3, MX6UL_SNVS_LP_BASE_ADDR);
+		writel(readl(IMX6UL_SNVS_LP_BASE_ADDR) |
+			0x3, IMX6UL_SNVS_LP_BASE_ADDR);
 	}
 
 	/* Set perclk to source from OSC 24MHz */
@@ -463,7 +463,7 @@ static int mmc_get_boot_dev(void)
 	 * Refer to
 	 * "i.MX 6Dual/6Quad Applications Processor Reference Manual"
 	 * Chapter "8.5.3.1 Expansion Device eFUSE Configuration"
-	 * i.MX6SL/SX/UL has same layout.
+	 * i.IMX6SL/SX/UL has same layout.
 	 */
 	bootsel = (soc_sbmr & 0x000000FF) >> 6;
 
@@ -509,7 +509,7 @@ uint mmc_get_env_part(struct mmc *mmc)
 
 int board_postclk_init(void)
 {
-	/* NO LDO SOC on i.MX6SLL */
+	/* NO LDO SOC on i.IMX6SLL */
 	if (is_mx6sll())
 		return 0;
 
@@ -562,7 +562,7 @@ void imx_get_mac_from_fuse(int dev_id, unsigned char *mac)
 const struct boot_mode soc_boot_modes[] = {
 	{"normal",	MAKE_CFGVAL(0x00, 0x00, 0x00, 0x00)},
 	/* reserved value should start rom usb */
-#if defined(CONFIG_MX6UL) || defined(CONFIG_MX6ULL)
+#if defined(CONFIG_IMX6UL) || defined(CONFIG_IMX6ULL)
 	{"usb",		MAKE_CFGVAL(0x20, 0x00, 0x00, 0x00)},
 #else
 	{"usb",		MAKE_CFGVAL(0x10, 0x00, 0x00, 0x00)},
@@ -599,9 +599,9 @@ void s_init(void)
 	if (is_mx6sx() || is_mx6ul() || is_mx6ull() || is_mx6sll())
 		return;
 
-	/* Due to hardware limitation, on MX6Q we need to gate/ungate all PFDs
+	/* Due to hardware limitation, on IMX6Q we need to gate/ungate all PFDs
 	 * to make sure PFD is working right, otherwise, PFDs may
-	 * not output clock after reset, MX6DL and MX6SL have added 396M pfd
+	 * not output clock after reset, IMX6DL and IMX6SL have added 396M pfd
 	 * workaround in ROM code, as bus clock need it
 	 */
 

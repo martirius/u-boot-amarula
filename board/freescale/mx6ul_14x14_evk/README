@@ -1,7 +1,7 @@
-How to use U-Boot on Freescale MX6UL 14x14 EVK
+How to use U-Boot on Freescale IMX6UL 14x14 EVK
 -----------------------------------------------
 
-- Build U-Boot for MX6UL 14x14 EVK:
+- Build U-Boot for IMX6UL 14x14 EVK:
 
 $ make mrproper
 $ make mx6ul_14x14_evk_defconfig

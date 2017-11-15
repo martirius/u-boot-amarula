@@ -1,13 +1,13 @@
 /*
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6Q SabreAuto board.
+ * Configuration settings for the Freescale i.IMX6Q SabreAuto board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
-#ifndef __MX6SABREAUTO_CONFIG_H
-#define __MX6SABREAUTO_CONFIG_H
+#ifndef __IMX6SABREAUTO_CONFIG_H
+#define __IMX6SABREAUTO_CONFIG_H
 
 #ifdef CONFIG_SPL
 #include "imx6_spl.h"
@@ -83,4 +83,4 @@
 #define CONFIG_POWER_PFUZE100
 #define CONFIG_POWER_PFUZE100_I2C_ADDR	0x08
 
-#endif                         /* __MX6SABREAUTO_CONFIG_H */
+#endif                         /* __IMX6SABREAUTO_CONFIG_H */

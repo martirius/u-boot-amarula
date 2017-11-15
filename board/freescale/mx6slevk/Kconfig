@@ -1,4 +1,4 @@
-if TARGET_MX6SLEVK
+if TARGET_IMX6SLEVK
 
 config SYS_BOARD
 	default "mx6slevk"

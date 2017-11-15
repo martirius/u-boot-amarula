@@ -40,9 +40,9 @@ config TDX_CMD_IMX_MFGR
 	default y
 
 config TDX_APALIS_IMX6_V1_0
-	bool "Apalis iMX6 V1.0 HW"
+	bool "Apalis iIMX6 V1.0 HW"
 	help
-	  Apalis iMX6 V1.0 HW has a different pinout for the UART.
+	  Apalis iIMX6 V1.0 HW has a different pinout for the UART.
 	    The UARTs must be used in DCE mode, RTS/CTS are swapped and
 	    thus unusable on standard carrier boards.
 	    This option configures DCE mode unconditionally. Whithout this

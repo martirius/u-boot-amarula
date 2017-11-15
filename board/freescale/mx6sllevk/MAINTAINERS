@@ -1,4 +1,4 @@
-MX6SLLEVK BOARD
+IMX6SLLEVK BOARD
 M:	Peng Fan <peng.fan@nxp.com>
 S:	Maintained
 F:	board/freescale/mx6sllevk/

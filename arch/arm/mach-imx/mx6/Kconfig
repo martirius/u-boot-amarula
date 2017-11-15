@@ -1,63 +1,63 @@
-if ARCH_MX6
+if ARCH_IMX6
 
-config MX6_SMP
+config IMX6_SMP
 	select ARM_ERRATA_751472
 	select ARM_ERRATA_761320
 	select ARM_ERRATA_794072
 	select ARM_ERRATA_845369
 	bool
 
-config MX6
-	select ARM_ERRATA_743622 if !MX6UL
+config IMX6
+	select ARM_ERRATA_743622 if !IMX6UL
 	bool
 	default y
 	imply CMD_FUSE
 
-config MX6D
-	select MX6_SMP
+config IMX6D
+	select IMX6_SMP
 	bool
 
-config MX6DL
-	select MX6_SMP
+config IMX6DL
+	select IMX6_SMP
 	bool
 
-config MX6Q
-	select MX6_SMP
+config IMX6Q
+	select IMX6_SMP
 	bool
 
-config MX6QDL
-	select MX6_SMP
+config IMX6QDL
+	select IMX6_SMP
 	bool
 
-config MX6S
+config IMX6S
 	bool
 
-config MX6SL
+config IMX6SL
 	bool
 
-config MX6SX
+config IMX6SX
 	select ROM_UNIFIED_SECTIONS
 	bool
 
-config MX6SLL
+config IMX6SLL
 	select ROM_UNIFIED_SECTIONS
 	bool
 
-config MX6UL
+config IMX6UL
 	select SYS_L2CACHE_OFF
 	select ROM_UNIFIED_SECTIONS
 	bool
 
-config MX6UL_LITESOM
+config IMX6UL_LITESOM
 	bool
-	select MX6UL
+	select IMX6UL
 	select DM
 	select DM_THERMAL
 	select SUPPORT_SPL
 
-config MX6UL_OPOS6UL
+config IMX6UL_OPOS6UL
 	bool
-	select MX6UL
+	select IMX6UL
 	select BOARD_LATE_INIT
 	select DM
 	select DM_GPIO
@@ -65,11 +65,11 @@ config MX6UL_OPOS6UL
 	select DM_THERMAL
 	select SUPPORT_SPL
 
-config MX6ULL
+config IMX6ULL
 	bool
-	select MX6UL
+	select IMX6UL
 
-config MX6_DDRCAL
+config IMX6_DDRCAL
 	bool "Include dynamic DDR calibration routines"
 	depends on SPL
 	default n
@@ -78,17 +78,17 @@ config MX6_DDRCAL
 	  If unsure, say N.
 
 choice
-	prompt "MX6 board select"
+	prompt "IMX6 board select"
 	optional
 
 config TARGET_ADVANTECH_DMS_BA16
 	bool "Advantech dms-ba16"
 	select BOARD_LATE_INIT
-	select MX6Q
+	select IMX6Q
 	imply CMD_SATA
 
 config TARGET_APALIS_IMX6
-	bool "Toradex Apalis iMX6 board"
+	bool "Toradex Apalis iIMX6 board"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
 	select DM
@@ -107,7 +107,7 @@ config TARGET_ARISTAINETOS2B
 	bool "Support aristainetos2-revB"
 	select BOARD_LATE_INIT
 
-config TARGET_CGTQMX6EVAL
+config TARGET_CGTQIMX6EVAL
 	bool "cgtqmx6eval"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
@@ -122,7 +122,7 @@ config TARGET_CM_FX6
 	select DM_GPIO
 
 config TARGET_COLIBRI_IMX6
-	bool "Toradex Colibri iMX6 board"
+	bool "Toradex Colibri iIMX6 board"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
 	select DM
@@ -144,24 +144,24 @@ config TARGET_DISPLAY5
 	select DM
 	select DM_SERIAL
 
-config TARGET_EMBESTMX6BOARDS
+config TARGET_EMBESTIMX6BOARDS
 	bool "embestmx6boards"
 	select BOARD_LATE_INIT
 
 config TARGET_GE_B450V3
 	bool "General Electric B450v3"
 	select BOARD_LATE_INIT
-	select MX6Q
+	select IMX6Q
 
 config TARGET_GE_B650V3
 	bool "General Electric B650v3"
 	select BOARD_LATE_INIT
-	select MX6Q
+	select IMX6Q
 
 config TARGET_GE_B850V3
 	bool "General Electric B850v3"
 	select BOARD_LATE_INIT
-	select MX6Q
+	select IMX6Q
 
 config TARGET_GW_VENTANA
 	bool "gw_ventana"
@@ -178,13 +178,13 @@ config TARGET_MCCMON6
 	bool "mccmon6"
 	select SUPPORT_SPL
 
-config TARGET_MX6CUBOXI
+config TARGET_IMX6CUBOXI
 	bool "Solid-run mx6 boards"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
 
-config TARGET_MX6LOGICPD
-	bool "Logic PD i.MX6 SOM"
+config TARGET_IMX6LOGICPD
+	bool "Logic PD i.IMX6 SOM"
 	select BOARD_EARLY_INIT_F
 	select BOARD_LATE_INIT
 	select DM
@@ -196,13 +196,13 @@ config TARGET_MX6LOGICPD
 	select DM_REGULATOR
 	select OF_CONTROL
 
-config TARGET_MX6QARM2
+config TARGET_IMX6QARM2
 	bool "mx6qarm2"
 
-config TARGET_MX6Q_ENGICAM
+config TARGET_IMX6Q_ENGICAM
 	bool "Support Engicam i.Core(RQS)"
 	select BOARD_LATE_INIT
-	select MX6QDL
+	select IMX6QDL
 	select OF_CONTROL
 	select SPL_OF_LIBFDT
 	select DM
@@ -218,7 +218,7 @@ config TARGET_MX6Q_ENGICAM
 	select SPL_SEPARATE_BSS if SPL
 	select SPL_PINCTRL if SPL
 
-config TARGET_MX6SABREAUTO
+config TARGET_IMX6SABREAUTO
 	bool "mx6sabreauto"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
@@ -226,7 +226,7 @@ config TARGET_MX6SABREAUTO
 	select DM_THERMAL
 	select BOARD_EARLY_INIT_F
 
-config TARGET_MX6SABRESD
+config TARGET_IMX6SABRESD
 	bool "mx6sabresd"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
@@ -234,53 +234,53 @@ config TARGET_MX6SABRESD
 	select DM_THERMAL
 	select BOARD_EARLY_INIT_F
 
-config TARGET_MX6SLEVK
+config TARGET_IMX6SLEVK
 	bool "mx6slevk"
 	select SUPPORT_SPL
 
-config TARGET_MX6SLLEVK
+config TARGET_IMX6SLLEVK
         bool "mx6sll evk"
 	select BOARD_LATE_INIT
-        select MX6SLL
+        select IMX6SLL
         select DM
         select DM_THERMAL
 
-config TARGET_MX6SXSABRESD
+config TARGET_IMX6SXSABRESD
 	bool "mx6sxsabresd"
-	select MX6SX
+	select IMX6SX
 	select SUPPORT_SPL
 	select DM
 	select DM_THERMAL
 	select BOARD_EARLY_INIT_F
 
-config TARGET_MX6SXSABREAUTO
+config TARGET_IMX6SXSABREAUTO
         bool "mx6sxsabreauto"
 	select BOARD_LATE_INIT
-	select MX6SX
+	select IMX6SX
         select DM
         select DM_THERMAL
 	select BOARD_EARLY_INIT_F
 
-config TARGET_MX6UL_9X9_EVK
+config TARGET_IMX6UL_9X9_EVK
 	bool "mx6ul_9x9_evk"
 	select BOARD_LATE_INIT
-	select MX6UL
+	select IMX6UL
 	select DM
 	select DM_THERMAL
 	select SUPPORT_SPL
 
-config TARGET_MX6UL_14X14_EVK
+config TARGET_IMX6UL_14X14_EVK
 	select BOARD_LATE_INIT
 	bool "mx6ul_14x14_evk"
-	select MX6UL
+	select IMX6UL
 	select DM
 	select DM_THERMAL
 	select SUPPORT_SPL
 
-config TARGET_MX6UL_ENGICAM
+config TARGET_IMX6UL_ENGICAM
 	bool "Support Engicam GEAM6UL/Is.IoT"
 	select BOARD_LATE_INIT
-	select MX6UL
+	select IMX6UL
 	select OF_CONTROL
 	select DM
 	select DM_ETH
@@ -294,10 +294,10 @@ config TARGET_MX6UL_ENGICAM
 	select SPL_SEPARATE_BSS if SPL
 	select SPL_PINCTRL if SPL
 
-config TARGET_MX6ULL_14X14_EVK
+config TARGET_IMX6ULL_14X14_EVK
 	bool "Support mx6ull_14x14_evk"
 	select BOARD_LATE_INIT
-	select MX6ULL
+	select IMX6ULL
 	select DM
 	select DM_THERMAL
 
@@ -310,7 +310,7 @@ config TARGET_NITROGEN6X
 
 config TARGET_OPOS6ULDEV
 	bool "Armadeus OPOS6ULDev board"
-	select MX6UL_OPOS6UL
+	select IMX6UL_OPOS6UL
 
 config TARGET_OT1200
 	bool "Bachmann OT1200"
@@ -319,12 +319,12 @@ config TARGET_OT1200
 
 config TARGET_PICO_IMX6UL
 	bool "PICO-IMX6UL-EMMC"
-	select MX6UL
+	select IMX6UL
 
 config TARGET_LITEBOARD
-	bool "Grinn liteBoard (i.MX6UL)"
+	bool "Grinn liteBoard (i.IMX6UL)"
 	select BOARD_LATE_INIT
-	select MX6UL_LITESOM
+	select IMX6UL_LITESOM
 
 config TARGET_PLATINUM_PICON
 	bool "platinum-picon"
@@ -335,16 +335,16 @@ config TARGET_PLATINUM_TITANIUM
 	select SUPPORT_SPL
 
 config TARGET_PCM058
-	bool "Phytec PCM058 i.MX6 Quad"
+	bool "Phytec PCM058 i.IMX6 Quad"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
 
 config TARGET_PFLA02
-	bool "Phytec PFLA02 (PhyFlex) i.MX6 Quad"
+	bool "Phytec PFLA02 (PhyFlex) i.IMX6 Quad"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
 
-config TARGET_SECOMX6
+config TARGET_SECOIMX6
 	bool "secomx6 boards"
 
 config TARGET_TBS2910
@@ -366,14 +366,14 @@ config TARGET_UDOO_NEO
 	bool "UDOO Neo"
 	select BOARD_LATE_INIT
 	select SUPPORT_SPL
-	select MX6SX
+	select IMX6SX
 	select DM
 	select DM_THERMAL
 
 config TARGET_SAMTEC_VINING_2000
 	bool "samtec VIN|ING 2000"
 	select BOARD_LATE_INIT
-	select MX6SX
+	select IMX6SX
 	select DM
 	select DM_THERMAL
 
@@ -389,7 +389,7 @@ config TARGET_WARP
 config TARGET_XPRESS
 	bool "CCV xPress"
 	select BOARD_LATE_INIT
-	select MX6UL
+	select IMX6UL
 	select DM
 	select DM_THERMAL
 	select SUPPORT_SPL

@@ -1,4 +1,4 @@
-MX6LOGICPD BOARD
+IMX6LOGICPD BOARD
 M:     Adam Ford <aford173@gmail.com>
 S:     Maintained
 F:     board/logicpd/imx6/

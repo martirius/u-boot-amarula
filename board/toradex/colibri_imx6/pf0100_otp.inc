@@ -6,14 +6,14 @@
 
 // Register Output for PF0100 programmer
 // Customer: Toradex AG
-// Program: Colibri iMX6
+// Program: Colibri iIMX6
 // Sample marking:
 // Date: 24.07.2015
 // Time: 10:52:58
 // Generated from Spreadsheet Revision: P1.8
 
 /* sed commands to get from programmer script to struct */
-/* sed -e 's/^WRITE_I2C:\(..\):\(..\)/\{pmic_i2c, 0x\1, 0x\2\},/g' -e 's/^DELAY:\([0-9]*\)/\{pmic_delay, 0, \1\},/g' pf0100_otp_Colibri_iMX6.txt > pf0100_otp.inc
+/* sed -e 's/^WRITE_I2C:\(..\):\(..\)/\{pmic_i2c, 0x\1, 0x\2\},/g' -e 's/^DELAY:\([0-9]*\)/\{pmic_delay, 0, \1\},/g' pf0100_otp_Colibri_iIMX6.txt > pf0100_otp.inc
    sed -i -e 's/^VPGM:ON/\{pmic_vpgm, 0, 1},/g' -e 's/^VPGM:OFF/\{pmic_vpgm, 0, 0},/g' pf0100_otp.inc
    sed -i -e 's/^PWRON: HIGH/\{pmic_pwr, 0, 1},/g' -e 's/^PWRON:LOW/\{pmic_pwr, 0, 0},/g' pf0100_otp.inc */
 

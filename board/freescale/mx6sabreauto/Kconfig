@@ -1,4 +1,4 @@
-if TARGET_MX6SABREAUTO
+if TARGET_IMX6SABREAUTO
 
 config SYS_BOARD
 	default "mx6sabreauto"

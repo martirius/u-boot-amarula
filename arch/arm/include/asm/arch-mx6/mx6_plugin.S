@@ -13,8 +13,8 @@
 #define ROM_API_TABLE_BASE_ADDR_LEGACY		0xC0
 #define ROM_VERSION_OFFSET               	0x48
 #endif
-#define ROM_API_TABLE_BASE_ADDR_MX6DQ_TO15	0xC4
-#define ROM_API_TABLE_BASE_ADDR_MX6DL_TO12	0xC4
+#define ROM_API_TABLE_BASE_ADDR_IMX6DQ_TO15	0xC4
+#define ROM_API_TABLE_BASE_ADDR_IMX6DL_TO12	0xC4
 #define ROM_API_HWCNFG_SETUP_OFFSET		0x08
 #define ROM_VERSION_TO10			0x10
 #define ROM_VERSION_TO12			0x12
@@ -43,7 +43,7 @@ plugin_start:
 	adr r2, boot_data2
 
 #ifdef CONFIG_NOR_BOOT
-#ifdef CONFIG_MX6SX
+#ifdef CONFIG_IMX6SX
 	ldr r3, =ROM_VERSION_OFFSET
 	ldr r4, [r3]
 	cmp r4, #ROM_VERSION_TO10
@@ -64,15 +64,15 @@ plugin_start:
 before_calling_rom___pu_irom_hwcnfg_setup:
 	ldr r3, =ROM_VERSION_OFFSET
 	ldr r4, [r3]
-#if defined(CONFIG_MX6SOLO) || defined(CONFIG_MX6DL)
+#if defined(CONFIG_IMX6SOLO) || defined(CONFIG_IMX6DL)
 	ldr r3, =ROM_VERSION_TO12
 	cmp r4, r3
-	ldrge r3, =ROM_API_TABLE_BASE_ADDR_MX6DL_TO12
+	ldrge r3, =ROM_API_TABLE_BASE_ADDR_IMX6DL_TO12
 	ldrlt r3, =ROM_API_TABLE_BASE_ADDR_LEGACY
-#elif defined(CONFIG_MX6Q)
+#elif defined(CONFIG_IMX6Q)
 	ldr r3, =ROM_VERSION_TO15
 	cmp r4, r3
-	ldrge r3, =ROM_API_TABLE_BASE_ADDR_MX6DQ_TO15
+	ldrge r3, =ROM_API_TABLE_BASE_ADDR_IMX6DQ_TO15
 	ldrlt r3, =ROM_API_TABLE_BASE_ADDR_LEGACY
 #else
 	ldr r3, =ROM_API_TABLE_BASE_ADDR_LEGACY

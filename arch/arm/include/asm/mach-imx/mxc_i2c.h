@@ -59,36 +59,36 @@ struct mxc_i2c_bus {
 #endif
 };
 
-#if defined(CONFIG_MX6QDL)
+#if defined(CONFIG_IMX6QDL)
 #define I2C_PADS(name, scl_i2c, scl_gpio, scl_gp, sda_i2c, sda_gpio, sda_gp) \
 	struct i2c_pads_info mx6q_##name = {		\
 		.scl = {				\
-			.i2c_mode = MX6Q_##scl_i2c,	\
-			.gpio_mode = MX6Q_##scl_gpio,	\
+			.i2c_mode = IMX6Q_##scl_i2c,	\
+			.gpio_mode = IMX6Q_##scl_gpio,	\
 			.gp = scl_gp,			\
 		},					\
 		.sda = {				\
-			.i2c_mode = MX6Q_##sda_i2c,	\
-			.gpio_mode = MX6Q_##sda_gpio,	\
+			.i2c_mode = IMX6Q_##sda_i2c,	\
+			.gpio_mode = IMX6Q_##sda_gpio,	\
 			.gp = sda_gp,			\
 		}					\
 	};						\
 	struct i2c_pads_info mx6s_##name = {		\
 		.scl = {				\
-			.i2c_mode = MX6DL_##scl_i2c,	\
-			.gpio_mode = MX6DL_##scl_gpio,	\
+			.i2c_mode = IMX6DL_##scl_i2c,	\
+			.gpio_mode = IMX6DL_##scl_gpio,	\
 			.gp = scl_gp,			\
 		},					\
 		.sda = {				\
-			.i2c_mode = MX6DL_##sda_i2c,	\
-			.gpio_mode = MX6DL_##sda_gpio,	\
+			.i2c_mode = IMX6DL_##sda_i2c,	\
+			.gpio_mode = IMX6DL_##sda_gpio,	\
 			.gp = sda_gp,			\
 		}					\
 	};
 
 
 #define I2C_PADS_INFO(name)	\
-	(is_cpu_type(MXC_CPU_MX6Q) || is_cpu_type(MXC_CPU_MX6D)) ? \
+	(is_cpu_type(MXC_CPU_IMX6Q) || is_cpu_type(MXC_CPU_IMX6D)) ? \
 					&mx6q_##name : &mx6s_##name
 #endif
 

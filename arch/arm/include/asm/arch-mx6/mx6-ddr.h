@@ -3,31 +3,31 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#ifndef __ASM_ARCH_MX6_DDR_H__
-#define __ASM_ARCH_MX6_DDR_H__
+#ifndef __ASM_ARCH_IMX6_DDR_H__
+#define __ASM_ARCH_IMX6_DDR_H__
 
 #ifndef CONFIG_SPL_BUILD
-#ifdef CONFIG_MX6Q
+#ifdef CONFIG_IMX6Q
 #include "mx6q-ddr.h"
 #else
-#if defined(CONFIG_MX6DL) || defined(CONFIG_MX6S)
+#if defined(CONFIG_IMX6DL) || defined(CONFIG_IMX6S)
 #include "mx6dl-ddr.h"
 #else
-#ifdef CONFIG_MX6SX
+#ifdef CONFIG_IMX6SX
 #include "mx6sx-ddr.h"
 #else
-#ifdef CONFIG_MX6UL
+#ifdef CONFIG_IMX6UL
 #include "mx6ul-ddr.h"
 #else
-#ifdef CONFIG_MX6SL
+#ifdef CONFIG_IMX6SL
 #include "mx6sl-ddr.h"
 #else
 #error "Please select cpu"
-#endif	/* CONFIG_MX6SL */
-#endif	/* CONFIG_MX6UL */
-#endif	/* CONFIG_MX6SX */
-#endif	/* CONFIG_MX6DL or CONFIG_MX6S */
-#endif	/* CONFIG_MX6Q */
+#endif	/* CONFIG_IMX6SL */
+#endif	/* CONFIG_IMX6UL */
+#endif	/* CONFIG_IMX6SX */
+#endif	/* CONFIG_IMX6DL or CONFIG_IMX6S */
+#endif	/* CONFIG_IMX6Q */
 #else
 
 enum {
@@ -122,7 +122,7 @@ struct mmdc_p_regs {
 	u32 mpdccr;
 };
 
-#define MX6SL_IOM_DDR_BASE     0x020e0300
+#define IMX6SL_IOM_DDR_BASE     0x020e0300
 struct mx6sl_iomux_ddr_regs {
 	u32 dram_cas;
 	u32 dram_cs0_b;
@@ -148,7 +148,7 @@ struct mx6sl_iomux_ddr_regs {
 	u32 dram_sdwe_b;
 };
 
-#define MX6SL_IOM_GRP_BASE     0x020e0500
+#define IMX6SL_IOM_GRP_BASE     0x020e0500
 struct mx6sl_iomux_grp_regs {
 	u32 res1[43];
 	u32 grp_addds;
@@ -165,7 +165,7 @@ struct mx6sl_iomux_grp_regs {
 	u32 grp_b3ds;
 };
 
-#define MX6UL_IOM_DDR_BASE	0x020e0200
+#define IMX6UL_IOM_DDR_BASE	0x020e0200
 struct mx6ul_iomux_ddr_regs {
 	u32 res1[17];
 	u32 dram_dqm0;
@@ -188,7 +188,7 @@ struct mx6ul_iomux_ddr_regs {
 	u32 dram_reset;
 };
 
-#define MX6UL_IOM_GRP_BASE	0x020e0400
+#define IMX6UL_IOM_GRP_BASE	0x020e0400
 struct mx6ul_iomux_grp_regs {
 	u32 res1[36];
 	u32 grp_addds;
@@ -203,7 +203,7 @@ struct mx6ul_iomux_grp_regs {
 	u32 grp_ddr_type;
 };
 
-#define MX6SX_IOM_DDR_BASE	0x020e0200
+#define IMX6SX_IOM_DDR_BASE	0x020e0200
 struct mx6sx_iomux_ddr_regs {
 	u32 res1[59];
 	u32 dram_dqm0;
@@ -229,7 +229,7 @@ struct mx6sx_iomux_ddr_regs {
 	u32 dram_reset;
 };
 
-#define MX6SX_IOM_GRP_BASE	0x020e0500
+#define IMX6SX_IOM_GRP_BASE	0x020e0500
 struct mx6sx_iomux_grp_regs {
 	u32 res1[61];
 	u32 grp_addds;
@@ -249,7 +249,7 @@ struct mx6sx_iomux_grp_regs {
 /*
  * MMDC iomux registers (pinctl/padctl) - (different for IMX6DQ vs IMX6SDL)
  */
-#define MX6DQ_IOM_DDR_BASE      0x020e0500
+#define IMX6DQ_IOM_DDR_BASE      0x020e0500
 struct mx6dq_iomux_ddr_regs {
 	u32 res1[3];
 	u32 dram_sdqs5;
@@ -284,7 +284,7 @@ struct mx6dq_iomux_ddr_regs {
 	u32 dram_dqm7;
 };
 
-#define MX6DQ_IOM_GRP_BASE      0x020e0700
+#define IMX6DQ_IOM_GRP_BASE      0x020e0700
 struct mx6dq_iomux_grp_regs {
 	u32 res1[18];
 	u32 grp_b7ds;
@@ -307,7 +307,7 @@ struct mx6dq_iomux_grp_regs {
 	u32 grp_b6ds;
 };
 
-#define MX6SDL_IOM_DDR_BASE     0x020e0400
+#define IMX6SDL_IOM_DDR_BASE     0x020e0400
 struct mx6sdl_iomux_ddr_regs {
 	u32 res1[25];
 	u32 dram_cas;
@@ -340,7 +340,7 @@ struct mx6sdl_iomux_ddr_regs {
 	u32 dram_sdqs7;
 };
 
-#define MX6SDL_IOM_GRP_BASE     0x020e0700
+#define IMX6SDL_IOM_GRP_BASE     0x020e0700
 struct mx6sdl_iomux_grp_regs {
 	u32 res1[18];
 	u32 grp_b7ds;
@@ -416,7 +416,7 @@ struct mx6_ddr_sysinfo {
  * Board specific calibration:
  *   This includes write leveling calibration values as well as DQS gating
  *   and read/write delays. These values are board/layout/device specific.
- *   Freescale recommends using the i.MX6 DDR Stress Test Tool V1.0.2
+ *   Freescale recommends using the i.IMX6 DDR Stress Test Tool V1.0.2
  *   (DOC-96412) to determine these values over a range of boards and
  *   temperatures.
  */
@@ -458,7 +458,7 @@ void mx6sl_dram_iocfg(unsigned width,
 		      const struct mx6sl_iomux_ddr_regs *,
 		      const struct mx6sl_iomux_grp_regs *);
 
-#if defined(CONFIG_MX6_DDRCAL)
+#if defined(CONFIG_IMX6_DDRCAL)
 int mmdc_do_write_level_calibration(struct mx6_ddr_sysinfo const *sysinfo);
 int mmdc_do_dqs_calibration(struct mx6_ddr_sysinfo const *sysinfo);
 void mmdc_read_calibration(struct mx6_ddr_sysinfo const *sysinfo,
@@ -472,60 +472,60 @@ void mx6_dram_cfg(const struct mx6_ddr_sysinfo *,
 
 #endif /* CONFIG_SPL_BUILD */
 
-#define MX6_MMDC_P0_MDCTL	0x021b0000
-#define MX6_MMDC_P0_MDPDC	0x021b0004
-#define MX6_MMDC_P0_MDOTC	0x021b0008
-#define MX6_MMDC_P0_MDCFG0	0x021b000c
-#define MX6_MMDC_P0_MDCFG1	0x021b0010
-#define MX6_MMDC_P0_MDCFG2	0x021b0014
-#define MX6_MMDC_P0_MDMISC	0x021b0018
-#define MX6_MMDC_P0_MDSCR	0x021b001c
-#define MX6_MMDC_P0_MDREF	0x021b0020
-#define MX6_MMDC_P0_MDRWD	0x021b002c
-#define MX6_MMDC_P0_MDOR	0x021b0030
-#define MX6_MMDC_P0_MDASP	0x021b0040
-#define MX6_MMDC_P0_MAPSR	0x021b0404
-#define MX6_MMDC_P0_MPZQHWCTRL	0x021b0800
-#define MX6_MMDC_P0_MPWLDECTRL0	0x021b080c
-#define MX6_MMDC_P0_MPWLDECTRL1	0x021b0810
-#define MX6_MMDC_P0_MPODTCTRL	0x021b0818
-#define MX6_MMDC_P0_MPRDDQBY0DL	0x021b081c
-#define MX6_MMDC_P0_MPRDDQBY1DL	0x021b0820
-#define MX6_MMDC_P0_MPRDDQBY2DL	0x021b0824
-#define MX6_MMDC_P0_MPRDDQBY3DL	0x021b0828
-#define MX6_MMDC_P0_MPDGCTRL0	0x021b083c
-#define MX6_MMDC_P0_MPDGCTRL1	0x021b0840
-#define MX6_MMDC_P0_MPRDDLCTL	0x021b0848
-#define MX6_MMDC_P0_MPWRDLCTL	0x021b0850
-#define MX6_MMDC_P0_MPZQLP2CTL	0x021b085C
-#define MX6_MMDC_P0_MPMUR0	0x021b08b8
+#define IMX6_MMDC_P0_MDCTL	0x021b0000
+#define IMX6_MMDC_P0_MDPDC	0x021b0004
+#define IMX6_MMDC_P0_MDOTC	0x021b0008
+#define IMX6_MMDC_P0_MDCFG0	0x021b000c
+#define IMX6_MMDC_P0_MDCFG1	0x021b0010
+#define IMX6_MMDC_P0_MDCFG2	0x021b0014
+#define IMX6_MMDC_P0_MDMISC	0x021b0018
+#define IMX6_MMDC_P0_MDSCR	0x021b001c
+#define IMX6_MMDC_P0_MDREF	0x021b0020
+#define IMX6_MMDC_P0_MDRWD	0x021b002c
+#define IMX6_MMDC_P0_MDOR	0x021b0030
+#define IMX6_MMDC_P0_MDASP	0x021b0040
+#define IMX6_MMDC_P0_MAPSR	0x021b0404
+#define IMX6_MMDC_P0_MPZQHWCTRL	0x021b0800
+#define IMX6_MMDC_P0_MPWLDECTRL0	0x021b080c
+#define IMX6_MMDC_P0_MPWLDECTRL1	0x021b0810
+#define IMX6_MMDC_P0_MPODTCTRL	0x021b0818
+#define IMX6_MMDC_P0_MPRDDQBY0DL	0x021b081c
+#define IMX6_MMDC_P0_MPRDDQBY1DL	0x021b0820
+#define IMX6_MMDC_P0_MPRDDQBY2DL	0x021b0824
+#define IMX6_MMDC_P0_MPRDDQBY3DL	0x021b0828
+#define IMX6_MMDC_P0_MPDGCTRL0	0x021b083c
+#define IMX6_MMDC_P0_MPDGCTRL1	0x021b0840
+#define IMX6_MMDC_P0_MPRDDLCTL	0x021b0848
+#define IMX6_MMDC_P0_MPWRDLCTL	0x021b0850
+#define IMX6_MMDC_P0_MPZQLP2CTL	0x021b085C
+#define IMX6_MMDC_P0_MPMUR0	0x021b08b8
 
-#define MX6_MMDC_P1_MDCTL	0x021b4000
-#define MX6_MMDC_P1_MDPDC	0x021b4004
-#define MX6_MMDC_P1_MDOTC	0x021b4008
-#define MX6_MMDC_P1_MDCFG0	0x021b400c
-#define MX6_MMDC_P1_MDCFG1	0x021b4010
-#define MX6_MMDC_P1_MDCFG2	0x021b4014
-#define MX6_MMDC_P1_MDMISC	0x021b4018
-#define MX6_MMDC_P1_MDSCR	0x021b401c
-#define MX6_MMDC_P1_MDREF	0x021b4020
-#define MX6_MMDC_P1_MDRWD	0x021b402c
-#define MX6_MMDC_P1_MDOR	0x021b4030
-#define MX6_MMDC_P1_MDASP	0x021b4040
-#define MX6_MMDC_P1_MAPSR	0x021b4404
-#define MX6_MMDC_P1_MPZQHWCTRL	0x021b4800
-#define MX6_MMDC_P1_MPWLDECTRL0	0x021b480c
-#define MX6_MMDC_P1_MPWLDECTRL1	0x021b4810
-#define MX6_MMDC_P1_MPODTCTRL	0x021b4818
-#define MX6_MMDC_P1_MPRDDQBY0DL	0x021b481c
-#define MX6_MMDC_P1_MPRDDQBY1DL	0x021b4820
-#define MX6_MMDC_P1_MPRDDQBY2DL	0x021b4824
-#define MX6_MMDC_P1_MPRDDQBY3DL	0x021b4828
-#define MX6_MMDC_P1_MPDGCTRL0	0x021b483c
-#define MX6_MMDC_P1_MPDGCTRL1	0x021b4840
-#define MX6_MMDC_P1_MPRDDLCTL	0x021b4848
-#define MX6_MMDC_P1_MPWRDLCTL	0x021b4850
-#define MX6_MMDC_P1_MPZQLP2CTL	0x021b485C
-#define MX6_MMDC_P1_MPMUR0	0x021b48b8
+#define IMX6_MMDC_P1_MDCTL	0x021b4000
+#define IMX6_MMDC_P1_MDPDC	0x021b4004
+#define IMX6_MMDC_P1_MDOTC	0x021b4008
+#define IMX6_MMDC_P1_MDCFG0	0x021b400c
+#define IMX6_MMDC_P1_MDCFG1	0x021b4010
+#define IMX6_MMDC_P1_MDCFG2	0x021b4014
+#define IMX6_MMDC_P1_MDMISC	0x021b4018
+#define IMX6_MMDC_P1_MDSCR	0x021b401c
+#define IMX6_MMDC_P1_MDREF	0x021b4020
+#define IMX6_MMDC_P1_MDRWD	0x021b402c
+#define IMX6_MMDC_P1_MDOR	0x021b4030
+#define IMX6_MMDC_P1_MDASP	0x021b4040
+#define IMX6_MMDC_P1_MAPSR	0x021b4404
+#define IMX6_MMDC_P1_MPZQHWCTRL	0x021b4800
+#define IMX6_MMDC_P1_MPWLDECTRL0	0x021b480c
+#define IMX6_MMDC_P1_MPWLDECTRL1	0x021b4810
+#define IMX6_MMDC_P1_MPODTCTRL	0x021b4818
+#define IMX6_MMDC_P1_MPRDDQBY0DL	0x021b481c
+#define IMX6_MMDC_P1_MPRDDQBY1DL	0x021b4820
+#define IMX6_MMDC_P1_MPRDDQBY2DL	0x021b4824
+#define IMX6_MMDC_P1_MPRDDQBY3DL	0x021b4828
+#define IMX6_MMDC_P1_MPDGCTRL0	0x021b483c
+#define IMX6_MMDC_P1_MPDGCTRL1	0x021b4840
+#define IMX6_MMDC_P1_MPRDDLCTL	0x021b4848
+#define IMX6_MMDC_P1_MPWRDLCTL	0x021b4850
+#define IMX6_MMDC_P1_MPZQLP2CTL	0x021b485C
+#define IMX6_MMDC_P1_MPMUR0	0x021b48b8
 
-#endif	/*__ASM_ARCH_MX6_DDR_H__ */
+#endif	/*__ASM_ARCH_IMX6_DDR_H__ */

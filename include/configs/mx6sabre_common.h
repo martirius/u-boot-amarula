@@ -1,13 +1,13 @@
 /*
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6Q SabreSD board.
+ * Configuration settings for the Freescale i.IMX6Q SabreSD board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
-#ifndef __MX6QSABRE_COMMON_CONFIG_H
-#define __MX6QSABRE_COMMON_CONFIG_H
+#ifndef __IMX6QSABRE_COMMON_CONFIG_H
+#define __IMX6QSABRE_COMMON_CONFIG_H
 
 #include "mx6_common.h"
 
@@ -141,17 +141,17 @@
 		"fi;\0" \
 		"findfdt="\
 			"if test $fdt_file = undefined; then " \
-				"if test $board_name = SABREAUTO && test $board_rev = MX6QP; then " \
+				"if test $board_name = SABREAUTO && test $board_rev = IMX6QP; then " \
 					"setenv fdt_file imx6qp-sabreauto.dtb; fi; " \
-				"if test $board_name = SABREAUTO && test $board_rev = MX6Q; then " \
+				"if test $board_name = SABREAUTO && test $board_rev = IMX6Q; then " \
 					"setenv fdt_file imx6q-sabreauto.dtb; fi; " \
-				"if test $board_name = SABREAUTO && test $board_rev = MX6DL; then " \
+				"if test $board_name = SABREAUTO && test $board_rev = IMX6DL; then " \
 					"setenv fdt_file imx6dl-sabreauto.dtb; fi; " \
-				"if test $board_name = SABRESD && test $board_rev = MX6QP; then " \
+				"if test $board_name = SABRESD && test $board_rev = IMX6QP; then " \
 					"setenv fdt_file imx6qp-sabresd.dtb; fi; " \
-				"if test $board_name = SABRESD && test $board_rev = MX6Q; then " \
+				"if test $board_name = SABRESD && test $board_rev = IMX6Q; then " \
 					"setenv fdt_file imx6q-sabresd.dtb; fi; " \
-				"if test $board_name = SABRESD && test $board_rev = MX6DL; then " \
+				"if test $board_name = SABRESD && test $board_rev = IMX6DL; then " \
 					"setenv fdt_file imx6dl-sabresd.dtb; fi; " \
 				"if test $fdt_file = undefined; then " \
 					"echo WARNING: Could not determine dtb to use; fi; " \
@@ -214,4 +214,4 @@
 #define CONFIG_USB_FUNCTION_MASS_STORAGE
 #endif
 
-#endif                         /* __MX6QSABRE_COMMON_CONFIG_H */
+#endif                         /* __IMX6QSABRE_COMMON_CONFIG_H */

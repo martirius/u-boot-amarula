@@ -4,10 +4,10 @@
  * SPDX-License-Identifier:	GPL-2.0
  */
 
-#ifndef __MX6_COMMON_H
-#define __MX6_COMMON_H
+#ifndef __IMX6_COMMON_H
+#define __IMX6_COMMON_H
 
-#ifndef CONFIG_MX6UL
+#ifndef CONFIG_IMX6UL
 #ifndef CONFIG_SYS_L2CACHE_OFF
 #define CONFIG_SYS_L2_PL310
 #define CONFIG_SYS_PL310_BASE	L2_PL310_BASE
@@ -24,8 +24,8 @@
 #include <asm/arch/imx-regs.h>
 #include <asm/mach-imx/gpio.h>
 
-#ifndef CONFIG_MX6
-#define CONFIG_MX6
+#ifndef CONFIG_IMX6
+#define CONFIG_IMX6
 #endif
 
 #define CONFIG_SYS_FSL_CLK
@@ -37,8 +37,8 @@
 #define CONFIG_REVISION_TAG
 
 /* Boot options */
-#if (defined(CONFIG_MX6SX) || defined(CONFIG_MX6SL) || \
-	defined(CONFIG_MX6UL) || defined(CONFIG_MX6SLL))
+#if (defined(CONFIG_IMX6SX) || defined(CONFIG_IMX6SL) || \
+	defined(CONFIG_IMX6UL) || defined(CONFIG_IMX6SLL))
 #define CONFIG_LOADADDR		0x82000000
 #ifndef CONFIG_SYS_TEXT_BASE
 #define CONFIG_SYS_TEXT_BASE	0x87800000

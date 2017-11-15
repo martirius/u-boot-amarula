@@ -1,9 +1,9 @@
 U-Boot for the Boundary Devices Nitrogen6X and
-Freescale i.MX6Q SabreLite boards
+Freescale i.IMX6Q SabreLite boards
 
 This file contains information for the port of
 U-Boot to the Boundary Devices Nitrogen6X and
-Freescale i.MX6Q SabreLite boards.
+Freescale i.IMX6Q SabreLite boards.
 
 1. Boot source, boot from SPI NOR
 ---------------------------------
@@ -71,14 +71,14 @@ To build U-Boot for one of the Nitrogen6x or SabreLite board:
 
 Note that 'nitrogen6x' is a placeholder. The complete list of supported
 board configurations is shown in the boards.cfg file:
-	nitrogen6q		i.MX6Q/6D	1GB
-	nitrogen6dl		i.MX6DL		1GB
-	nitrogen6s		i.MX6S		512MB
-	nitrogen6q2g    	i.MX6Q/6D	2GB
-	nitrogen6dl2g		i.MX6DL		2GB
-	nitrogen6s1g		i.MX6S		1GB
+	nitrogen6q		i.IMX6Q/6D	1GB
+	nitrogen6dl		i.IMX6DL		1GB
+	nitrogen6s		i.IMX6S		512MB
+	nitrogen6q2g    	i.IMX6Q/6D	2GB
+	nitrogen6dl2g		i.IMX6DL		2GB
+	nitrogen6s1g		i.IMX6S		1GB
 
-The -6q variants support either the i.MX6Quad or i.MX6Dual processors
+The -6q variants support either the i.IMX6Quad or i.IMX6Dual processors
 and are configured for a 64-bit memory bus at 1066 MHz.
 
 The -6dl variants also use a 64-bit memory bus, operated at 800MHz.

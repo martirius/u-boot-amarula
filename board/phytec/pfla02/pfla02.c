@@ -139,13 +139,13 @@ static iomux_v3_cfg_t const nfc_pads[] = {
 
 static struct i2c_pads_info i2c_pad_info = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_EIM_D21__I2C1_SCL | I2C_PAD,
-		.gpio_mode = MX6Q_PAD_EIM_D21__GPIO3_IO21 | I2C_PAD,
+		.i2c_mode = IMX6Q_PAD_EIM_D21__I2C1_SCL | I2C_PAD,
+		.gpio_mode = IMX6Q_PAD_EIM_D21__GPIO3_IO21 | I2C_PAD,
 		.gp = IMX_GPIO_NR(3, 21)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_EIM_D28__I2C1_SDA | I2C_PAD,
-		.gpio_mode = MX6Q_PAD_EIM_D28__GPIO3_IO28 | I2C_PAD,
+		.i2c_mode = IMX6Q_PAD_EIM_D28__I2C1_SDA | I2C_PAD,
+		.gpio_mode = IMX6Q_PAD_EIM_D28__GPIO3_IO28 | I2C_PAD,
 		.gp = IMX_GPIO_NR(3, 28)
 	}
 };
@@ -298,7 +298,7 @@ static void setup_gpmi_nand(void)
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_BCH_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_GPMI_IO_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_INPUT_APB_MASK |
-		     MXC_CCM_CCGR4_PL301_MX6QPER1_BCH_OFFSET);
+		     MXC_CCM_CCGR4_PL301_IMX6QPER1_BCH_OFFSET);
 
 	/* enable apbh clock gating */
 	setbits_le32(&mxc_ccm->CCGR0, MXC_CCM_CCGR0_APBHDMA_MASK);
@@ -402,7 +402,7 @@ int board_late_init(void)
 #include <spl.h>
 #include <libfdt.h>
 
-#define MX6_PHYFLEX_ERR006282	IMX_GPIO_NR(2, 11)
+#define IMX6_PHYFLEX_ERR006282	IMX_GPIO_NR(2, 11)
 static void phyflex_err006282_workaround(void)
 {
 	/*
@@ -412,13 +412,13 @@ static void phyflex_err006282_workaround(void)
 	 * need a check for older boards before applying this fixup.
 	 */
 
-	gpio_direction_output(MX6_PHYFLEX_ERR006282, 0);
+	gpio_direction_output(IMX6_PHYFLEX_ERR006282, 0);
 	mdelay(2);
-	gpio_direction_output(MX6_PHYFLEX_ERR006282, 1);
+	gpio_direction_output(IMX6_PHYFLEX_ERR006282, 1);
 	mdelay(2);
-	gpio_set_value(MX6_PHYFLEX_ERR006282, 0);
+	gpio_set_value(IMX6_PHYFLEX_ERR006282, 0);
 
-	gpio_direction_input(MX6_PHYFLEX_ERR006282);
+	gpio_direction_input(IMX6_PHYFLEX_ERR006282);
 }
 
 static const struct mx6dq_iomux_ddr_regs mx6_ddr_ioregs = {

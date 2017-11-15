@@ -75,8 +75,8 @@ void v7_outer_cache_enable(void)
 	val |= 0x30000000;
 
 	/*
-	 * The L2 cache controller(PL310) version on the i.MX6D/Q is r3p1-50rel0
-	 * The L2 cache controller(PL310) version on the i.MX6DL/SOLO/SL is r3p2
+	 * The L2 cache controller(PL310) version on the i.IMX6D/Q is r3p1-50rel0
+	 * The L2 cache controller(PL310) version on the i.IMX6DL/SOLO/SL is r3p2
 	 * But according to ARM PL310 errata: 752271
 	 * ID: 752271: Double linefill feature can cause data corruption
 	 * Fault Status: Present in: r3p0, r3p1, r3p1-50rel0. Fixed in r3p2
@@ -84,7 +84,7 @@ void v7_outer_cache_enable(void)
 	 * double linefill feature. This is the default behavior.
 	 */
 
-#ifndef CONFIG_MX6Q
+#ifndef CONFIG_IMX6Q
 	val |= 0x40800000;
 #endif
 	writel(val, &pl310->pl310_prefetch_ctrl);

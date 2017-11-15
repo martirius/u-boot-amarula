@@ -1,11 +1,11 @@
-How to use U-Boot on Freescale MX6ULL 14x14 EVK
+How to use U-Boot on Freescale IMX6ULL 14x14 EVK
 ----------------------------------------------
 
 - First make sure you have installed the dtc package (device tree compiler):
 
 $ sudo apt-get install device-tree-compiler
 
-- Build U-Boot for MX6ULL 14x14 EVK:
+- Build U-Boot for IMX6ULL 14x14 EVK:
 
 $ make mrproper
 $ make mx6ull_14x14_evk_defconfig

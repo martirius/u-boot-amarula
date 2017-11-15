@@ -50,7 +50,7 @@
 /* i.e. 0: unprogrammed, 3: programmed, other: undefined prog. state */
 unsigned pmic_init(void);
 
-/* programmes OTP fuses to values required on a Toradex Apalis iMX6 */
+/* programmes OTP fuses to values required on a Toradex Apalis iIMX6 */
 int pf0100_prog(void);
 
 #endif /* PF0100_H_ */

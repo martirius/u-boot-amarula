@@ -30,10 +30,10 @@ DECLARE_GLOBAL_DATA_PTR;
         PAD_CTL_DSE_40ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
 
 static iomux_v3_cfg_t const uart_pads[] = {
-#ifdef CONFIG_MX6QDL
+#ifdef CONFIG_IMX6QDL
         IOMUX_PADS(PAD_KEY_COL0__UART4_TX_DATA | MUX_PAD_CTRL(UART_PAD_CTRL)),
         IOMUX_PADS(PAD_KEY_ROW0__UART4_RX_DATA | MUX_PAD_CTRL(UART_PAD_CTRL)),
-#elif CONFIG_MX6UL
+#elif CONFIG_IMX6UL
 	IOMUX_PADS(PAD_UART1_TX_DATA__UART1_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL)),
 	IOMUX_PADS(PAD_UART1_RX_DATA__UART1_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL)),
 #endif
@@ -92,7 +92,7 @@ int spl_start_uboot(void)
 }
 #endif
 
-#ifdef CONFIG_MX6QDL
+#ifdef CONFIG_IMX6QDL
 /*
  * Driving strength:
  *   0x30 == 40 Ohm
@@ -101,7 +101,7 @@ int spl_start_uboot(void)
 #define IMX6DQ_DRIVE_STRENGTH		0x30
 #define IMX6SDL_DRIVE_STRENGTH		0x28
 
-/* configure MX6Q/DUAL mmdc DDR io registers */
+/* configure IMX6Q/DUAL mmdc DDR io registers */
 static struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_sdqs0 = IMX6DQ_DRIVE_STRENGTH,
 	.dram_sdqs1 = IMX6DQ_DRIVE_STRENGTH,
@@ -131,7 +131,7 @@ static struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_sdodt1 = IMX6DQ_DRIVE_STRENGTH,
 };
 
-/* configure MX6Q/DUAL mmdc GRP io registers */
+/* configure IMX6Q/DUAL mmdc GRP io registers */
 static struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_b0ds = IMX6DQ_DRIVE_STRENGTH,
 	.grp_b1ds = IMX6DQ_DRIVE_STRENGTH,
@@ -149,7 +149,7 @@ static struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc DDR io registers */
+/* configure IMX6SOLO/DUALLITE mmdc DDR io registers */
 struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_sdclk_0 = IMX6SDL_DRIVE_STRENGTH,
 	.dram_sdclk_1 = IMX6SDL_DRIVE_STRENGTH,
@@ -179,7 +179,7 @@ struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_dqm7 = IMX6SDL_DRIVE_STRENGTH,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc GRP io registers */
+/* configure IMX6SOLO/DUALLITE mmdc GRP io registers */
 struct mx6sdl_iomux_grp_regs mx6sdl_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -293,9 +293,9 @@ static struct mx6_ddr_sysinfo mem_s = {
 	.rst_to_cke	= 0x23,
 	.sde_to_rst	= 0x10,
 };
-#endif /* CONFIG_MX6QDL */
+#endif /* CONFIG_IMX6QDL */
 
-#ifdef CONFIG_MX6UL
+#ifdef CONFIG_IMX6UL
 static struct mx6ul_iomux_grp_regs mx6_grp_ioregs = {
 	.grp_addds = 0x00000030,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -349,7 +349,7 @@ static struct mx6_ddr3_cfg mem_ddr = {
 	.density = 4,
 	.width = 16,
 	.banks = 8,
-#ifdef TARGET_MX6UL_ISIOT
+#ifdef TARGET_IMX6UL_ISIOT
 	.rowaddr = 15,
 #else
 	.rowaddr = 13,
@@ -360,13 +360,13 @@ static struct mx6_ddr3_cfg mem_ddr = {
 	.trcmin = 4875,
 	.trasmin = 3500,
 };
-#endif /* CONFIG_MX6UL */
+#endif /* CONFIG_IMX6UL */
 
 static void ccgr_init(void)
 {
 	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
 
-#ifdef CONFIG_MX6QDL
+#ifdef CONFIG_IMX6QDL
 	writel(0x00003F3F, &ccm->CCGR0);
 	writel(0x0030FC00, &ccm->CCGR1);
 	writel(0x000FC000, &ccm->CCGR2);
@@ -374,7 +374,7 @@ static void ccgr_init(void)
 	writel(0xFF00F300, &ccm->CCGR4);
 	writel(0x0F0000C3, &ccm->CCGR5);
 	writel(0x000003CC, &ccm->CCGR6);
-#elif CONFIG_MX6UL
+#elif CONFIG_IMX6UL
 	writel(0x00c03f3f, &ccm->CCGR0);
 	writel(0xfcffff00, &ccm->CCGR1);
 	writel(0x0cffffcc, &ccm->CCGR2);
@@ -387,7 +387,7 @@ static void ccgr_init(void)
 
 static void spl_dram_init(void)
 {
-#ifdef CONFIG_MX6QDL
+#ifdef CONFIG_IMX6QDL
 	if (is_mx6solo()) {
 		mx6sdl_dram_iocfg(32, &mx6sdl_ddr_ioregs, &mx6sdl_grp_ioregs);
 		mx6_dram_cfg(&mem_s, &mx6dl_mmdc_calib, &mt41j256);
@@ -398,7 +398,7 @@ static void spl_dram_init(void)
 		mx6dq_dram_iocfg(64, &mx6dq_ddr_ioregs, &mx6dq_grp_ioregs);
 		mx6_dram_cfg(&mem_q, &mx6dq_mmdc_calib, &mt41j256);
 	}
-#elif CONFIG_MX6UL
+#elif CONFIG_IMX6UL
 	mx6ul_dram_iocfg(mem_ddr.width, &mx6_ddr_ioregs, &mx6_grp_ioregs);
 	mx6_dram_cfg(&ddr_sysinfo, &mx6_mmcd_calib, &mem_ddr);
 #endif

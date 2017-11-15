@@ -1,15 +1,15 @@
-U-Boot for LogicPD i.MX6 Development Kit
+U-Boot for LogicPD i.IMX6 Development Kit
 ----------------------------------------
 
 This file contains information for the port of U-Boot to the Logic PD Development kit.
 
-Logic PD has an i.MX6 System On Module (SOM) and a correspondong development
+Logic PD has an i.IMX6 System On Module (SOM) and a correspondong development
 board.  SOM has a built-in microSD socket, DDR and NAND flash.  The development kit has
 an SMSC Ethernet PHY, serial debug port and a variety of peripherals.
 
-On the intial release, the SOM came with either an i.MX6D or i.MX6Q.
+On the intial release, the SOM came with either an i.IMX6D or i.IMX6Q.
 
-For more details about Logic PD i.MX6 Development kit, visit:
+For more details about Logic PD i.IMX6 Development kit, visit:
 https://www.logicpd.com/
 
 Building U-Boot for Logic PD Development Kit

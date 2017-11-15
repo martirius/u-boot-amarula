@@ -14,25 +14,25 @@ choice
 	default TQMA6Q
 	help
 	  select the TQMa6 module variant. The variants differing in the used
-	  i.MX6 CPU type and DRAM
+	  i.IMX6 CPU type and DRAM
 
 config TQMA6Q
 	bool "TQMa6Q / TQMa6D"
-	select MX6Q
+	select IMX6Q
 	help
-	  select TQMa6Q / TQMa6D with i.MX6Q/D and 1GiB DRAM
+	  select TQMa6Q / TQMa6D with i.IMX6Q/D and 1GiB DRAM
 
 config TQMA6DL
 	bool "TQMa6DL"
-	select MX6DL
+	select IMX6DL
 	help
-	  select TQMa6DL with i.MX6DL and 1GiB DRAM
+	  select TQMa6DL with i.IMX6DL and 1GiB DRAM
 
 config TQMA6S
 	bool "TQMa6S"
-	select MX6S
+	select IMX6S
 	help
-	  select TQMa6S with i.MX6S and 512 MiB DRAM
+	  select TQMa6S with i.IMX6S and 512 MiB DRAM
 
 endchoice
 

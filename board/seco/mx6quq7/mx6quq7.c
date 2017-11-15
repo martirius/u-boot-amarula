@@ -156,7 +156,7 @@ int board_init(void)
 	/* address of boot parameters */
 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
 
-	imx_iomux_v3_setup_pad(MX6_PAD_NANDF_D4__GPIO2_IO04 |
+	imx_iomux_v3_setup_pad(IMX6_PAD_NANDF_D4__GPIO2_IO04 |
 			       MUX_PAD_CTRL(NO_PAD_CTRL));
 
 	gpio_direction_output(IMX_GPIO_NR(2, 4), 0);

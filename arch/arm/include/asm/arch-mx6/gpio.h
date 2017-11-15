@@ -6,9 +6,9 @@
  */
 
 
-#ifndef __ASM_ARCH_MX6_GPIO_H
-#define __ASM_ARCH_MX6_GPIO_H
+#ifndef __ASM_ARCH_IMX6_GPIO_H
+#define __ASM_ARCH_IMX6_GPIO_H
 
 #include <asm/mach-imx/gpio.h>
 
-#endif	/* __ASM_ARCH_MX6_GPIO_H */
+#endif	/* __ASM_ARCH_IMX6_GPIO_H */

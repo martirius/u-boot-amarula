@@ -1,5 +1,5 @@
 /*
- * Freescale i.MX6 PCI Express Root-Complex driver
+ * Freescale i.IMX6 PCI Express Root-Complex driver
  *
  * Copyright (C) 2013 Marek Vasut <marex@denx.de>
  *
@@ -24,21 +24,21 @@
 #define PCI_ACCESS_READ  0
 #define PCI_ACCESS_WRITE 1
 
-#ifdef CONFIG_MX6SX
-#define MX6_DBI_ADDR	0x08ffc000
-#define MX6_IO_ADDR	0x08000000
-#define MX6_MEM_ADDR	0x08100000
-#define MX6_ROOT_ADDR	0x08f00000
+#ifdef CONFIG_IMX6SX
+#define IMX6_DBI_ADDR	0x08ffc000
+#define IMX6_IO_ADDR	0x08000000
+#define IMX6_MEM_ADDR	0x08100000
+#define IMX6_ROOT_ADDR	0x08f00000
 #else
-#define MX6_DBI_ADDR	0x01ffc000
-#define MX6_IO_ADDR	0x01000000
-#define MX6_MEM_ADDR	0x01100000
-#define MX6_ROOT_ADDR	0x01f00000
+#define IMX6_DBI_ADDR	0x01ffc000
+#define IMX6_IO_ADDR	0x01000000
+#define IMX6_MEM_ADDR	0x01100000
+#define IMX6_ROOT_ADDR	0x01f00000
 #endif
-#define MX6_DBI_SIZE	0x4000
-#define MX6_IO_SIZE	0x100000
-#define MX6_MEM_SIZE	0xe00000
-#define MX6_ROOT_SIZE	0xfc000
+#define IMX6_DBI_SIZE	0x4000
+#define IMX6_IO_SIZE	0x100000
+#define IMX6_MEM_SIZE	0xe00000
+#define IMX6_ROOT_SIZE	0xfc000
 
 /* PCIe Port Logic registers (memory-mapped) */
 #define PL_OFFSET 0x700
@@ -232,7 +232,7 @@ static int imx6_pcie_link_up(void)
 	int rx_valid, temp;
 
 	/* link is debug bit 36, debug register 1 starts at bit 32 */
-	rc = readl(MX6_DBI_ADDR + PCIE_PHY_DEBUG_R1);
+	rc = readl(IMX6_DBI_ADDR + PCIE_PHY_DEBUG_R1);
 	if ((rc & PCIE_PHY_DEBUG_R1_LINK_UP) &&
 	    !(rc & PCIE_PHY_DEBUG_R1_LINK_IN_TRAINING))
 		return -EAGAIN;
@@ -244,8 +244,8 @@ static int imx6_pcie_link_up(void)
 	 * && (PHY/rx_valid==0) then pulse PHY/rx_reset. Transition
 	 * to gen2 is stuck
 	 */
-	pcie_phy_read((void *)MX6_DBI_ADDR, PCIE_PHY_RX_ASIC_OUT, &rx_valid);
-	ltssm = readl(MX6_DBI_ADDR + PCIE_PHY_DEBUG_R0) & 0x3F;
+	pcie_phy_read((void *)IMX6_DBI_ADDR, PCIE_PHY_RX_ASIC_OUT, &rx_valid);
+	ltssm = readl(IMX6_DBI_ADDR + PCIE_PHY_DEBUG_R0) & 0x3F;
 
 	if (rx_valid & 0x01)
 		return 0;
@@ -255,15 +255,15 @@ static int imx6_pcie_link_up(void)
 
 	printf("transition to gen2 is stuck, reset PHY!\n");
 
-	pcie_phy_read((void *)MX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, &temp);
+	pcie_phy_read((void *)IMX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, &temp);
 	temp |= (PHY_RX_OVRD_IN_LO_RX_DATA_EN | PHY_RX_OVRD_IN_LO_RX_PLL_EN);
-	pcie_phy_write((void *)MX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, temp);
+	pcie_phy_write((void *)IMX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, temp);
 
 	udelay(3000);
 
-	pcie_phy_read((void *)MX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, &temp);
+	pcie_phy_read((void *)IMX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, &temp);
 	temp &= ~(PHY_RX_OVRD_IN_LO_RX_DATA_EN | PHY_RX_OVRD_IN_LO_RX_PLL_EN);
-	pcie_phy_write((void *)MX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, temp);
+	pcie_phy_write((void *)IMX6_DBI_ADDR, PHY_RX_OVRD_IN_LO, temp);
 
 	return 0;
 }
@@ -274,7 +274,7 @@ static int imx6_pcie_link_up(void)
 static int imx_pcie_regions_setup(void)
 {
 	/*
-	 * i.MX6 defines 16MB in the AXI address map for PCIe.
+	 * i.IMX6 defines 16MB in the AXI address map for PCIe.
 	 *
 	 * That address space excepted the pcie registers is
 	 * split and defined into different regions by iATU,
@@ -286,24 +286,24 @@ static int imx_pcie_regions_setup(void)
 	 */
 
 	/* CMD reg:I/O space, MEM space, and Bus Master Enable */
-	setbits_le32(MX6_DBI_ADDR | PCI_COMMAND,
+	setbits_le32(IMX6_DBI_ADDR | PCI_COMMAND,
 		     PCI_COMMAND_IO | PCI_COMMAND_MEMORY | PCI_COMMAND_MASTER);
 
 	/* Set the CLASS_REV of RC CFG header to PCI_CLASS_BRIDGE_PCI */
-	setbits_le32(MX6_DBI_ADDR + PCI_CLASS_REVISION,
+	setbits_le32(IMX6_DBI_ADDR + PCI_CLASS_REVISION,
 		     PCI_CLASS_BRIDGE_PCI << 16);
 
 	/* Region #0 is used for Outbound CFG space access. */
-	writel(0, MX6_DBI_ADDR + PCIE_ATU_VIEWPORT);
+	writel(0, IMX6_DBI_ADDR + PCIE_ATU_VIEWPORT);
 
-	writel(MX6_ROOT_ADDR, MX6_DBI_ADDR + PCIE_ATU_LOWER_BASE);
-	writel(0, MX6_DBI_ADDR + PCIE_ATU_UPPER_BASE);
-	writel(MX6_ROOT_ADDR + MX6_ROOT_SIZE, MX6_DBI_ADDR + PCIE_ATU_LIMIT);
+	writel(IMX6_ROOT_ADDR, IMX6_DBI_ADDR + PCIE_ATU_LOWER_BASE);
+	writel(0, IMX6_DBI_ADDR + PCIE_ATU_UPPER_BASE);
+	writel(IMX6_ROOT_ADDR + IMX6_ROOT_SIZE, IMX6_DBI_ADDR + PCIE_ATU_LIMIT);
 
-	writel(0, MX6_DBI_ADDR + PCIE_ATU_LOWER_TARGET);
-	writel(0, MX6_DBI_ADDR + PCIE_ATU_UPPER_TARGET);
-	writel(PCIE_ATU_TYPE_CFG0, MX6_DBI_ADDR + PCIE_ATU_CR1);
-	writel(PCIE_ATU_ENABLE, MX6_DBI_ADDR + PCIE_ATU_CR2);
+	writel(0, IMX6_DBI_ADDR + PCIE_ATU_LOWER_TARGET);
+	writel(0, IMX6_DBI_ADDR + PCIE_ATU_UPPER_TARGET);
+	writel(PCIE_ATU_TYPE_CFG0, IMX6_DBI_ADDR + PCIE_ATU_CR1);
+	writel(PCIE_ATU_ENABLE, IMX6_DBI_ADDR + PCIE_ATU_CR2);
 
 	return 0;
 }
@@ -316,18 +316,18 @@ static uint32_t get_bus_address(pci_dev_t d, int where)
 	uint32_t va_address;
 
 	/* Reconfigure Region #0 */
-	writel(0, MX6_DBI_ADDR + PCIE_ATU_VIEWPORT);
+	writel(0, IMX6_DBI_ADDR + PCIE_ATU_VIEWPORT);
 
 	if (PCI_BUS(d) < 2)
-		writel(PCIE_ATU_TYPE_CFG0, MX6_DBI_ADDR + PCIE_ATU_CR1);
+		writel(PCIE_ATU_TYPE_CFG0, IMX6_DBI_ADDR + PCIE_ATU_CR1);
 	else
-		writel(PCIE_ATU_TYPE_CFG1, MX6_DBI_ADDR + PCIE_ATU_CR1);
+		writel(PCIE_ATU_TYPE_CFG1, IMX6_DBI_ADDR + PCIE_ATU_CR1);
 
 	if (PCI_BUS(d) == 0) {
-		va_address = MX6_DBI_ADDR;
+		va_address = IMX6_DBI_ADDR;
 	} else {
-		writel(d << 8, MX6_DBI_ADDR + PCIE_ATU_LOWER_TARGET);
-		va_address = MX6_IO_ADDR + SZ_16M - SZ_1M;
+		writel(d << 8, IMX6_DBI_ADDR + PCIE_ATU_LOWER_TARGET);
+		va_address = IMX6_IO_ADDR + SZ_16M - SZ_1M;
 	}
 
 	va_address += (where & ~0x3);
@@ -438,10 +438,10 @@ static int imx6_pcie_assert_core_reset(bool prepare_for_boot)
 	if (is_mx6dqp())
 		setbits_le32(&iomuxc_regs->gpr[1], IOMUXC_GPR1_PCIE_SW_RST);
 
-#if defined(CONFIG_MX6SX)
+#if defined(CONFIG_IMX6SX)
 	struct gpc *gpc_regs = (struct gpc *)GPC_BASE_ADDR;
 
-	/* SSP_EN is not used on MX6SX anymore */
+	/* SSP_EN is not used on IMX6SX anymore */
 	setbits_le32(&iomuxc_regs->gpr[12], IOMUXC_GPR12_TEST_POWERDOWN);
 	/* Force PCIe PHY reset */
 	setbits_le32(&iomuxc_regs->gpr[5], IOMUXC_GPR5_PCIE_BTNRST);
@@ -452,7 +452,7 @@ static int imx6_pcie_assert_core_reset(bool prepare_for_boot)
 	 * If the bootloader already enabled the link we need some special
 	 * handling to get the core back into a state where it is safe to
 	 * touch it for configuration.  As there is no dedicated reset signal
-	 * wired up for MX6QDL, we need to manually force LTSSM into "detect"
+	 * wired up for IMX6QDL, we need to manually force LTSSM into "detect"
 	 * state before completely disabling LTSSM, which is a prerequisite
 	 * for core configuration.
 	 *
@@ -466,12 +466,12 @@ static int imx6_pcie_assert_core_reset(bool prepare_for_boot)
 		gpr12 = readl(&iomuxc_regs->gpr[12]);
 		if ((gpr1 & IOMUXC_GPR1_PCIE_REF_CLK_EN) &&
 		    (gpr12 & IOMUXC_GPR12_PCIE_CTL_2)) {
-			val = readl(MX6_DBI_ADDR + PCIE_PL_PFLR);
+			val = readl(IMX6_DBI_ADDR + PCIE_PL_PFLR);
 			val &= ~PCIE_PL_PFLR_LINK_STATE_MASK;
 			val |= PCIE_PL_PFLR_FORCE_LINK;
 
 			imx_pcie_fix_dabt_handler(true);
-			writel(val, MX6_DBI_ADDR + PCIE_PL_PFLR);
+			writel(val, IMX6_DBI_ADDR + PCIE_PL_PFLR);
 			imx_pcie_fix_dabt_handler(false);
 
 			gpr12 &= ~IOMUXC_GPR12_PCIE_CTL_2;
@@ -498,7 +498,7 @@ static int imx6_pcie_init_phy(void)
 			IOMUXC_GPR12_LOS_LEVEL_MASK,
 			IOMUXC_GPR12_LOS_LEVEL_9);
 
-#ifdef CONFIG_MX6SX
+#ifdef CONFIG_IMX6SX
 	clrsetbits_le32(&iomuxc_regs->gpr[12],
 			IOMUXC_GPR12_RX_EQ_MASK,
 			IOMUXC_GPR12_RX_EQ_2);
@@ -583,8 +583,8 @@ static int imx6_pcie_deassert_core_reset(void)
 	 */
 	mdelay(50);
 
-#if defined(CONFIG_MX6SX)
-	/* SSP_EN is not used on MX6SX anymore */
+#if defined(CONFIG_IMX6SX)
+	/* SSP_EN is not used on IMX6SX anymore */
 	clrbits_le32(&iomuxc_regs->gpr[12], IOMUXC_GPR12_TEST_POWERDOWN);
 	/* Clear PCIe PHY reset bit */
 	clrbits_le32(&iomuxc_regs->gpr[5], IOMUXC_GPR5_PCIE_BTNRST);
@@ -617,10 +617,10 @@ static int imx_pcie_link_up(void)
 	 * up, otherwise no downstream devices are detected. After the
 	 * link is up, a managed Gen1->Gen2 transition can be initiated.
 	 */
-	tmp = readl(MX6_DBI_ADDR + 0x7c);
+	tmp = readl(IMX6_DBI_ADDR + 0x7c);
 	tmp &= ~0xf;
 	tmp |= 0x1;
-	writel(tmp, MX6_DBI_ADDR + 0x7c);
+	writel(tmp, IMX6_DBI_ADDR + 0x7c);
 
 	/* LTSSM enable, starting link. */
 	setbits_le32(&iomuxc_regs->gpr[12], IOMUXC_GPR12_APPS_LTSSM_ENABLE);
@@ -633,8 +633,8 @@ static int imx_pcie_link_up(void)
 			puts("PCI:   pcie phy link never came up\n");
 #endif
 			debug("DEBUG_R0: 0x%08x, DEBUG_R1: 0x%08x\n",
-			      readl(MX6_DBI_ADDR + PCIE_PHY_DEBUG_R0),
-			      readl(MX6_DBI_ADDR + PCIE_PHY_DEBUG_R1));
+			      readl(IMX6_DBI_ADDR + PCIE_PHY_DEBUG_R0),
+			      readl(IMX6_DBI_ADDR + PCIE_PHY_DEBUG_R1));
 			return -EINVAL;
 		}
 	}
@@ -653,13 +653,13 @@ void imx_pcie_init(void)
 
 	/* PCI I/O space */
 	pci_set_region(&hose->regions[0],
-		       MX6_IO_ADDR, MX6_IO_ADDR,
-		       MX6_IO_SIZE, PCI_REGION_IO);
+		       IMX6_IO_ADDR, IMX6_IO_ADDR,
+		       IMX6_IO_SIZE, PCI_REGION_IO);
 
 	/* PCI memory space */
 	pci_set_region(&hose->regions[1],
-		       MX6_MEM_ADDR, MX6_MEM_ADDR,
-		       MX6_MEM_SIZE, PCI_REGION_MEM);
+		       IMX6_MEM_ADDR, IMX6_MEM_ADDR,
+		       IMX6_MEM_SIZE, PCI_REGION_MEM);
 
 	/* System memory space */
 	pci_set_region(&hose->regions[2],

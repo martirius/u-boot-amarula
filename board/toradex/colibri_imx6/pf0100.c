@@ -24,7 +24,7 @@
 
 /* use GPIO: EXT_IO1 to switch on VPGM, ON: 1 */
 static iomux_v3_cfg_t const pmic_prog_pads[] = {
-	MX6_PAD_NANDF_D3__GPIO2_IO03 | MUX_PAD_CTRL(NO_PAD_CTRL),
+	IMX6_PAD_NANDF_D3__GPIO2_IO03 | MUX_PAD_CTRL(NO_PAD_CTRL),
 #	define PMIC_PROG_VOLTAGE IMX_GPIO_NR(2, 3)
 };
 

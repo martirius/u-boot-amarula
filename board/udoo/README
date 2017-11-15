@@ -1,7 +1,7 @@
-How to use U-Boot on MX6Q/DL Udoo boards
+How to use U-Boot on IMX6Q/DL Udoo boards
 ----------------------------------------
 
-- Build U-Boot for MX6Q/DL Udoo boards:
+- Build U-Boot for IMX6Q/DL Udoo boards:
 
 $ make mrproper
 $ make udoo_defconfig

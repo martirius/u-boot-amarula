@@ -249,16 +249,16 @@ int board_phy_config(struct phy_device *phydev)
 #if defined(CONFIG_VIDEO_IPUV3)
 struct i2c_pads_info mx6q_i2c2_pad_info = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_KEY_COL3__I2C2_SCL
+		.i2c_mode = IMX6Q_PAD_KEY_COL3__I2C2_SCL
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_KEY_COL3__GPIO4_IO12
+		.gpio_mode = IMX6Q_PAD_KEY_COL3__GPIO4_IO12
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA
+		.i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13
+		.gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(4, 13)
 	}
@@ -266,16 +266,16 @@ struct i2c_pads_info mx6q_i2c2_pad_info = {
 
 struct i2c_pads_info mx6dl_i2c2_pad_info = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_KEY_COL3__I2C2_SCL
+		.i2c_mode = IMX6DL_PAD_KEY_COL3__I2C2_SCL
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6DL_PAD_KEY_COL3__GPIO4_IO12
+		.gpio_mode = IMX6DL_PAD_KEY_COL3__GPIO4_IO12
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_KEY_ROW3__I2C2_SDA
+		.i2c_mode = IMX6DL_PAD_KEY_ROW3__I2C2_SDA
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6DL_PAD_KEY_ROW3__GPIO4_IO13
+		.gpio_mode = IMX6DL_PAD_KEY_ROW3__GPIO4_IO13
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(4, 13)
 	}
@@ -283,16 +283,16 @@ struct i2c_pads_info mx6dl_i2c2_pad_info = {
 
 struct i2c_pads_info mx6q_i2c3_pad_info = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_GPIO_5__I2C3_SCL
+		.i2c_mode = IMX6Q_PAD_GPIO_5__I2C3_SCL
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_GPIO_5__GPIO1_IO05
+		.gpio_mode = IMX6Q_PAD_GPIO_5__GPIO1_IO05
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(1, 5)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_GPIO_16__I2C3_SDA
+		.i2c_mode = IMX6Q_PAD_GPIO_16__I2C3_SDA
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_GPIO_16__GPIO7_IO11
+		.gpio_mode = IMX6Q_PAD_GPIO_16__GPIO7_IO11
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(7, 11)
 	}
@@ -300,16 +300,16 @@ struct i2c_pads_info mx6q_i2c3_pad_info = {
 
 struct i2c_pads_info mx6dl_i2c3_pad_info = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_GPIO_5__I2C3_SCL
+		.i2c_mode = IMX6DL_PAD_GPIO_5__I2C3_SCL
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6DL_PAD_GPIO_5__GPIO1_IO05
+		.gpio_mode = IMX6DL_PAD_GPIO_5__GPIO1_IO05
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(1, 5)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_GPIO_16__I2C3_SDA
+		.i2c_mode = IMX6DL_PAD_GPIO_16__I2C3_SDA
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6DL_PAD_GPIO_16__GPIO7_IO11
+		.gpio_mode = IMX6DL_PAD_GPIO_16__GPIO7_IO11
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(7, 11)
 	}
@@ -511,11 +511,11 @@ int board_late_init(void)
 
 #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
 	if (is_mx6dqp())
-		env_set("board_rev", "MX6QP");
+		env_set("board_rev", "IMX6QP");
 	else if (is_mx6dq())
-		env_set("board_rev", "MX6Q");
+		env_set("board_rev", "IMX6Q");
 	else
-		env_set("board_rev", "MX6DL");
+		env_set("board_rev", "IMX6DL");
 
 	if (is_revd1())
 		env_set("board_name", "D1");

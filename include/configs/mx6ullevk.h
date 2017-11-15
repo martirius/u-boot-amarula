@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2016 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6UL 14x14 EVK board.
+ * Configuration settings for the Freescale i.IMX6UL 14x14 EVK board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#ifndef __MX6ULLEVK_CONFIG_H
-#define __MX6ULLEVK_CONFIG_H
+#ifndef __IMX6ULLEVK_CONFIG_H
+#define __IMX6ULLEVK_CONFIG_H
 
 
 #include <asm/arch/imx-regs.h>

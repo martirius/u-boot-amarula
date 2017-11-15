@@ -40,19 +40,19 @@ static unsigned long gpio_ports[] = {
 	[1] = GPIO2_BASE_ADDR,
 	[2] = GPIO3_BASE_ADDR,
 #if defined(CONFIG_MX25) || defined(CONFIG_MX27) || defined(CONFIG_MX51) || \
-		defined(CONFIG_MX53) || defined(CONFIG_MX6) || \
+		defined(CONFIG_MX53) || defined(CONFIG_IMX6) || \
 		defined(CONFIG_MX7)
 	[3] = GPIO4_BASE_ADDR,
 #endif
-#if defined(CONFIG_MX27) || defined(CONFIG_MX53) || defined(CONFIG_MX6) || \
+#if defined(CONFIG_MX27) || defined(CONFIG_MX53) || defined(CONFIG_IMX6) || \
 		defined(CONFIG_MX7)
 	[4] = GPIO5_BASE_ADDR,
-#ifndef CONFIG_MX6UL
+#ifndef CONFIG_IMX6UL
 	[5] = GPIO6_BASE_ADDR,
 #endif
 #endif
-#if defined(CONFIG_MX53) || defined(CONFIG_MX6) || defined(CONFIG_MX7)
-#ifndef CONFIG_MX6UL
+#if defined(CONFIG_MX53) || defined(CONFIG_IMX6) || defined(CONFIG_MX7)
+#ifndef CONFIG_IMX6UL
 	[6] = GPIO7_BASE_ADDR,
 #endif
 #endif
@@ -349,14 +349,14 @@ static const struct mxc_gpio_plat mxc_plat[] = {
 	{ 1, (struct gpio_regs *)GPIO2_BASE_ADDR },
 	{ 2, (struct gpio_regs *)GPIO3_BASE_ADDR },
 #if defined(CONFIG_MX25) || defined(CONFIG_MX27) || defined(CONFIG_MX51) || \
-		defined(CONFIG_MX53) || defined(CONFIG_MX6)
+		defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 	{ 3, (struct gpio_regs *)GPIO4_BASE_ADDR },
 #endif
-#if defined(CONFIG_MX27) || defined(CONFIG_MX53) || defined(CONFIG_MX6)
+#if defined(CONFIG_MX27) || defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 	{ 4, (struct gpio_regs *)GPIO5_BASE_ADDR },
 	{ 5, (struct gpio_regs *)GPIO6_BASE_ADDR },
 #endif
-#if defined(CONFIG_MX53) || defined(CONFIG_MX6)
+#if defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 	{ 6, (struct gpio_regs *)GPIO7_BASE_ADDR },
 #endif
 };
@@ -366,14 +366,14 @@ U_BOOT_DEVICES(mxc_gpios) = {
 	{ "gpio_mxc", &mxc_plat[1] },
 	{ "gpio_mxc", &mxc_plat[2] },
 #if defined(CONFIG_MX25) || defined(CONFIG_MX27) || defined(CONFIG_MX51) || \
-		defined(CONFIG_MX53) || defined(CONFIG_MX6)
+		defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 	{ "gpio_mxc", &mxc_plat[3] },
 #endif
-#if defined(CONFIG_MX27) || defined(CONFIG_MX53) || defined(CONFIG_MX6)
+#if defined(CONFIG_MX27) || defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 	{ "gpio_mxc", &mxc_plat[4] },
 	{ "gpio_mxc", &mxc_plat[5] },
 #endif
-#if defined(CONFIG_MX53) || defined(CONFIG_MX6)
+#if defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 	{ "gpio_mxc", &mxc_plat[6] },
 #endif
 };

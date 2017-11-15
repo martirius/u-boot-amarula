@@ -1,4 +1,4 @@
-if TARGET_CGTQMX6EVAL
+if TARGET_CGTQIMX6EVAL
 
 config SYS_BOARD
 	default "cgtqmx6eval"

@@ -1,7 +1,7 @@
 Board information
 -----------------
 
-The SBC produced by Phytec has a SOM based on a i.MX6Q.
+The SBC produced by Phytec has a SOM based on a i.IMX6Q.
 The SOM is sold in two versions, with eMMC or with NAND. Support
 here is for the SOM with NAND.
 The evaluation board "phyBoard-Mira" is thought to be used
@@ -11,7 +11,7 @@ More information on the board can be found on manufacturer's
 website:
 
 http://www.phytec.de/produkt/single-board-computer/phyboard-mira/
-http://www.phytec.de/fileadmin/user_upload/images/content/1.Products/SOMs/phyCORE-i.MX6/L-808e_1.pdf
+http://www.phytec.de/fileadmin/user_upload/images/content/1.Products/SOMs/phyCORE-i.IMX6/L-808e_1.pdf
 
 Building U-Boot
 -------------------------------

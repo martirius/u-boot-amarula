@@ -73,9 +73,9 @@
 #define IVT_SIZE		0x20
 #define ALIGN_SIZE		0x1000
 #define CSF_PAD_SIZE		0x2000
-#define MX6DQ_PU_IROM_MMU_EN_VAR	0x009024a8
-#define MX6DLS_PU_IROM_MMU_EN_VAR	0x00901dd0
-#define MX6SL_PU_IROM_MMU_EN_VAR	0x00900a18
+#define IMX6DQ_PU_IROM_MMU_EN_VAR	0x009024a8
+#define IMX6DLS_PU_IROM_MMU_EN_VAR	0x00901dd0
+#define IMX6SL_PU_IROM_MMU_EN_VAR	0x00900a18
 #define IS_HAB_ENABLED_BIT \
 	(is_soc_type(MXC_SOC_MX7ULP) ? 0x80000000 :	\
 	 (is_soc_type(MXC_SOC_MX7) ? 0x2000000 : 0x2))
@@ -471,20 +471,20 @@ uint32_t authenticate_image(uint32_t ddr_start, uint32_t image_size)
 			 * crash.
 			 */
 			/* Check MMU enabled */
-			if (is_soc_type(MXC_SOC_MX6) && get_cr() & CR_M) {
+			if (is_soc_type(MXC_SOC_IMX6) && get_cr() & CR_M) {
 				if (is_mx6dq()) {
 					/*
 					 * This won't work on Rev 1.0.0 of
-					 * i.MX6Q/D, since their ROM doesn't
+					 * i.IMX6Q/D, since their ROM doesn't
 					 * do cache flushes. don't think any
 					 * exist, so we ignore them.
 					 */
 					if (!is_mx6dqp())
-						writel(1, MX6DQ_PU_IROM_MMU_EN_VAR);
+						writel(1, IMX6DQ_PU_IROM_MMU_EN_VAR);
 				} else if (is_mx6sdl()) {
-					writel(1, MX6DLS_PU_IROM_MMU_EN_VAR);
+					writel(1, IMX6DLS_PU_IROM_MMU_EN_VAR);
 				} else if (is_mx6sl()) {
-					writel(1, MX6SL_PU_IROM_MMU_EN_VAR);
+					writel(1, IMX6SL_PU_IROM_MMU_EN_VAR);
 				}
 			}
 

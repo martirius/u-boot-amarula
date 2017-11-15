@@ -41,15 +41,15 @@ void enable_ocotp_clk(unsigned char enable)
 #ifdef CONFIG_NAND_MXS
 void setup_gpmi_io_clk(u32 cfg)
 {
-	/* Disable clocks per ERR007177 from MX6 errata */
+	/* Disable clocks per ERR007177 from IMX6 errata */
 	clrbits_le32(&imx_ccm->CCGR4,
 		     MXC_CCM_CCGR4_RAWNAND_U_BCH_INPUT_APB_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_BCH_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_GPMI_IO_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_INPUT_APB_MASK |
-		     MXC_CCM_CCGR4_PL301_MX6QPER1_BCH_MASK);
+		     MXC_CCM_CCGR4_PL301_IMX6QPER1_BCH_MASK);
 
-#if defined(CONFIG_MX6SX)
+#if defined(CONFIG_IMX6SX)
 	clrbits_le32(&imx_ccm->CCGR4, MXC_CCM_CCGR4_QSPI2_ENFC_MASK);
 
 	clrsetbits_le32(&imx_ccm->cs2cdr,
@@ -75,7 +75,7 @@ void setup_gpmi_io_clk(u32 cfg)
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_BCH_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_GPMI_IO_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_INPUT_APB_MASK |
-		     MXC_CCM_CCGR4_PL301_MX6QPER1_BCH_MASK);
+		     MXC_CCM_CCGR4_PL301_IMX6QPER1_BCH_MASK);
 }
 #endif
 
@@ -92,7 +92,7 @@ void enable_usboh3_clk(unsigned char enable)
 
 }
 
-#if defined(CONFIG_FEC_MXC) && !defined(CONFIG_MX6SX)
+#if defined(CONFIG_FEC_MXC) && !defined(CONFIG_IMX6SX)
 void enable_enet_clk(unsigned char enable)
 {
 	u32 mask, *addr;
@@ -744,7 +744,7 @@ void mxs_set_lcdclk(u32 base_addr, u32 freq)
 
 		enable_lcdif_clock(base_addr, 1);
 	} else if (is_mx6sx()) {
-		/* Setting LCDIF2 for i.MX6SX */
+		/* Setting LCDIF2 for i.IMX6SX */
 		if (enable_pll_video(pll_div, pll_num, pll_denom, post_div))
 			return;
 
@@ -920,7 +920,7 @@ int enable_fec_anatop_clock(int fec_id, enum enet_freq freq)
 		reg &= ~BM_ANADIG_PLL_ENET_DIV_SELECT;
 		reg |= BF_ANADIG_PLL_ENET_DIV_SELECT(freq);
 	} else if (fec_id == 1) {
-		/* Only i.MX6SX/UL support ENET2 */
+		/* Only i.IMX6SX/UL support ENET2 */
 		if (!(is_mx6sx() || is_mx6ul() || is_mx6ull()))
 			return -EINVAL;
 		reg &= ~BM_ANADIG_PLL_ENET2_DIV_SELECT;
@@ -949,7 +949,7 @@ int enable_fec_anatop_clock(int fec_id, enum enet_freq freq)
 	reg &= ~BM_ANADIG_PLL_ENET_BYPASS;
 	writel(reg, &anatop->pll_enet);
 
-#ifdef CONFIG_MX6SX
+#ifdef CONFIG_IMX6SX
 	/* Disable enet system clcok before switching clock parent */
 	reg = readl(&imx_ccm->CCGR3);
 	reg &= ~MXC_CCM_CCGR3_ENET_MASK;
@@ -1115,13 +1115,13 @@ int enable_pcie_clock(void)
 	 * Here be dragons!
 	 *
 	 * The register ANATOP_MISC1 is not documented in the Freescale
-	 * MX6RM. The register that is mapped in the ANATOP space and
+	 * IMX6RM. The register that is mapped in the ANATOP space and
 	 * marked as ANATOP_MISC1 is actually documented in the PMU section
 	 * of the datasheet as PMU_MISC1.
 	 *
 	 * Switch LVDS clock source to SATA (0xb) on mx6q/dl or PCI (0xa) on
 	 * mx6sx, disable clock INPUT and enable clock OUTPUT. This is important
-	 * for PCI express link that is clocked from the i.MX6.
+	 * for PCI express link that is clocked from the i.IMX6.
 	 */
 #define ANADIG_ANA_MISC1_LVDSCLK1_IBEN		(1 << 12)
 #define ANADIG_ANA_MISC1_LVDSCLK1_OBEN		(1 << 10)
@@ -1312,7 +1312,7 @@ int do_mx6_showclocks(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	return 0;
 }
 
-#ifndef CONFIG_MX6SX
+#ifndef CONFIG_IMX6SX
 void enable_ipu_clock(void)
 {
 	struct mxc_ccm_reg *mxc_ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
@@ -1328,8 +1328,8 @@ void enable_ipu_clock(void)
 }
 #endif
 
-#if defined(CONFIG_MX6Q) || defined(CONFIG_MX6D) || defined(CONFIG_MX6DL) || \
-	defined(CONFIG_MX6S)
+#if defined(CONFIG_IMX6Q) || defined(CONFIG_IMX6D) || defined(CONFIG_IMX6DL) || \
+	defined(CONFIG_IMX6S)
 static void disable_ldb_di_clock_sources(void)
 {
 	struct mxc_ccm_reg *mxc_ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
@@ -1337,7 +1337,7 @@ static void disable_ldb_di_clock_sources(void)
 
 	/* Make sure PFDs are disabled at boot. */
 	reg = readl(&mxc_ccm->analog_pfd_528);
-	/* Cannot disable pll2_pfd2_396M, as it is the MMDC clock in iMX6DL */
+	/* Cannot disable pll2_pfd2_396M, as it is the MMDC clock in iIMX6DL */
 	if (is_mx6sdl())
 		reg |= 0x80008080;
 	else

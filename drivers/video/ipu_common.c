@@ -84,8 +84,8 @@ struct ipu_ch_param {
 
 #define IPUV3_CLK_MX51		133000000
 #define IPUV3_CLK_MX53		200000000
-#define IPUV3_CLK_MX6Q		264000000
-#define IPUV3_CLK_MX6DL		198000000
+#define IPUV3_CLK_IMX6Q		264000000
+#define IPUV3_CLK_IMX6DL		198000000
 
 void clk_enable(struct clk *clk)
 {
@@ -486,7 +486,7 @@ int ipu_probe(void)
 #elif defined(CONFIG_MX53)
 	g_ipu_clk->rate = IPUV3_CLK_MX53;
 #else
-	g_ipu_clk->rate = is_mx6sdl() ? IPUV3_CLK_MX6DL : IPUV3_CLK_MX6Q;
+	g_ipu_clk->rate = is_mx6sdl() ? IPUV3_CLK_IMX6DL : IPUV3_CLK_IMX6Q;
 #endif
 	debug("ipu_clk = %u\n", clk_get_rate(g_ipu_clk));
 	g_ldb_clk = &ldb_clk;

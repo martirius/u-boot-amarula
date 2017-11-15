@@ -79,7 +79,7 @@ u32 get_imx_reset_cause(void)
 }
 #endif
 
-#if defined(CONFIG_MX53) || defined(CONFIG_MX6)
+#if defined(CONFIG_MX53) || defined(CONFIG_IMX6)
 #if defined(CONFIG_MX53)
 #define MEMCTL_BASE	ESDCTL_BASE_ADDR
 #else
@@ -124,7 +124,7 @@ unsigned imx_ddr_size(void)
 	bits += ESD_MMDC_CTL_GET_WIDTH(ctl);
 	bits += ESD_MMDC_CTL_GET_CS1(ctl);
 
-	/* The MX6 can do only 3840 MiB of DRAM */
+	/* The IMX6 can do only 3840 MiB of DRAM */
 	if (bits == 32)
 		return 0xf0000000;
 
@@ -141,27 +141,27 @@ const char *get_imx_type(u32 imxtype)
 		return "7S";	/* Single-core version of the mx7 */
 	case MXC_CPU_MX7D:
 		return "7D";	/* Dual-core version of the mx7 */
-	case MXC_CPU_MX6QP:
+	case MXC_CPU_IMX6QP:
 		return "6QP";	/* Quad-Plus version of the mx6 */
-	case MXC_CPU_MX6DP:
+	case MXC_CPU_IMX6DP:
 		return "6DP";	/* Dual-Plus version of the mx6 */
-	case MXC_CPU_MX6Q:
+	case MXC_CPU_IMX6Q:
 		return "6Q";	/* Quad-core version of the mx6 */
-	case MXC_CPU_MX6D:
+	case MXC_CPU_IMX6D:
 		return "6D";	/* Dual-core version of the mx6 */
-	case MXC_CPU_MX6DL:
+	case MXC_CPU_IMX6DL:
 		return "6DL";	/* Dual Lite version of the mx6 */
-	case MXC_CPU_MX6SOLO:
+	case MXC_CPU_IMX6SOLO:
 		return "6SOLO";	/* Solo version of the mx6 */
-	case MXC_CPU_MX6SL:
+	case MXC_CPU_IMX6SL:
 		return "6SL";	/* Solo-Lite version of the mx6 */
-	case MXC_CPU_MX6SLL:
+	case MXC_CPU_IMX6SLL:
 		return "6SLL";	/* SLL version of the mx6 */
-	case MXC_CPU_MX6SX:
+	case MXC_CPU_IMX6SX:
 		return "6SX";   /* SoloX version of the mx6 */
-	case MXC_CPU_MX6UL:
+	case MXC_CPU_IMX6UL:
 		return "6UL";   /* Ultra-Lite version of the mx6 */
-	case MXC_CPU_MX6ULL:
+	case MXC_CPU_IMX6ULL:
 		return "6ULL";	/* ULL version of the mx6 */
 	case MXC_CPU_MX51:
 		return "51";
@@ -280,7 +280,7 @@ void arch_preboot_os(void)
 #endif
 #if defined(CONFIG_SATA)
 	sata_remove(0);
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 	disable_sata_clock();
 #endif
 #endif

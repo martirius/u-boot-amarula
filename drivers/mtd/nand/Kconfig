@@ -150,7 +150,7 @@ config NAND_MXC
 
 config NAND_MXS
 	bool "MXS NAND support"
-	depends on MX6 || MX7
+	depends on IMX6 || MX7
 	imply CMD_NAND
 	help
 	  This enables NAND driver for the NAND flash controller on the

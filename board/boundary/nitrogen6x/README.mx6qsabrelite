@@ -1,12 +1,12 @@
-U-Boot for the Freescale i.MX6q SabreLite board
+U-Boot for the Freescale i.IMX6q SabreLite board
 
 This file contains information for the port of U-Boot to the Freescale
-i.MX6q SabreLite board.
+i.IMX6q SabreLite board.
 
 1. Boot source, boot from SD card
 ---------------------------------
 
-The recent mainline U-Boot for the Freescale i.MX6q SabreLite board supports
+The recent mainline U-Boot for the Freescale i.IMX6q SabreLite board supports
 boot from SD card only. However, by default, the SabreLite
 boards boot from the SPI NOR flash. These boards need to be reflashed with
 a small SD card loader to support boot from SD card. This small SD card loader
@@ -15,7 +15,7 @@ the loader will in turn request the BootROM to load the U-Boot from SD card.
 
 The SD card loader is available from
 
-https://wiki.linaro.org/Boards/MX6QSabreLite
+https://wiki.linaro.org/Boards/IMX6QSabreLite
 
 under a open-source 3-clause BSD license.
 
@@ -24,7 +24,7 @@ manufacturing tool use the following procedure:
 
 1. Write this SD card loader onto a large SD card using:
 
- sudo dd if=iMX6DQ_SPI_to_uSDHC3.bin of=/dev/sXx
+ sudo dd if=iIMX6DQ_SPI_to_uSDHC3.bin of=/dev/sXx
 
 Note: Replace sXx with the device representing the SD card in your system.
 
@@ -38,11 +38,11 @@ from the fuses.
 (the default one the board is shipped with, starting from the SPI NOR) and
 enter the following commands:
 
- MX6Q SABRELITE U-Boot > mmc dev 0
- MX6Q SABRELITE U-Boot > mmc read 0x10800000 0 200
- MX6Q SABRELITE U-Boot > sf probe
- MX6Q SABRELITE U-Boot > sf erase 0 0x40000
- MX6Q SABRELITE U-Boot > sf write 0x10800000 0 0x40000
+ IMX6Q SABRELITE U-Boot > mmc dev 0
+ IMX6Q SABRELITE U-Boot > mmc read 0x10800000 0 200
+ IMX6Q SABRELITE U-Boot > sf probe
+ IMX6Q SABRELITE U-Boot > sf erase 0 0x40000
+ IMX6Q SABRELITE U-Boot > sf write 0x10800000 0 0x40000
 
 4. done.
 
@@ -55,7 +55,7 @@ Note: The board now boots from full size SD3 on the bottom of the board. NOT
 
 This information is taken from
 
-https://wiki.linaro.org/Boards/MX6QSabreLite
+https://wiki.linaro.org/Boards/IMX6QSabreLite
 
 2. Build
 --------

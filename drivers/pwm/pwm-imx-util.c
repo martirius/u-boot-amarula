@@ -27,7 +27,7 @@ struct pwm_regs *pwm_id_to_reg(int pwm_id)
 		return (struct pwm_regs *)PWM3_BASE_ADDR;
 	case 3:
 		return (struct pwm_regs *)PWM4_BASE_ADDR;
-#ifdef CONFIG_MX6SX
+#ifdef CONFIG_IMX6SX
 	case 4:
 		return (struct pwm_regs *)PWM5_BASE_ADDR;
 	case 5:

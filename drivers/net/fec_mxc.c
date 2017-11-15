@@ -126,7 +126,7 @@ static void fec_mii_setspeed(struct ethernet_regs *eth)
 	 * Set MII_SPEED = (1/(mii_speed * 2)) * System Clock
 	 * and do not drop the Preamble.
 	 *
-	 * The i.MX28 and i.MX6 types have another field in the MSCR (aka
+	 * The i.MX28 and i.IMX6 types have another field in the MSCR (aka
 	 * MII_SPEED) register that defines the MDIO output hold time. Earlier
 	 * versions are RAZ there, so just ignore the difference and write the
 	 * register always.
@@ -454,7 +454,7 @@ static int fec_open(struct eth_device *edev)
 	writel(readl(&fec->eth->ecntrl) | FEC_ECNTRL_ETHER_EN,
 	       &fec->eth->ecntrl);
 
-#if defined(CONFIG_MX25) || defined(CONFIG_MX53) || defined(CONFIG_MX6SL)
+#if defined(CONFIG_MX25) || defined(CONFIG_MX53) || defined(CONFIG_IMX6SL)
 	udelay(100);
 
 	/* setup the MII gasket for RMII mode */
@@ -562,7 +562,7 @@ static int fec_init(struct eth_device *dev, bd_t *bd)
 	writel(0x00000000, &fec->eth->gaddr1);
 	writel(0x00000000, &fec->eth->gaddr2);
 
-	/* Do not access reserved register for i.MX6UL */
+	/* Do not access reserved register for i.IMX6UL */
 	if (!is_mx6ul() && !is_mx6ull()) {
 		/* clear MIB RAM */
 		for (i = mib_ptr; i <= mib_ptr + 0xfc; i += 4)

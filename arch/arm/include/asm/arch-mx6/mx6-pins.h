@@ -3,48 +3,48 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#ifndef __ASM_ARCH_MX6_PINS_H__
-#define __ASM_ARCH_MX6_PINS_H__
+#ifndef __ASM_ARCH_IMX6_PINS_H__
+#define __ASM_ARCH_IMX6_PINS_H__
 
 #include <asm/mach-imx/iomux-v3.h>
 
-#define MX6_PAD_DECLARE(prefix, name, pco, mc, mm, sio, si, pc) \
+#define IMX6_PAD_DECLARE(prefix, name, pco, mc, mm, sio, si, pc) \
 	prefix##name = IOMUX_PAD(pco, mc, mm, sio, si, pc)
 
-#ifdef CONFIG_MX6QDL
+#ifdef CONFIG_IMX6QDL
 enum {
-#define MX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
-	MX6_PAD_DECLARE(MX6Q_PAD_,name, pco, mc, mm, sio, si, pc),
+#define IMX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
+	IMX6_PAD_DECLARE(IMX6Q_PAD_,name, pco, mc, mm, sio, si, pc),
 #include "mx6q_pins.h"
-#undef MX6_PAD_DECL
-#define MX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
-	MX6_PAD_DECLARE(MX6DL_PAD_,name, pco, mc, mm, sio, si, pc),
+#undef IMX6_PAD_DECL
+#define IMX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
+	IMX6_PAD_DECLARE(IMX6DL_PAD_,name, pco, mc, mm, sio, si, pc),
 #include "mx6dl_pins.h"
 };
-#elif defined(CONFIG_MX6Q)
+#elif defined(CONFIG_IMX6Q)
 enum {
-#define MX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
-	MX6_PAD_DECLARE(MX6_PAD_,name, pco, mc, mm, sio, si, pc),
+#define IMX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
+	IMX6_PAD_DECLARE(IMX6_PAD_,name, pco, mc, mm, sio, si, pc),
 #include "mx6q_pins.h"
 };
-#elif defined(CONFIG_MX6DL) || defined(CONFIG_MX6S)
+#elif defined(CONFIG_IMX6DL) || defined(CONFIG_IMX6S)
 enum {
-#define MX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
-	MX6_PAD_DECLARE(MX6_PAD_,name, pco, mc, mm, sio, si, pc),
+#define IMX6_PAD_DECL(name, pco, mc, mm, sio, si, pc) \
+	IMX6_PAD_DECLARE(IMX6_PAD_,name, pco, mc, mm, sio, si, pc),
 #include "mx6dl_pins.h"
 };
-#elif defined(CONFIG_MX6SLL)
+#elif defined(CONFIG_IMX6SLL)
 #include "mx6sll_pins.h"
-#elif defined(CONFIG_MX6SL)
+#elif defined(CONFIG_IMX6SL)
 #include "mx6sl_pins.h"
-#elif defined(CONFIG_MX6SX)
+#elif defined(CONFIG_IMX6SX)
 #include "mx6sx_pins.h"
-#elif defined(CONFIG_MX6ULL)
+#elif defined(CONFIG_IMX6ULL)
 #include "mx6ull_pins.h"
-#elif defined(CONFIG_MX6UL)
+#elif defined(CONFIG_IMX6UL)
 #include "mx6ul_pins.h"
 #else
 #error "Please select cpu"
-#endif	/* CONFIG_MX6Q */
+#endif	/* CONFIG_IMX6Q */
 
-#endif	/*__ASM_ARCH_MX6_PINS_H__ */
+#endif	/*__ASM_ARCH_IMX6_PINS_H__ */

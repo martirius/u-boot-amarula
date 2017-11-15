@@ -5,8 +5,8 @@
  *
 */
 
-#ifndef __SECURE_MX6Q_H__
-#define __SECURE_MX6Q_H__
+#ifndef __SECURE_IMX6Q_H__
+#define __SECURE_IMX6Q_H__
 
 #include <linux/types.h>
 

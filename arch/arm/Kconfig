@@ -606,15 +606,15 @@ config ARCH_MX7
 	select BOARD_EARLY_INIT_F
 	select ARCH_MISC_INIT
 
-config ARCH_MX6
-	bool "Freescale MX6"
+config ARCH_IMX6
+	bool "Freescale IMX6"
 	select CPU_V7
 	select SYS_FSL_HAS_SEC if SECURE_BOOT
 	select SYS_FSL_SEC_COMPAT_4
 	select SYS_FSL_SEC_LE
 	select SYS_THUMB_BUILD if SPL
 
-if ARCH_MX6
+if ARCH_IMX6
 config SPL_LDSCRIPT
         default "arch/arm/mach-omap2/u-boot-spl.lds"
 endif

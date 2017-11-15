@@ -149,7 +149,7 @@ typedef struct ccsr_sec {
 
 struct jr_regs {
 #if defined(CONFIG_SYS_FSL_SEC_LE) && \
-	!(defined(CONFIG_MX6) || defined(CONFIG_MX7))
+	!(defined(CONFIG_IMX6) || defined(CONFIG_MX7))
 	u32 irba_l;
 	u32 irba_h;
 #else
@@ -163,7 +163,7 @@ struct jr_regs {
 	u32 rsvd3;
 	u32 irja;
 #if defined(CONFIG_SYS_FSL_SEC_LE) && \
-	!(defined(CONFIG_MX6) || defined(CONFIG_MX7))
+	!(defined(CONFIG_IMX6) || defined(CONFIG_MX7))
 	u32 orba_l;
 	u32 orba_h;
 #else
@@ -196,7 +196,7 @@ struct jr_regs {
  */
 struct sg_entry {
 #if defined(CONFIG_SYS_FSL_SEC_LE) && \
-	!(defined(CONFIG_MX6) || defined(CONFIG_MX7))
+	!(defined(CONFIG_IMX6) || defined(CONFIG_MX7))
 	uint32_t addr_lo;	/* Memory Address - lo */
 	uint32_t addr_hi;	/* Memory Address of start of buffer - hi */
 #else
@@ -215,7 +215,7 @@ struct sg_entry {
 #define SG_ENTRY_OFFSET_SHIFT	0
 };
 
-#if defined(CONFIG_MX6) || defined(CONFIG_MX7)
+#if defined(CONFIG_IMX6) || defined(CONFIG_MX7)
 /* Job Ring Base Address */
 #define JR_BASE_ADDR(x) (CONFIG_SYS_FSL_SEC_ADDR + 0x1000 * (x + 1))
 /* Secure Memory Offset varies accross versions */

@@ -1,13 +1,13 @@
 /*
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6Q SabreSD board.
+ * Configuration settings for the Freescale i.IMX6Q SabreSD board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
-#ifndef __MX6SABRESD_CONFIG_H
-#define __MX6SABRESD_CONFIG_H
+#ifndef __IMX6SABRESD_CONFIG_H
+#define __IMX6SABRESD_CONFIG_H
 
 #ifdef CONFIG_SPL
 #include "imx6_spl.h"
@@ -65,4 +65,4 @@
 #define CONFIG_USB_MAX_CONTROLLER_COUNT	1 /* Enabled USB controller number */
 #endif
 
-#endif                         /* __MX6SABRESD_CONFIG_H */
+#endif                         /* __IMX6SABRESD_CONFIG_H */

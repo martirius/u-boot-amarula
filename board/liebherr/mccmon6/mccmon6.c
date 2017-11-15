@@ -303,16 +303,16 @@ void setup_spi(void)
 
 struct i2c_pads_info mx6q_i2c1_pad_info = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_CSI0_DAT9__I2C1_SCL
+		.i2c_mode = IMX6Q_PAD_CSI0_DAT9__I2C1_SCL
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_CSI0_DAT9__GPIO5_IO27
+		.gpio_mode = IMX6Q_PAD_CSI0_DAT9__GPIO5_IO27
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(5, 27)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_CSI0_DAT8__I2C1_SDA
+		.i2c_mode = IMX6Q_PAD_CSI0_DAT8__I2C1_SDA
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_CSI0_DAT8__GPIO5_IO26
+		.gpio_mode = IMX6Q_PAD_CSI0_DAT8__GPIO5_IO26
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(5, 26)
 	}
@@ -320,16 +320,16 @@ struct i2c_pads_info mx6q_i2c1_pad_info = {
 
 struct i2c_pads_info mx6q_i2c2_pad_info = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_KEY_COL3__I2C2_SCL
+		.i2c_mode = IMX6Q_PAD_KEY_COL3__I2C2_SCL
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_KEY_COL3__GPIO4_IO12
+		.gpio_mode = IMX6Q_PAD_KEY_COL3__GPIO4_IO12
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA
+		.i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
-		.gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13
+		.gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13
 			| MUX_PAD_CTRL(I2C_PAD_CTRL),
 		.gp = IMX_GPIO_NR(4, 13)
 	}

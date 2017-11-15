@@ -5,9 +5,9 @@
 #ifndef __ASM_ARCH_IOMUX_H__
 #define __ASM_ARCH_IOMUX_H__
 
-#define MX6_IOMUXC_GPR4		0x020e0010
-#define MX6_IOMUXC_GPR6		0x020e0018
-#define MX6_IOMUXC_GPR7		0x020e001c
+#define IMX6_IOMUXC_GPR4		0x020e0010
+#define IMX6_IOMUXC_GPR6		0x020e0018
+#define IMX6_IOMUXC_GPR7		0x020e001c
 
 /*
  * IOMUXC_GPR1 bit fields
@@ -180,7 +180,7 @@
 				|IOMUXC_GPR13_SATA_PHY_1_MASK)
 
 /*
- * Setup RGMII voltage levels on iMX6 SoC - the
+ * Setup RGMII voltage levels on iIMX6 SoC - the
  *
  * IOMUXC_SW_PAD_CTL_GRP_DDR_TYPE_RGMII - register
  *

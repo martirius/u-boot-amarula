@@ -1,5 +1,5 @@
 /*
- * DHCOM DH-iMX6 PDK SPL support
+ * DHCOM DH-iIMX6 PDK SPL support
  *
  * Copyright (C) 2017 Marek Vasut <marex@denx.de>
  *

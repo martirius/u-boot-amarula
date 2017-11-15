@@ -25,7 +25,7 @@ DECLARE_GLOBAL_DATA_PTR;
 
 #undef RTT_NOM_120OHM	/* use 120ohm Rtt_nom vs 60ohm (lower power) */
 
-/* Configure MX6Q/DUAL mmdc DDR io registers */
+/* Configure IMX6Q/DUAL mmdc DDR io registers */
 struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	/* SDCLK[0:1], CAS, RAS, Reset: Differential input, 40ohm */
 	.dram_sdclk_0 = 0x00020030,
@@ -61,7 +61,7 @@ struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_dqm7 = 0x00020030,
 };
 
-/* Configure MX6Q/DUAL mmdc GRP io registers */
+/* Configure IMX6Q/DUAL mmdc GRP io registers */
 struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	/* DDR3 */
 	.grp_ddr_type = 0x000c0000,

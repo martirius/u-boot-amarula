@@ -126,7 +126,7 @@ static struct mx6_ddr3_cfg cm_fx6_ddr3_cfg_s = {
 static void spl_mx6s_dram_init(enum ddr_config dram_config, bool reset)
 {
 	if (reset)
-		((struct mmdc_p_regs *)MX6_MMDC_P0_MDCTL)->mdmisc = 2;
+		((struct mmdc_p_regs *)IMX6_MMDC_P0_MDCTL)->mdmisc = 2;
 
 	switch (dram_config) {
 	case DDR_16BIT_256MB:
@@ -195,7 +195,7 @@ static struct mx6_ddr3_cfg cm_fx6_ddr3_cfg_q = {
 static void spl_mx6q_dram_init(enum ddr_config dram_config, bool reset)
 {
 	if (reset)
-		((struct mmdc_p_regs *)MX6_MMDC_P0_MDCTL)->mdmisc = 2;
+		((struct mmdc_p_regs *)IMX6_MMDC_P0_MDCTL)->mdmisc = 2;
 
 	cm_fx6_ddr3_cfg_q.rowaddr = 14;
 	switch (dram_config) {
@@ -234,7 +234,7 @@ static int cm_fx6_spl_dram_init(void)
 	unsigned long bank1_size, bank2_size;
 
 	switch (get_cpu_type()) {
-	case MXC_CPU_MX6SOLO:
+	case MXC_CPU_IMX6SOLO:
 		mx6sdl_dram_iocfg(64, &ddr_iomux_s, &grp_iomux_s);
 
 		spl_mx6s_dram_init(DDR_32BIT_1GB, false);
@@ -254,8 +254,8 @@ static int cm_fx6_spl_dram_init(void)
 			return 0;
 
 		break;
-	case MXC_CPU_MX6D:
-	case MXC_CPU_MX6Q:
+	case MXC_CPU_IMX6D:
+	case MXC_CPU_IMX6Q:
 		mx6dq_dram_iocfg(64, &ddr_iomux_q, &grp_iomux_q);
 
 		spl_mx6q_dram_init(DDR_64BIT_4GB, false);

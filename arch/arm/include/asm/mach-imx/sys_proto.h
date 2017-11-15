@@ -25,23 +25,23 @@
 #define is_cpu_type(cpu) (get_cpu_type() == cpu)
 #define is_soc_type(soc) (get_soc_type() == soc)
 
-#define is_mx6() (is_soc_type(MXC_SOC_MX6))
+#define is_mx6() (is_soc_type(MXC_SOC_IMX6))
 #define is_mx7() (is_soc_type(MXC_SOC_MX7))
 
-#define is_mx6dqp() (is_cpu_type(MXC_CPU_MX6QP) || is_cpu_type(MXC_CPU_MX6DP))
-#define is_mx6dq() (is_cpu_type(MXC_CPU_MX6Q) || is_cpu_type(MXC_CPU_MX6D))
-#define is_mx6sdl() (is_cpu_type(MXC_CPU_MX6SOLO) || is_cpu_type(MXC_CPU_MX6DL))
-#define is_mx6dl() (is_cpu_type(MXC_CPU_MX6DL))
-#define is_mx6sx() (is_cpu_type(MXC_CPU_MX6SX))
-#define is_mx6sl() (is_cpu_type(MXC_CPU_MX6SL))
-#define is_mx6solo() (is_cpu_type(MXC_CPU_MX6SOLO))
-#define is_mx6ul() (is_cpu_type(MXC_CPU_MX6UL))
-#define is_mx6ull() (is_cpu_type(MXC_CPU_MX6ULL))
-#define is_mx6sll() (is_cpu_type(MXC_CPU_MX6SLL))
+#define is_mx6dqp() (is_cpu_type(MXC_CPU_IMX6QP) || is_cpu_type(MXC_CPU_IMX6DP))
+#define is_mx6dq() (is_cpu_type(MXC_CPU_IMX6Q) || is_cpu_type(MXC_CPU_IMX6D))
+#define is_mx6sdl() (is_cpu_type(MXC_CPU_IMX6SOLO) || is_cpu_type(MXC_CPU_IMX6DL))
+#define is_mx6dl() (is_cpu_type(MXC_CPU_IMX6DL))
+#define is_mx6sx() (is_cpu_type(MXC_CPU_IMX6SX))
+#define is_mx6sl() (is_cpu_type(MXC_CPU_IMX6SL))
+#define is_mx6solo() (is_cpu_type(MXC_CPU_IMX6SOLO))
+#define is_mx6ul() (is_cpu_type(MXC_CPU_IMX6UL))
+#define is_mx6ull() (is_cpu_type(MXC_CPU_IMX6ULL))
+#define is_mx6sll() (is_cpu_type(MXC_CPU_IMX6SLL))
 
 #define is_mx7ulp() (is_cpu_type(MXC_CPU_MX7ULP))
 
-#ifdef CONFIG_MX6
+#ifdef CONFIG_IMX6
 #define IMX6_SRC_GPR10_BMODE		BIT(28)
 
 #define IMX6_BMODE_MASK			GENMASK(7, 0)
@@ -69,7 +69,7 @@ enum imx6_bmode_emi {
 
 enum imx6_bmode {
 	IMX6_BMODE_EMI,
-#if defined(CONFIG_MX6UL) || defined(CONFIG_MX6ULL)
+#if defined(CONFIG_IMX6UL) || defined(CONFIG_IMX6ULL)
 	IMX6_BMODE_QSPI,
 	IMX6_BMODE_RESERVED,
 #else
@@ -92,7 +92,7 @@ static inline u8 imx6_is_bmode_from_gpr9(void)
 u32 imx6_src_get_boot_mode(void);
 void gpr_init(void);
 
-#endif /* CONFIG_MX6 */
+#endif /* CONFIG_IMX6 */
 
 u32 get_nr_cpus(void);
 u32 get_cpu_rev(void);

@@ -53,7 +53,7 @@ DECLARE_GLOBAL_DATA_PTR;
 	PAD_CTL_SPEED_MED |		\
 	PAD_CTL_DSE_40ohm | PAD_CTL_SRE_FAST)
 
-#define MX6Q_QMX6_PFUZE_MUX		IMX_GPIO_NR(6, 9)
+#define IMX6Q_QIMX6_PFUZE_MUX		IMX_GPIO_NR(6, 9)
 
 
 #define ENET_PAD_CTRL  (PAD_CTL_PKE | PAD_CTL_PUE |		\
@@ -172,26 +172,26 @@ static iomux_v3_cfg_t const ecspi1_pads[] = {
 #define PC MUX_PAD_CTRL(I2C_PAD_CTRL)
 struct i2c_pads_info mx6q_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_KEY_COL3__I2C2_SCL | PC,
-		.gpio_mode = MX6Q_PAD_KEY_COL3__GPIO4_IO12 | PC,
+		.i2c_mode = IMX6Q_PAD_KEY_COL3__I2C2_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_KEY_COL3__GPIO4_IO12 | PC,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
-		.gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		.i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
+		.gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
 
 struct i2c_pads_info mx6dl_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_KEY_COL3__I2C2_SCL | PC,
-		.gpio_mode = MX6DL_PAD_KEY_COL3__GPIO4_IO12 | PC,
+		.i2c_mode = IMX6DL_PAD_KEY_COL3__I2C2_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_KEY_COL3__GPIO4_IO12 | PC,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
-		.gpio_mode = MX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		.i2c_mode = IMX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
+		.gpio_mode = IMX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
@@ -217,7 +217,7 @@ int power_init_board(void)
 	char const *lv_mipi;
 
 	/* configure I2C multiplexer */
-	gpio_direction_output(MX6Q_QMX6_PFUZE_MUX, 1);
+	gpio_direction_output(IMX6Q_QIMX6_PFUZE_MUX, 1);
 
 	power_pfuze100_init(I2C_PMIC);
 	p = pmic_get("PFUZE100");
@@ -714,16 +714,16 @@ int checkboard(void)
 {
 	char *type = "unknown";
 
-	if (is_cpu_type(MXC_CPU_MX6Q))
+	if (is_cpu_type(MXC_CPU_IMX6Q))
 		type = "Quad";
-	else if (is_cpu_type(MXC_CPU_MX6D))
+	else if (is_cpu_type(MXC_CPU_IMX6D))
 		type = "Dual";
-	else if (is_cpu_type(MXC_CPU_MX6DL))
+	else if (is_cpu_type(MXC_CPU_IMX6DL))
 		type = "Dual-Lite";
-	else if (is_cpu_type(MXC_CPU_MX6SOLO))
+	else if (is_cpu_type(MXC_CPU_IMX6SOLO))
 		type = "Solo";
 
-	printf("Board: conga-QMX6 %s\n", type);
+	printf("Board: conga-QIMX6 %s\n", type);
 
 	return 0;
 }
@@ -756,9 +756,9 @@ int board_late_init(void)
 {
 #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
 	if (is_mx6dq())
-		env_set("board_rev", "MX6Q");
+		env_set("board_rev", "IMX6Q");
 	else
-		env_set("board_rev", "MX6DL");
+		env_set("board_rev", "IMX6DL");
 #endif
 
 	return 0;
@@ -1033,7 +1033,7 @@ static void spl_dram_init(int width)
 		.refr = 7,	/* 8 refresh commands per refresh cycle */
 	};
 
-	if (is_cpu_type(MXC_CPU_MX6Q) && is_2gb()) {
+	if (is_cpu_type(MXC_CPU_IMX6Q) && is_2gb()) {
 		mx6dq_dram_iocfg(width, &mx6q_ddr_ioregs, &mx6q_grp_ioregs);
 		mx6_dram_cfg(&sysinfo, &mx6q_2g_mmcd_calib, &mem_ddr_4g);
 		return;
@@ -1042,11 +1042,11 @@ static void spl_dram_init(int width)
 	if (is_mx6dq()) {
 		mx6dq_dram_iocfg(width, &mx6q_ddr_ioregs, &mx6q_grp_ioregs);
 		mx6_dram_cfg(&sysinfo, &mx6q_mmcd_calib, &mem_ddr_2g);
-	} else if (is_cpu_type(MXC_CPU_MX6SOLO)) {
+	} else if (is_cpu_type(MXC_CPU_IMX6SOLO)) {
 		sysinfo.walat = 1;
 		mx6sdl_dram_iocfg(width, &mx6dl_ddr_ioregs, &mx6sdl_grp_ioregs);
 		mx6_dram_cfg(&sysinfo, &mx6s_mmcd_calib, &mem_ddr_4g);
-	} else if (is_cpu_type(MXC_CPU_MX6DL)) {
+	} else if (is_cpu_type(MXC_CPU_IMX6DL)) {
 		sysinfo.walat = 1;
 		mx6sdl_dram_iocfg(width, &mx6dl_ddr_ioregs, &mx6sdl_grp_ioregs);
 		mx6_dram_cfg(&sysinfo, &mx6dl_mmcd_calib, &mem_ddr_2g);
@@ -1074,7 +1074,7 @@ void board_init_f(ulong dummy)
 	spl_init();
 
 	/* DDR initialization */
-	if (is_cpu_type(MXC_CPU_MX6SOLO))
+	if (is_cpu_type(MXC_CPU_IMX6SOLO))
 		spl_dram_init(32);
 	else
 		spl_dram_init(64);

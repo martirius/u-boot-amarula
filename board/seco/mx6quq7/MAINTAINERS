@@ -1,4 +1,4 @@
-MX6QUQ7 BOARD
+IMX6QUQ7 BOARD
 M:	Boris Brezillon <boris.brezillon@free-electrons.com>
 S:	Maintained
 F:	board/seco/mx6quq7/

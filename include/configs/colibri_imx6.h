@@ -1,7 +1,7 @@
 /*
  * Copyright 2013-2015 Toradex, Inc.
  *
- * Configuration settings for the Toradex Colibri iMX6
+ * Configuration settings for the Toradex Colibri iIMX6
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */

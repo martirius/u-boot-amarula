@@ -19,7 +19,7 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 /* determine boot device from SRC_SBMR1 (BOOT_CFG[4:1]) or SRC_GPR9 register */
 u32 spl_boot_device(void)
 {
@@ -61,7 +61,7 @@ u32 spl_boot_device(void)
 	case IMX6_BMODE_RESERVED:
 		return BOOT_DEVICE_BOARD;
 	/* SATA: See 8.5.4, Table 8-20 */
-#if !defined(CONFIG_MX6UL) && !defined(CONFIG_MX6ULL)
+#if !defined(CONFIG_IMX6UL) && !defined(CONFIG_IMX6ULL)
 	case IMX6_BMODE_SATA:
 		return BOOT_DEVICE_SATA;
 #endif
@@ -116,7 +116,7 @@ u32 spl_boot_device(void)
 		return BOOT_DEVICE_NONE;
 	}
 }
-#endif /* CONFIG_MX6 || CONFIG_MX7 */
+#endif /* CONFIG_IMX6 || CONFIG_MX7 */
 
 #ifdef CONFIG_SPL_USB_GADGET_SUPPORT
 int g_dnl_bind_fixup(struct usb_device_descriptor *dev, const char *name)
@@ -174,7 +174,7 @@ __weak void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
 
 #endif
 
-#if defined(CONFIG_MX6) && defined(CONFIG_SPL_OS_BOOT)
+#if defined(CONFIG_IMX6) && defined(CONFIG_SPL_OS_BOOT)
 int dram_init_banksize(void)
 {
 	gd->bd->bi_dram[0].start = CONFIG_SYS_SDRAM_BASE;

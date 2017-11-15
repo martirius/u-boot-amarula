@@ -1,5 +1,5 @@
 /*
- * DHCOM DH-iMX6 PDK board configuration
+ * DHCOM DH-iIMX6 PDK board configuration
  *
  * Copyright (C) 2017 Marek Vasut <marex@denx.de>
  *

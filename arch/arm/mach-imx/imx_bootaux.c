@@ -28,7 +28,7 @@ int arch_auxiliary_core_check_up(u32 core_id)
 	__attribute__((weak, alias("__arch_auxiliary_core_check_up")));
 
 /*
- * To i.MX6SX and i.MX7D, the image supported by bootaux needs
+ * To i.IMX6SX and i.MX7D, the image supported by bootaux needs
  * the reset vector at the head for the image, with SP and PC
  * as the first two words.
  *

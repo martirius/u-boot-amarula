@@ -126,9 +126,9 @@
 			"bootz; " \
 		"fi;\0" \
 		"findfdt=" \
-			"if test $board_rev = MX6Q ; then " \
+			"if test $board_rev = IMX6Q ; then " \
 				"setenv fdt_file imx6q-udoo.dtb; fi; " \
-			"if test $board_rev = MX6DL ; then " \
+			"if test $board_rev = IMX6DL ; then " \
 				"setenv fdt_file imx6dl-udoo.dtb; fi; " \
 			"if test $fdt_file = undefined; then " \
 				"echo WARNING: Could not determine dtb to use; fi; \0"

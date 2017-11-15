@@ -150,10 +150,10 @@ matrix:
         - JOB="Freescale AArch64"
           BUILDMAN="freescale&aarch64"
     - env:
-        - JOB="i.MX6 (non-Freescale)"
+        - JOB="i.IMX6 (non-Freescale)"
           BUILDMAN="mx6 -x freescale,toradex,boundary,engicam"
     - env:
-        - JOB="i.MX (non-Freescale, non-i.MX6)"
+        - JOB="i.MX (non-Freescale, non-i.IMX6)"
           BUILDMAN="mx -x freescale,mx6,toradex"
     - env:
         - BUILDMAN="k2"

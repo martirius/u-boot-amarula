@@ -1,5 +1,5 @@
 /*
- * DHCOM DH-iMX6 PDK board support
+ * DHCOM DH-iIMX6 PDK board support
  *
  * Copyright (C) 2017 Marek Vasut <marex@denx.de>
  *
@@ -42,78 +42,78 @@ DECLARE_GLOBAL_DATA_PTR;
 
 static struct i2c_pads_info dh6sdl_i2c_pad_info0 = {
 	.scl = {
-		.i2c_mode  = MX6DL_PAD_EIM_D21__I2C1_SCL | PC,
-		.gpio_mode = MX6DL_PAD_EIM_D21__GPIO3_IO21 | PC,
+		.i2c_mode  = IMX6DL_PAD_EIM_D21__I2C1_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_EIM_D21__GPIO3_IO21 | PC,
 		.gp = IMX_GPIO_NR(3, 21)
 	},
 	.sda = {
-		 .i2c_mode = MX6DL_PAD_EIM_D28__I2C1_SDA | PC,
-		 .gpio_mode = MX6DL_PAD_EIM_D28__GPIO3_IO28 | PC,
+		 .i2c_mode = IMX6DL_PAD_EIM_D28__I2C1_SDA | PC,
+		 .gpio_mode = IMX6DL_PAD_EIM_D28__GPIO3_IO28 | PC,
 		 .gp = IMX_GPIO_NR(3, 28)
 	 }
 };
 
 static struct i2c_pads_info dh6sdl_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode  = MX6DL_PAD_KEY_COL3__I2C2_SCL | PC,
-		.gpio_mode = MX6DL_PAD_KEY_COL3__GPIO4_IO12 | PC,
+		.i2c_mode  = IMX6DL_PAD_KEY_COL3__I2C2_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_KEY_COL3__GPIO4_IO12 | PC,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		 .i2c_mode = MX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
-		 .gpio_mode = MX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		 .i2c_mode = IMX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
+		 .gpio_mode = IMX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		 .gp = IMX_GPIO_NR(4, 13)
 	 }
 };
 
 static struct i2c_pads_info dh6sdl_i2c_pad_info2 = {
 	.scl = {
-		.i2c_mode  = MX6DL_PAD_GPIO_3__I2C3_SCL | PC,
-		.gpio_mode = MX6DL_PAD_GPIO_3__GPIO1_IO03 | PC,
+		.i2c_mode  = IMX6DL_PAD_GPIO_3__I2C3_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_GPIO_3__GPIO1_IO03 | PC,
 		.gp = IMX_GPIO_NR(1, 3)
 	},
 	.sda = {
-		 .i2c_mode = MX6DL_PAD_GPIO_6__I2C3_SDA | PC,
-		 .gpio_mode = MX6DL_PAD_GPIO_6__GPIO1_IO06 | PC,
+		 .i2c_mode = IMX6DL_PAD_GPIO_6__I2C3_SDA | PC,
+		 .gpio_mode = IMX6DL_PAD_GPIO_6__GPIO1_IO06 | PC,
 		 .gp = IMX_GPIO_NR(1, 6)
 	 }
 };
 
 static struct i2c_pads_info dh6dq_i2c_pad_info0 = {
 	.scl = {
-		.i2c_mode  = MX6Q_PAD_EIM_D21__I2C1_SCL | PC,
-		.gpio_mode = MX6Q_PAD_EIM_D21__GPIO3_IO21 | PC,
+		.i2c_mode  = IMX6Q_PAD_EIM_D21__I2C1_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_EIM_D21__GPIO3_IO21 | PC,
 		.gp = IMX_GPIO_NR(3, 21)
 	},
 	.sda = {
-		 .i2c_mode = MX6Q_PAD_EIM_D28__I2C1_SDA | PC,
-		 .gpio_mode = MX6Q_PAD_EIM_D28__GPIO3_IO28 | PC,
+		 .i2c_mode = IMX6Q_PAD_EIM_D28__I2C1_SDA | PC,
+		 .gpio_mode = IMX6Q_PAD_EIM_D28__GPIO3_IO28 | PC,
 		 .gp = IMX_GPIO_NR(3, 28)
 	 }
 };
 
 static struct i2c_pads_info dh6dq_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode  = MX6Q_PAD_KEY_COL3__I2C2_SCL | PC,
-		.gpio_mode = MX6Q_PAD_KEY_COL3__GPIO4_IO12 | PC,
+		.i2c_mode  = IMX6Q_PAD_KEY_COL3__I2C2_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_KEY_COL3__GPIO4_IO12 | PC,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		 .i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
-		 .gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		 .i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
+		 .gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		 .gp = IMX_GPIO_NR(4, 13)
 	 }
 };
 
 static struct i2c_pads_info dh6dq_i2c_pad_info2 = {
 	.scl = {
-		.i2c_mode  = MX6Q_PAD_GPIO_3__I2C3_SCL | PC,
-		.gpio_mode = MX6Q_PAD_GPIO_3__GPIO1_IO03 | PC,
+		.i2c_mode  = IMX6Q_PAD_GPIO_3__I2C3_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_GPIO_3__GPIO1_IO03 | PC,
 		.gp = IMX_GPIO_NR(1, 3)
 	},
 	.sda = {
-		 .i2c_mode = MX6Q_PAD_GPIO_6__I2C3_SDA | PC,
-		 .gpio_mode = MX6Q_PAD_GPIO_6__GPIO1_IO06 | PC,
+		 .i2c_mode = IMX6Q_PAD_GPIO_6__I2C3_SDA | PC,
+		 .gpio_mode = IMX6Q_PAD_GPIO_6__GPIO1_IO06 | PC,
 		 .gp = IMX_GPIO_NR(1, 6)
 	 }
 };
@@ -241,12 +241,12 @@ int board_mmc_init(bd_t *bis)
 }
 #endif
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 static void setup_usb(void)
 {
 	/*
-	 * Set daisy chain for otg_pin_id on MX6Q.
-	 * For MX6DL, this bit is reserved.
+	 * Set daisy chain for otg_pin_id on IMX6Q.
+	 * For IMX6DL, this bit is reserved.
 	 */
 	imx_iomux_set_gpr_register(1, 13, 1, 0);
 }
@@ -312,7 +312,7 @@ static int setup_dhcom_mac_from_fuse(void)
 
 int board_early_init_f(void)
 {
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 	setup_usb();
 #endif
 
@@ -399,16 +399,16 @@ int board_late_init(void)
 	hw_code = board_get_hwcode();
 
 	switch (get_cpu_type()) {
-	case MXC_CPU_MX6SOLO:
+	case MXC_CPU_IMX6SOLO:
 		snprintf(buf, sizeof(buf), "imx6s-dhcom%1d", hw_code);
 		break;
-	case MXC_CPU_MX6DL:
+	case MXC_CPU_IMX6DL:
 		snprintf(buf, sizeof(buf), "imx6dl-dhcom%1d", hw_code);
 		break;
-	case MXC_CPU_MX6D:
+	case MXC_CPU_IMX6D:
 		snprintf(buf, sizeof(buf), "imx6d-dhcom%1d", hw_code);
 		break;
-	case MXC_CPU_MX6Q:
+	case MXC_CPU_IMX6Q:
 		snprintf(buf, sizeof(buf), "imx6q-dhcom%1d", hw_code);
 		break;
 	default:
@@ -426,6 +426,6 @@ int board_late_init(void)
 
 int checkboard(void)
 {
-	puts("Board: DHCOM i.MX6\n");
+	puts("Board: DHCOM i.IMX6\n");
 	return 0;
 }

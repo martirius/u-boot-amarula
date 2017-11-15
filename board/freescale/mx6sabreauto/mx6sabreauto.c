@@ -96,26 +96,26 @@ static iomux_v3_cfg_t const enet_pads[] = {
 /* I2C2 PMIC, iPod, Tuner, Codec, Touch, HDMI EDID, MIPI CSI2 card */
 static struct i2c_pads_info mx6q_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_EIM_EB2__I2C2_SCL | PC,
-		.gpio_mode = MX6Q_PAD_EIM_EB2__GPIO2_IO30 | PC,
+		.i2c_mode = IMX6Q_PAD_EIM_EB2__I2C2_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_EIM_EB2__GPIO2_IO30 | PC,
 		.gp = IMX_GPIO_NR(2, 30)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
-		.gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		.i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA | PC,
+		.gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
 
 static struct i2c_pads_info mx6dl_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_EIM_EB2__I2C2_SCL | PC,
-		.gpio_mode = MX6DL_PAD_EIM_EB2__GPIO2_IO30 | PC,
+		.i2c_mode = IMX6DL_PAD_EIM_EB2__I2C2_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_EIM_EB2__GPIO2_IO30 | PC,
 		.gp = IMX_GPIO_NR(2, 30)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
-		.gpio_mode = MX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
+		.i2c_mode = IMX6DL_PAD_KEY_ROW3__I2C2_SDA | PC,
+		.gpio_mode = IMX6DL_PAD_KEY_ROW3__GPIO4_IO13 | PC,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
@@ -127,26 +127,26 @@ static struct i2c_pads_info mx6dl_i2c_pad_info1 = {
  */
 static struct i2c_pads_info mx6q_i2c_pad_info2 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_GPIO_3__I2C3_SCL | PC,
-		.gpio_mode = MX6Q_PAD_GPIO_3__GPIO1_IO03 | PC,
+		.i2c_mode = IMX6Q_PAD_GPIO_3__I2C3_SCL | PC,
+		.gpio_mode = IMX6Q_PAD_GPIO_3__GPIO1_IO03 | PC,
 		.gp = IMX_GPIO_NR(1, 3)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_EIM_D18__I2C3_SDA | PC,
-		.gpio_mode = MX6Q_PAD_EIM_D18__GPIO3_IO18 | PC,
+		.i2c_mode = IMX6Q_PAD_EIM_D18__I2C3_SDA | PC,
+		.gpio_mode = IMX6Q_PAD_EIM_D18__GPIO3_IO18 | PC,
 		.gp = IMX_GPIO_NR(3, 18)
 	}
 };
 
 static struct i2c_pads_info mx6dl_i2c_pad_info2 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_GPIO_3__I2C3_SCL | PC,
-		.gpio_mode = MX6DL_PAD_GPIO_3__GPIO1_IO03 | PC,
+		.i2c_mode = IMX6DL_PAD_GPIO_3__I2C3_SCL | PC,
+		.gpio_mode = IMX6DL_PAD_GPIO_3__GPIO1_IO03 | PC,
 		.gp = IMX_GPIO_NR(1, 3)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_EIM_D18__I2C3_SDA | PC,
-		.gpio_mode = MX6DL_PAD_EIM_D18__GPIO3_IO18 | PC,
+		.i2c_mode = IMX6DL_PAD_EIM_D18__I2C3_SDA | PC,
+		.gpio_mode = IMX6DL_PAD_EIM_D18__GPIO3_IO18 | PC,
 		.gp = IMX_GPIO_NR(3, 18)
 	}
 };
@@ -404,8 +404,8 @@ static int mx6sabre_rev(void)
 {
 	/*
 	 * Get Board ID information from OCOTP_GP1[15:8]
-	 * i.MX6Q ARD RevA: 0x01
-	 * i.MX6Q ARD RevB: 0x02
+	 * i.IMX6Q ARD RevA: 0x01
+	 * i.IMX6Q ARD RevB: 0x02
 	 */
 	struct ocotp_regs *ocotp = (struct ocotp_regs *)OCOTP_BASE_ADDR;
 	struct fuse_bank *bank = &ocotp->bank[4];
@@ -691,11 +691,11 @@ int board_late_init(void)
 	env_set("board_name", "SABREAUTO");
 
 	if (is_mx6dqp())
-		env_set("board_rev", "MX6QP");
+		env_set("board_rev", "IMX6QP");
 	else if (is_mx6dq())
-		env_set("board_rev", "MX6Q");
+		env_set("board_rev", "IMX6Q");
 	else if (is_mx6sdl())
-		env_set("board_rev", "MX6DL");
+		env_set("board_rev", "IMX6DL");
 #endif
 
 	return 0;
@@ -716,12 +716,12 @@ int checkboard(void)
 		break;
 	}
 
-	printf("Board: MX6Q-Sabreauto rev%s\n", revname);
+	printf("Board: IMX6Q-Sabreauto rev%s\n", revname);
 
 	return 0;
 }
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 #define USB_HOST1_PWR     PORTEXP_IO_NR(0x32, 7)
 #define USB_OTG_PWR       PORTEXP_IO_NR(0x34, 1)
 

@@ -118,7 +118,7 @@ static void setup_gpmi_nand(void)
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_BCH_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_BCH_INPUT_GPMI_IO_MASK |
 		     MXC_CCM_CCGR4_RAWNAND_U_GPMI_INPUT_APB_MASK |
-		     MXC_CCM_CCGR4_PL301_MX6QPER1_BCH_OFFSET);
+		     MXC_CCM_CCGR4_PL301_IMX6QPER1_BCH_OFFSET);
 
 	/* enable apbh clock gating */
 	setbits_le32(&mxc_ccm->CCGR0, MXC_CCM_CCGR0_APBHDMA_MASK);
@@ -137,7 +137,7 @@ static void setup_iomux_enet(int gpio)
 	mdelay(100);
 }
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 static iomux_v3_cfg_t const usb_pads[] = {
 	IOMUX_PADS(PAD_GPIO_1__USB_OTG_ID   | DIO_PAD_CFG),
 	IOMUX_PADS(PAD_KEY_COL4__USB_OTG_OC | DIO_PAD_CFG),
@@ -183,7 +183,7 @@ int board_ehci_power(int port, int on)
 	}
 	return 0;
 }
-#endif /* CONFIG_USB_EHCI_MX6 */
+#endif /* CONFIG_USB_EHCI_IMX6 */
 
 #ifdef CONFIG_MXC_SPI
 iomux_v3_cfg_t const ecspi1_pads[] = {
@@ -731,11 +731,11 @@ int misc_init_r(void)
 		 * env scripts will try loading each from most specific to
 		 * least.
 		 */
-		if (is_cpu_type(MXC_CPU_MX6Q) ||
-		    is_cpu_type(MXC_CPU_MX6D))
+		if (is_cpu_type(MXC_CPU_IMX6Q) ||
+		    is_cpu_type(MXC_CPU_IMX6D))
 			cputype = "imx6q";
-		else if (is_cpu_type(MXC_CPU_MX6DL) ||
-			 is_cpu_type(MXC_CPU_MX6SOLO))
+		else if (is_cpu_type(MXC_CPU_IMX6DL) ||
+			 is_cpu_type(MXC_CPU_IMX6SOLO))
 			cputype = "imx6dl";
 		env_set("soctype", cputype);
 		if (8 << (ventana_info.nand_flash_size-1) >= 2048)
@@ -1265,11 +1265,11 @@ int ft_board_setup(void *blob, bd_t *bd)
 					u32 mux_reg = fdt32_to_cpu(range[i+0]);
 					u32 conf_reg = fdt32_to_cpu(range[i+1]);
 					/* mux PAD_CSI0_DATA_EN to GPIO */
-					if (is_cpu_type(MXC_CPU_MX6Q) &&
+					if (is_cpu_type(MXC_CPU_IMX6Q) &&
 					    mux_reg == 0x260 &&
 					    conf_reg == 0x630)
 						range[i+3] = cpu_to_fdt32(0x5);
-					else if (!is_cpu_type(MXC_CPU_MX6Q) &&
+					else if (!is_cpu_type(MXC_CPU_IMX6Q) &&
 						 mux_reg == 0x08c &&
 						 conf_reg == 0x3a0)
 						range[i+3] = cpu_to_fdt32(0x5);

@@ -30,7 +30,7 @@ typedef u32 rdc_ma_cfg_t;
 #define RDC_MASTER_CFG(master_id, domain_id) (rdc_ma_cfg_t)((master_id << 8) | \
 					(domain_id << RDC_DOMAIN_SHIFT_BASE))
 
-/* The Following macro definitions are common to i.MX6SX and i.MX7D */
+/* The Following macro definitions are common to i.IMX6SX and i.MX7D */
 #define SEMA_GATES_NUM		64
 
 #define RDC_MDA_DID_SHIFT	0

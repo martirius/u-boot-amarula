@@ -6,7 +6,7 @@
 
 // Register Output for PF0100 programmer
 // Customer: Toradex AG
-// Program: Apalis iMX6
+// Program: Apalis iIMX6
 // Sample marking:
 // Date: 12.02.2014
 // Time: 17:16:41

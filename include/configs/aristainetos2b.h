@@ -5,7 +5,7 @@
  * Based on:
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6DL aristainetos2 board.
+ * Configuration settings for the Freescale i.IMX6DL aristainetos2 board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */

@@ -1,7 +1,7 @@
 /*
  * Copyright 2014 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6SX Sabreauto board.
+ * Configuration settings for the Freescale i.IMX6SX Sabreauto board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */

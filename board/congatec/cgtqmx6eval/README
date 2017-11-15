@@ -1,12 +1,12 @@
-U-Boot for the Congatec QMX6 boards
+U-Boot for the Congatec QIMX6 boards
 
 This file contains information for the port of U-Boot to the Congatec
-QMX6 boards.
+QIMX6 boards.
 
 1. Building U-Boot
 ------------------
 
-- Build U-Boot for Congatec QMX6 boards:
+- Build U-Boot for Congatec QIMX6 boards:
 
 $ make mrproper
 $ make cgtqmx6eval_defconfig
@@ -56,7 +56,7 @@ sudo dd if=u-boot.img of=/dev/mmcblk0 bs=1k seek=69; sync
 
 - Insert the SD card into the big slot.
 
-The boot medium of Congatec QMX6 boards is the SPI NOR flash, so boot
+The boot medium of Congatec QIMX6 boards is the SPI NOR flash, so boot
 the board from SPI first.
 
 It is also possible to boot from the SD card slot by using the 'bmode'

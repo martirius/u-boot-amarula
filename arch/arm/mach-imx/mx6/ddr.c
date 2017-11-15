@@ -14,7 +14,7 @@
 #include <asm/types.h>
 #include <wait_bit.h>
 
-#if defined(CONFIG_MX6_DDRCAL)
+#if defined(CONFIG_IMX6_DDRCAL)
 static void reset_read_data_fifos(void)
 {
 	struct mmdc_p_regs *mmdc0 = (struct mmdc_p_regs *)MMDC_P0_BASE_ADDR;
@@ -227,7 +227,7 @@ int mmdc_do_dqs_calibration(struct mx6_ddr_sysinfo const *sysinfo)
 	struct mmdc_p_regs *mmdc0 = (struct mmdc_p_regs *)MMDC_P0_BASE_ADDR;
 	struct mmdc_p_regs *mmdc1 = (struct mmdc_p_regs *)MMDC_P1_BASE_ADDR;
 	struct mx6dq_iomux_ddr_regs *mx6_ddr_iomux =
-		(struct mx6dq_iomux_ddr_regs *)MX6DQ_IOM_DDR_BASE;
+		(struct mx6dq_iomux_ddr_regs *)IMX6DQ_IOM_DDR_BASE;
 	bool cs0_enable;
 	bool cs1_enable;
 	bool cs0_enable_initial;
@@ -572,8 +572,8 @@ int mmdc_do_dqs_calibration(struct mx6_ddr_sysinfo const *sysinfo)
 }
 #endif
 
-#if defined(CONFIG_MX6SX)
-/* Configure MX6SX mmdc iomux */
+#if defined(CONFIG_IMX6SX)
+/* Configure IMX6SX mmdc iomux */
 void mx6sx_dram_iocfg(unsigned width,
 		      const struct mx6sx_iomux_ddr_regs *ddr,
 		      const struct mx6sx_iomux_grp_regs *grp)
@@ -581,8 +581,8 @@ void mx6sx_dram_iocfg(unsigned width,
 	struct mx6sx_iomux_ddr_regs *mx6_ddr_iomux;
 	struct mx6sx_iomux_grp_regs *mx6_grp_iomux;
 
-	mx6_ddr_iomux = (struct mx6sx_iomux_ddr_regs *)MX6SX_IOM_DDR_BASE;
-	mx6_grp_iomux = (struct mx6sx_iomux_grp_regs *)MX6SX_IOM_GRP_BASE;
+	mx6_ddr_iomux = (struct mx6sx_iomux_ddr_regs *)IMX6SX_IOM_DDR_BASE;
+	mx6_grp_iomux = (struct mx6sx_iomux_grp_regs *)IMX6SX_IOM_GRP_BASE;
 
 	/* DDR IO TYPE */
 	writel(grp->grp_ddr_type, &mx6_grp_iomux->grp_ddr_type);
@@ -631,7 +631,7 @@ void mx6sx_dram_iocfg(unsigned width,
 }
 #endif
 
-#ifdef CONFIG_MX6UL
+#ifdef CONFIG_IMX6UL
 void mx6ul_dram_iocfg(unsigned width,
 		      const struct mx6ul_iomux_ddr_regs *ddr,
 		      const struct mx6ul_iomux_grp_regs *grp)
@@ -639,8 +639,8 @@ void mx6ul_dram_iocfg(unsigned width,
 	struct mx6ul_iomux_ddr_regs *mx6_ddr_iomux;
 	struct mx6ul_iomux_grp_regs *mx6_grp_iomux;
 
-	mx6_ddr_iomux = (struct mx6ul_iomux_ddr_regs *)MX6UL_IOM_DDR_BASE;
-	mx6_grp_iomux = (struct mx6ul_iomux_grp_regs *)MX6UL_IOM_GRP_BASE;
+	mx6_ddr_iomux = (struct mx6ul_iomux_ddr_regs *)IMX6UL_IOM_DDR_BASE;
+	mx6_grp_iomux = (struct mx6ul_iomux_grp_regs *)IMX6UL_IOM_GRP_BASE;
 
 	/* DDR IO TYPE */
 	writel(grp->grp_ddr_type, &mx6_grp_iomux->grp_ddr_type);
@@ -675,7 +675,7 @@ void mx6ul_dram_iocfg(unsigned width,
 }
 #endif
 
-#if defined(CONFIG_MX6SL)
+#if defined(CONFIG_IMX6SL)
 void mx6sl_dram_iocfg(unsigned width,
 		      const struct mx6sl_iomux_ddr_regs *ddr,
 		      const struct mx6sl_iomux_grp_regs *grp)
@@ -683,8 +683,8 @@ void mx6sl_dram_iocfg(unsigned width,
 	struct mx6sl_iomux_ddr_regs *mx6_ddr_iomux;
 	struct mx6sl_iomux_grp_regs *mx6_grp_iomux;
 
-	mx6_ddr_iomux = (struct mx6sl_iomux_ddr_regs *)MX6SL_IOM_DDR_BASE;
-	mx6_grp_iomux = (struct mx6sl_iomux_grp_regs *)MX6SL_IOM_GRP_BASE;
+	mx6_ddr_iomux = (struct mx6sl_iomux_ddr_regs *)IMX6SL_IOM_DDR_BASE;
+	mx6_grp_iomux = (struct mx6sl_iomux_grp_regs *)IMX6SL_IOM_GRP_BASE;
 
 	/* DDR IO TYPE */
 	mx6_grp_iomux->grp_ddr_type = grp->grp_ddr_type;
@@ -730,8 +730,8 @@ void mx6sl_dram_iocfg(unsigned width,
 }
 #endif
 
-#if defined(CONFIG_MX6QDL) || defined(CONFIG_MX6Q) || defined(CONFIG_MX6D)
-/* Configure MX6DQ mmdc iomux */
+#if defined(CONFIG_IMX6QDL) || defined(CONFIG_IMX6Q) || defined(CONFIG_IMX6D)
+/* Configure IMX6DQ mmdc iomux */
 void mx6dq_dram_iocfg(unsigned width,
 		      const struct mx6dq_iomux_ddr_regs *ddr,
 		      const struct mx6dq_iomux_grp_regs *grp)
@@ -739,8 +739,8 @@ void mx6dq_dram_iocfg(unsigned width,
 	volatile struct mx6dq_iomux_ddr_regs *mx6_ddr_iomux;
 	volatile struct mx6dq_iomux_grp_regs *mx6_grp_iomux;
 
-	mx6_ddr_iomux = (struct mx6dq_iomux_ddr_regs *)MX6DQ_IOM_DDR_BASE;
-	mx6_grp_iomux = (struct mx6dq_iomux_grp_regs *)MX6DQ_IOM_GRP_BASE;
+	mx6_ddr_iomux = (struct mx6dq_iomux_ddr_regs *)IMX6DQ_IOM_DDR_BASE;
+	mx6_grp_iomux = (struct mx6dq_iomux_grp_regs *)IMX6DQ_IOM_GRP_BASE;
 
 	/* DDR IO Type */
 	mx6_grp_iomux->grp_ddr_type = grp->grp_ddr_type;
@@ -808,8 +808,8 @@ void mx6dq_dram_iocfg(unsigned width,
 }
 #endif
 
-#if defined(CONFIG_MX6QDL) || defined(CONFIG_MX6DL) || defined(CONFIG_MX6S)
-/* Configure MX6SDL mmdc iomux */
+#if defined(CONFIG_IMX6QDL) || defined(CONFIG_IMX6DL) || defined(CONFIG_IMX6S)
+/* Configure IMX6SDL mmdc iomux */
 void mx6sdl_dram_iocfg(unsigned width,
 		       const struct mx6sdl_iomux_ddr_regs *ddr,
 		       const struct mx6sdl_iomux_grp_regs *grp)
@@ -817,8 +817,8 @@ void mx6sdl_dram_iocfg(unsigned width,
 	volatile struct mx6sdl_iomux_ddr_regs *mx6_ddr_iomux;
 	volatile struct mx6sdl_iomux_grp_regs *mx6_grp_iomux;
 
-	mx6_ddr_iomux = (struct mx6sdl_iomux_ddr_regs *)MX6SDL_IOM_DDR_BASE;
-	mx6_grp_iomux = (struct mx6sdl_iomux_grp_regs *)MX6SDL_IOM_GRP_BASE;
+	mx6_ddr_iomux = (struct mx6sdl_iomux_ddr_regs *)IMX6SDL_IOM_DDR_BASE;
+	mx6_grp_iomux = (struct mx6sdl_iomux_grp_regs *)IMX6SDL_IOM_GRP_BASE;
 
 	/* DDR IO Type */
 	mx6_grp_iomux->grp_ddr_type = grp->grp_ddr_type;
@@ -1218,14 +1218,14 @@ void mx6_ddr3_cfg(const struct mx6_ddr_sysinfo *sysinfo,
 	if (!is_mx6sx() && !is_mx6ul() && !is_mx6sl())
 		mmdc1 = (struct mmdc_p_regs *)MMDC_P1_BASE_ADDR;
 
-	/* Limit mem_speed for MX6D/MX6Q */
+	/* Limit mem_speed for IMX6D/IMX6Q */
 	if (is_mx6dq() || is_mx6dqp()) {
 		if (mem_speed > 1066)
 			mem_speed = 1066; /* 1066 MT/s */
 
 		tcwl = 4;
 	}
-	/* Limit mem_speed for MX6S/MX6DL */
+	/* Limit mem_speed for IMX6S/IMX6DL */
 	else {
 		if (mem_speed > 800)
 			mem_speed = 800;  /* 800 MT/s */
@@ -1235,7 +1235,7 @@ void mx6_ddr3_cfg(const struct mx6_ddr_sysinfo *sysinfo,
 
 	clock = mem_speed / 2;
 	/*
-	 * Data rate of 1066 MT/s requires 533 MHz DDR3 clock, but MX6D/Q supports
+	 * Data rate of 1066 MT/s requires 533 MHz DDR3 clock, but IMX6D/Q supports
 	 * up to 528 MHz, so reduce the clock to fit chip specs
 	 */
 	if (is_mx6dq() || is_mx6dqp()) {

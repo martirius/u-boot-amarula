@@ -34,7 +34,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #define IMX6DQ_DRIVE_STRENGTH		0x30
 #define IMX6SDL_DRIVE_STRENGTH	0x28
 
-/* configure MX6Q/DUAL mmdc DDR io registers */
+/* configure IMX6Q/DUAL mmdc DDR io registers */
 static struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_sdclk_0 = IMX6DQ_DRIVE_STRENGTH,
 	.dram_sdclk_1 = IMX6DQ_DRIVE_STRENGTH,
@@ -64,7 +64,7 @@ static struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_dqm7 = IMX6DQ_DRIVE_STRENGTH,
 };
 
-/* configure MX6Q/DUAL mmdc GRP io registers */
+/* configure IMX6Q/DUAL mmdc GRP io registers */
 static struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -82,7 +82,7 @@ static struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_b7ds = IMX6DQ_DRIVE_STRENGTH,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc DDR io registers */
+/* configure IMX6SOLO/DUALLITE mmdc DDR io registers */
 struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_sdclk_0 = IMX6SDL_DRIVE_STRENGTH,
 	.dram_sdclk_1 = IMX6SDL_DRIVE_STRENGTH,
@@ -112,7 +112,7 @@ struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_dqm7 = IMX6SDL_DRIVE_STRENGTH,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc GRP io registers */
+/* configure IMX6SOLO/DUALLITE mmdc GRP io registers */
 struct mx6sdl_iomux_grp_regs mx6sdl_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -213,14 +213,14 @@ static void ccgr_init(void)
 
 static void spl_dram_init(void)
 {
-	if (is_cpu_type(MXC_CPU_MX6DL)) {
+	if (is_cpu_type(MXC_CPU_IMX6DL)) {
 		mt41k128m16jt_125.mem_speed = 800;
 		mem_qdl.rtt_nom = 1;
 		mem_qdl.rtt_wr = 1;
 
 		mx6sdl_dram_iocfg(64, &mx6sdl_ddr_ioregs, &mx6sdl_grp_ioregs);
 		mx6_dram_cfg(&mem_qdl, &mx6dl_1g_mmdc_calib, &mt41k128m16jt_125);
-	} else if (is_cpu_type(MXC_CPU_MX6Q)) {
+	} else if (is_cpu_type(MXC_CPU_IMX6Q)) {
 		mt41k128m16jt_125.mem_speed = 1066;
 		mem_qdl.rtt_nom = 2;
 		mem_qdl.rtt_wr = 2;

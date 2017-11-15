@@ -9,7 +9,7 @@ config SYS_VENDOR
 config SYS_CONFIG_NAME
 	default "tbs2910"
 
-config MX6Q
+config IMX6Q
 	default y
 
 config IMX_CONFIG

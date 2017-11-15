@@ -116,7 +116,7 @@ void boot_mode_apply(unsigned cfg_val)
 }
 #endif
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 u32 imx6_src_get_boot_mode(void)
 {
 	if (imx6_is_bmode_from_gpr9())

@@ -3,15 +3,15 @@
  * Congatec Conga-QEVAl board configuration file.
  *
  * Copyright (C) 2010-2011 Freescale Semiconductor, Inc.
- * Based on Freescale i.MX6Q Sabre Lite board configuration file.
+ * Based on Freescale i.IMX6Q Sabre Lite board configuration file.
  * Copyright (C) 2013, Adeneo Embedded <www.adeneo-embedded.com>
  * Leo Sartre, <lsartre@adeneo-embedded.com>
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
-#ifndef __CONFIG_CGTQMX6EVAL_H
-#define __CONFIG_CGTQMX6EVAL_H
+#ifndef __CONFIG_CGTQIMX6EVAL_H
+#define __CONFIG_CGTQIMX6EVAL_H
 
 #include "mx6_common.h"
 
@@ -158,9 +158,9 @@
 			"bootz; " \
 		"fi;\0" \
 	"findfdt="\
-		"if test $board_rev = MX6Q ; then " \
+		"if test $board_rev = IMX6Q ; then " \
 			"setenv fdtfile imx6q-qmx6.dtb; fi; " \
-		"if test $board_rev = MX6DL ; then " \
+		"if test $board_rev = IMX6DL ; then " \
 			"setenv fdtfile imx6dl-qmx6.dtb; fi; " \
 		"if test $fdtfile = undefined; then " \
 			"echo WARNING: Could not determine dtb to use; fi; \0" \
@@ -239,4 +239,4 @@
 #define CONFIG_ENV_SPI_MAX_HZ		CONFIG_SF_DEFAULT_SPEED
 #endif
 
-#endif			       /* __CONFIG_CGTQMX6EVAL_H */
+#endif			       /* __CONFIG_CGTQIMX6EVAL_H */

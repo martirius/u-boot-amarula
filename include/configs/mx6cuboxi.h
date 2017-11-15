@@ -5,8 +5,8 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#ifndef __MX6CUBOXI_CONFIG_H
-#define __MX6CUBOXI_CONFIG_H
+#ifndef __IMX6CUBOXI_CONFIG_H
+#define __IMX6CUBOXI_CONFIG_H
 
 #include <config_distro_defaults.h>
 #include "mx6_common.h"
@@ -106,17 +106,17 @@
 			"fi; "	\
 		"fi\0" \
 	"findfdt="\
-		"if test $board_name = HUMMINGBOARD2 && test $board_rev = MX6Q ; then " \
+		"if test $board_name = HUMMINGBOARD2 && test $board_rev = IMX6Q ; then " \
 			"setenv fdtfile imx6q-hummingboard2.dtb; fi; " \
-		"if test $board_name = HUMMINGBOARD2 && test $board_rev = MX6DL ; then " \
+		"if test $board_name = HUMMINGBOARD2 && test $board_rev = IMX6DL ; then " \
 			"setenv fdtfile imx6dl-hummingboard2.dtb; fi; " \
-		"if test $board_name = HUMMINGBOARD && test $board_rev = MX6Q ; then " \
+		"if test $board_name = HUMMINGBOARD && test $board_rev = IMX6Q ; then " \
 			"setenv fdtfile imx6q-hummingboard.dtb; fi; " \
-		"if test $board_name = HUMMINGBOARD && test $board_rev = MX6DL ; then " \
+		"if test $board_name = HUMMINGBOARD && test $board_rev = IMX6DL ; then " \
 			"setenv fdtfile imx6dl-hummingboard.dtb; fi; " \
-		"if test $board_name = CUBOXI && test $board_rev = MX6Q ; then " \
+		"if test $board_name = CUBOXI && test $board_rev = IMX6Q ; then " \
 			"setenv fdtfile imx6q-cubox-i.dtb; fi; " \
-		"if test $board_name = CUBOXI && test $board_rev = MX6DL ; then " \
+		"if test $board_name = CUBOXI && test $board_rev = IMX6DL ; then " \
 			"setenv fdtfile imx6dl-cubox-i.dtb; fi; " \
 		"if test $fdtfile = undefined; then " \
 			"echo WARNING: Could not determine dtb to use; fi; \0" \
@@ -155,4 +155,4 @@
 #define CONFIG_ENV_SIZE			(8 * 1024)
 #define CONFIG_ENV_OFFSET		(8 * 64 * 1024)
 
-#endif                         /* __MX6CUBOXI_CONFIG_H */
+#endif                         /* __IMX6CUBOXI_CONFIG_H */

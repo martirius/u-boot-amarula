@@ -885,7 +885,7 @@ int init_sata(int dev)
 {
 	struct ahci_uc_priv *uc_priv = NULL;
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 	if (!is_mx6dq() && !is_mx6dqp())
 		return 1;
 #endif

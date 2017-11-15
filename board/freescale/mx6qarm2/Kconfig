@@ -1,4 +1,4 @@
-if TARGET_MX6QARM2
+if TARGET_IMX6QARM2
 
 config SYS_BOARD
 	default "mx6qarm2"

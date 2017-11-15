@@ -291,7 +291,7 @@ static int setup_display(void)
 }
 #endif /* CONFIG_VIDEO_IPUV3 */
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 static void setup_usb(void)
 {
 	SETUP_IOMUX_PADS(usb_pads);
@@ -314,7 +314,7 @@ int board_early_init_f(void)
 	setup_sata();
 #endif
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 	setup_usb();
 #endif
 	return 0;
@@ -393,11 +393,11 @@ static bool is_hummingboard2(void)
 int checkboard(void)
 {
 	if (is_hummingboard2())
-		puts("Board: MX6 Hummingboard2\n");
+		puts("Board: IMX6 Hummingboard2\n");
 	else if (is_hummingboard())
-		puts("Board: MX6 Hummingboard\n");
+		puts("Board: IMX6 Hummingboard\n");
 	else
-		puts("Board: MX6 Cubox-i\n");
+		puts("Board: IMX6 Cubox-i\n");
 
 	return 0;
 }
@@ -413,9 +413,9 @@ int board_late_init(void)
 		env_set("board_name", "CUBOXI");
 
 	if (is_mx6dq())
-		env_set("board_rev", "MX6Q");
+		env_set("board_rev", "IMX6Q");
 	else
-		env_set("board_rev", "MX6DL");
+		env_set("board_rev", "IMX6DL");
 #endif
 
 	return 0;
@@ -640,13 +640,13 @@ static void spl_dram_init(int width)
 	else
 		mx6sdl_dram_iocfg(width, &mx6dl_ddr_ioregs, &mx6sdl_grp_ioregs);
 
-	if (is_cpu_type(MXC_CPU_MX6D))
+	if (is_cpu_type(MXC_CPU_IMX6D))
 		mx6_dram_cfg(&sysinfo, &mx6q_1g_mmcd_calib, &mem_ddr_2g);
-	else if (is_cpu_type(MXC_CPU_MX6Q))
+	else if (is_cpu_type(MXC_CPU_IMX6Q))
 		mx6_dram_cfg(&sysinfo, &mx6q_2g_mmcd_calib, &mem_ddr_4g);
-	else if (is_cpu_type(MXC_CPU_MX6DL))
+	else if (is_cpu_type(MXC_CPU_IMX6DL))
 		mx6_dram_cfg(&sysinfo, &mx6dl_1g_mmcd_calib, &mem_ddr_2g);
-	else if (is_cpu_type(MXC_CPU_MX6SOLO))
+	else if (is_cpu_type(MXC_CPU_IMX6SOLO))
 		mx6_dram_cfg(&sysinfo, &mx6dl_512m_mmcd_calib, &mem_ddr_2g);
 }
 
@@ -668,7 +668,7 @@ void board_init_f(ulong dummy)
 	preloader_console_init();
 
 	/* DDR initialization */
-	if (is_cpu_type(MXC_CPU_MX6SOLO))
+	if (is_cpu_type(MXC_CPU_IMX6SOLO))
 		spl_dram_init(32);
 	else
 		spl_dram_init(64);

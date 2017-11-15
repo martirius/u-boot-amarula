@@ -64,11 +64,11 @@
 
 #define WRITE_POSTAMBLE_US		2
 
-#if defined(CONFIG_MX6) || defined(CONFIG_VF610)
+#if defined(CONFIG_IMX6) || defined(CONFIG_VF610)
 #define FUSE_BANK_SIZE	0x80
-#ifdef CONFIG_MX6SL
+#ifdef CONFIG_IMX6SL
 #define FUSE_BANKS	8
-#elif defined(CONFIG_MX6ULL) || defined(CONFIG_MX6SLL)
+#elif defined(CONFIG_IMX6ULL) || defined(CONFIG_IMX6SLL)
 #define FUSE_BANKS	9
 #else
 #define FUSE_BANKS	16
@@ -83,19 +83,19 @@
 #error "Unsupported architecture\n"
 #endif
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 
 /*
  * There is a hole in shadow registers address map of size 0x100
- * between bank 5 and bank 6 on iMX6QP, iMX6DQ, iMX6SDL, iMX6SX,
- * iMX6UL, i.MX6ULL and i.MX6SLL.
+ * between bank 5 and bank 6 on iIMX6QP, iIMX6DQ, iIMX6SDL, iIMX6SX,
+ * iIMX6UL, i.IMX6ULL and i.IMX6SLL.
  * Bank 5 ends at 0x6F0 and Bank 6 starts at 0x800. When reading the fuses,
  * we should account for this hole in address space.
  *
  * Similar hole exists between bank 14 and bank 15 of size
- * 0x80 on iMX6QP, iMX6DQ, iMX6SDL and iMX6SX.
- * Note: iMX6SL has only 0-7 banks and there is no hole.
- * Note: iMX6UL doesn't have this one.
+ * 0x80 on iIMX6QP, iIMX6DQ, iIMX6SDL and iIMX6SX.
+ * Note: iIMX6SL has only 0-7 banks and there is no hole.
+ * Note: iIMX6UL doesn't have this one.
  *
  * This function is to covert user input to physical bank index.
  * Only needed when read fuse, because we use register offset, so
@@ -296,7 +296,7 @@ static void setup_direct_access(struct ocotp_regs *regs, u32 bank, u32 word,
 	u32 addr = bank;
 #else
 	u32 addr;
-	/* Bank 7 and Bank 8 only supports 4 words each for i.MX6ULL */
+	/* Bank 7 and Bank 8 only supports 4 words each for i.IMX6ULL */
 	if ((is_mx6ull() || is_mx6sll()) && (bank > 7)) {
 		bank = bank - 1;
 		word += 4;

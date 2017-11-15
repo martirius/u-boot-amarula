@@ -34,7 +34,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #define IMX6SDL_DRIVE_STRENGTH		0x28
 #define IMX6QP_DRIVE_STRENGTH		0x28
 
-/* configure MX6Q/DUAL mmdc DDR io registers */
+/* configure IMX6Q/DUAL mmdc DDR io registers */
 static struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_sdclk_0 = IMX6DQ_DRIVE_STRENGTH,
 	.dram_sdclk_1 = IMX6DQ_DRIVE_STRENGTH,
@@ -64,7 +64,7 @@ static struct mx6dq_iomux_ddr_regs mx6dq_ddr_ioregs = {
 	.dram_dqm7 = IMX6DQ_DRIVE_STRENGTH,
 };
 
-/* configure MX6QP mmdc DDR io registers */
+/* configure IMX6QP mmdc DDR io registers */
 static struct mx6dq_iomux_ddr_regs mx6qp_ddr_ioregs = {
 	.dram_sdclk_0 = IMX6QP_DRIVE_STRENGTH,
 	.dram_sdclk_1 = IMX6QP_DRIVE_STRENGTH,
@@ -94,7 +94,7 @@ static struct mx6dq_iomux_ddr_regs mx6qp_ddr_ioregs = {
 	.dram_dqm7 = IMX6QP_DRIVE_STRENGTH,
 };
 
-/* configure MX6Q/DUAL mmdc GRP io registers */
+/* configure IMX6Q/DUAL mmdc GRP io registers */
 static struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -112,7 +112,7 @@ static struct mx6dq_iomux_grp_regs mx6dq_grp_ioregs = {
 	.grp_b7ds = IMX6DQ_DRIVE_STRENGTH,
 };
 
-/* configure MX6QP mmdc GRP io registers */
+/* configure IMX6QP mmdc GRP io registers */
 static struct mx6dq_iomux_grp_regs mx6qp_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -130,7 +130,7 @@ static struct mx6dq_iomux_grp_regs mx6qp_grp_ioregs = {
 	.grp_b7ds = IMX6QP_DRIVE_STRENGTH,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc DDR io registers */
+/* configure IMX6SOLO/DUALLITE mmdc DDR io registers */
 struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_sdclk_0 = IMX6SDL_DRIVE_STRENGTH,
 	.dram_sdclk_1 = IMX6SDL_DRIVE_STRENGTH,
@@ -160,7 +160,7 @@ struct mx6sdl_iomux_ddr_regs mx6sdl_ddr_ioregs = {
 	.dram_dqm7 = IMX6SDL_DRIVE_STRENGTH,
 };
 
-/* configure MX6SOLO/DUALLITE mmdc GRP io registers */
+/* configure IMX6SOLO/DUALLITE mmdc GRP io registers */
 struct mx6sdl_iomux_grp_regs mx6sdl_grp_ioregs = {
 	.grp_ddr_type = 0x000c0000,
 	.grp_ddrmode_ctl = 0x00020000,
@@ -389,13 +389,13 @@ static void spl_dram_init(void)
 	if (is_mx6dqp()) {
 		mx6dq_dram_iocfg(64, &mx6qp_ddr_ioregs, &mx6qp_grp_ioregs);
 		spl_dram_init_imx6qp_lpddr3();
-	} else if (is_cpu_type(MXC_CPU_MX6SOLO)) {
+	} else if (is_cpu_type(MXC_CPU_IMX6SOLO)) {
 		mx6sdl_dram_iocfg(32, &mx6sdl_ddr_ioregs, &mx6sdl_grp_ioregs);
 		mx6_dram_cfg(&mem_s, &mx6s_512m_mmdc_calib, &h5tq2g63dfr);
-	} else if (is_cpu_type(MXC_CPU_MX6DL)) {
+	} else if (is_cpu_type(MXC_CPU_IMX6DL)) {
 		mx6sdl_dram_iocfg(64, &mx6sdl_ddr_ioregs, &mx6sdl_grp_ioregs);
 		mx6_dram_cfg(&mem_dl, &mx6dl_1g_mmdc_calib, &h5tq2g63dfr);
-	} else if (is_cpu_type(MXC_CPU_MX6Q)) {
+	} else if (is_cpu_type(MXC_CPU_IMX6Q)) {
 		mx6dq_dram_iocfg(64, &mx6dq_ddr_ioregs, &mx6dq_grp_ioregs);
 		mx6_dram_cfg(&mem_q, &mx6q_2g_mmdc_calib, &h5t04g63afr);
 	}

@@ -1,4 +1,4 @@
-MX6Q_ENGICAM BOARD
+IMX6Q_ENGICAM BOARD
 M:	Jagan Teki <jagan@amarulasolutions.com>
 S:	Maintained
 F:	board/engicam/imx6q

@@ -70,10 +70,10 @@ const char * const toradex_modules[] = {
 	[11] = "Colibri VF61 256MB",
 	[12] = "Colibri VF61 256MB IT",
 	[13] = "Colibri VF50 128MB IT",
-	[14] = "Colibri iMX6 Solo 256MB",
-	[15] = "Colibri iMX6 DualLite 512MB",
-	[16] = "Colibri iMX6 Solo 256MB IT",
-	[17] = "Colibri iMX6 DualLite 512MB IT",
+	[14] = "Colibri iIMX6 Solo 256MB",
+	[15] = "Colibri iIMX6 DualLite 512MB",
+	[16] = "Colibri iIMX6 Solo 256MB IT",
+	[17] = "Colibri iIMX6 DualLite 512MB IT",
 	[18] = "UNKNOWN MODULE",
 	[19] = "UNKNOWN MODULE",
 	[20] = "Colibri T20 256MB",
@@ -83,15 +83,15 @@ const char * const toradex_modules[] = {
 	[24] = "Colibri T20 256MB IT",
 	[25] = "Apalis T30 2GB",
 	[26] = "Apalis T30 1GB",
-	[27] = "Apalis iMX6 Quad 1GB",
-	[28] = "Apalis iMX6 Quad 2GB IT",
-	[29] = "Apalis iMX6 Dual 512MB",
+	[27] = "Apalis iIMX6 Quad 1GB",
+	[28] = "Apalis iIMX6 Quad 2GB IT",
+	[29] = "Apalis iIMX6 Dual 512MB",
 	[30] = "Colibri T30 1GB IT",
 	[31] = "Apalis T30 1GB IT",
 	[32] = "Colibri iMX7 Solo 256MB",
 	[33] = "Colibri iMX7 Dual 512MB",
 	[34] = "Apalis TK1 2GB",
-	[35] = "Apalis iMX6 Dual 1GB IT",
+	[35] = "Apalis iIMX6 Dual 1GB IT",
 };
 
 #ifdef CONFIG_TDX_CFG_BLOCK_IS_IN_MMC
@@ -280,23 +280,23 @@ static int get_cfgblock_interactive(void)
 	if (!strcmp("mx6", soc)) {
 #ifdef CONFIG_MACH_TYPE
 		if (it == 'y' || it == 'Y')
-			if (is_cpu_type(MXC_CPU_MX6Q))
+			if (is_cpu_type(MXC_CPU_IMX6Q))
 				tdx_hw_tag.prodid = APALIS_IMX6Q_IT;
 			else
 				tdx_hw_tag.prodid = APALIS_IMX6D_IT;
 		else
-			if (is_cpu_type(MXC_CPU_MX6Q))
+			if (is_cpu_type(MXC_CPU_IMX6Q))
 				tdx_hw_tag.prodid = APALIS_IMX6Q;
 			else
 				tdx_hw_tag.prodid = APALIS_IMX6D;
 #else
 		if (it == 'y' || it == 'Y')
-			if (is_cpu_type(MXC_CPU_MX6DL))
+			if (is_cpu_type(MXC_CPU_IMX6DL))
 				tdx_hw_tag.prodid = COLIBRI_IMX6DL_IT;
 			else
 				tdx_hw_tag.prodid = COLIBRI_IMX6S_IT;
 		else
-			if (is_cpu_type(MXC_CPU_MX6DL))
+			if (is_cpu_type(MXC_CPU_IMX6DL))
 				tdx_hw_tag.prodid = COLIBRI_IMX6DL;
 			else
 				tdx_hw_tag.prodid = COLIBRI_IMX6S;

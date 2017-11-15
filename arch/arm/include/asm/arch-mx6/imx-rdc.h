@@ -7,10 +7,10 @@
 #ifndef __IMX_RDC_H__
 #define __IMX_RDC_H__
 
-#if defined(CONFIG_MX6SX)
+#if defined(CONFIG_IMX6SX)
 #include "mx6sx_rdc.h"
 #else
 #error "Please select cpu"
-#endif /* CONFIG_MX6SX */
+#endif /* CONFIG_IMX6SX */
 
 #endif	/* __IMX_RDC_H__*/

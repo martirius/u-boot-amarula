@@ -15,7 +15,7 @@
 
 #include "mx6_common.h"
 
-#define CONFIG_MX6Q
+#define CONFIG_IMX6Q
 
 /* Provide the MACH_TYPE value that the vendor kernel requires. */
 #define CONFIG_MACH_TYPE		3769

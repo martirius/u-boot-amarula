@@ -4,7 +4,7 @@
  * Copyright (C) 2014 Advantech
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the GE MX6Q Bx50v3 boards.
+ * Configuration settings for the GE IMX6Q Bx50v3 boards.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */

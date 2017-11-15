@@ -46,7 +46,7 @@ struct thermal_data {
 	int maxc;
 };
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 static int read_cpu_temperature(struct udevice *dev)
 {
 	int temperature;
@@ -242,7 +242,7 @@ static int imx_thermal_probe(struct udevice *dev)
 	/* Read Temperature calibration data fuse */
 	fuse_read(pdata->fuse_bank, pdata->fuse_word, &fuse);
 
-	if (is_soc_type(MXC_SOC_MX6)) {
+	if (is_soc_type(MXC_SOC_IMX6)) {
 		/* Check for valid fuse */
 		if (fuse == 0 || fuse == ~0) {
 			debug("CPU:   Thermal invalid data, fuse: 0x%x\n",

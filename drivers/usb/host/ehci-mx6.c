@@ -64,7 +64,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #define UCMD_RUN_STOP           (1 << 0) /* controller run/stop */
 #define UCMD_RESET		(1 << 1) /* controller reset */
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 static const unsigned phy_bases[] = {
 	USB_PHY0_BASE_ADDR,
 	USB_PHY1_BASE_ADDR,
@@ -248,7 +248,7 @@ int usb_phy_mode(int port)
 
 static void usb_oc_config(int index)
 {
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 	struct usbnc_regs *usbnc = (struct usbnc_regs *)(USB_BASE_ADDR +
 			USB_OTHERREGS_OFFSET);
 	void __iomem *ctrl = (void __iomem *)(&usbnc->ctrl[index]);
@@ -258,7 +258,7 @@ static void usb_oc_config(int index)
 	void __iomem *ctrl = (void __iomem *)(&usbnc->ctrl1);
 #endif
 
-#if CONFIG_MACH_TYPE == MACH_TYPE_MX6Q_ARM2
+#if CONFIG_MACH_TYPE == MACH_TYPE_IMX6Q_ARM2
 	/* mx6qarm2 seems to required a different setting*/
 	clrbits_le32(ctrl, UCTRL_OVER_CUR_POL);
 #else
@@ -329,7 +329,7 @@ int ehci_mx6_common_init(struct usb_ehci *ehci, int index)
 	usb_power_config(index);
 	usb_oc_config(index);
 
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 	usb_internal_phy_clock_gate(index, 1);
 	usb_phy_enable(index, ehci);
 #endif
@@ -342,7 +342,7 @@ int ehci_hcd_init(int index, enum usb_init_type init,
 		struct ehci_hccr **hccr, struct ehci_hcor **hcor)
 {
 	enum usb_init_type type;
-#if defined(CONFIG_MX6)
+#if defined(CONFIG_IMX6)
 	u32 controller_spacing = 0x200;
 #elif defined(CONFIG_MX7)
 	u32 controller_spacing = 0x10000;

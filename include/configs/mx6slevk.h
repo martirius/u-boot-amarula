@@ -1,7 +1,7 @@
 /*
  * Copyright 2013 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6SL EVK board.
+ * Configuration settings for the Freescale i.IMX6SL EVK board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
@@ -15,7 +15,7 @@
 #include "imx6_spl.h"
 #endif
 
-#define CONFIG_MACH_TYPE		MACH_TYPE_MX6SL_EVK
+#define CONFIG_MACH_TYPE		MACH_TYPE_IMX6SL_EVK
 
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN		(3 * SZ_1M)

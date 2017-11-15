@@ -4,8 +4,8 @@
  * SPDX-License-Identifier:  GPL-2.0+
  */
 
-#ifndef __MX6SX_RDC_H__
-#define __MX6SX_RDC_H__
+#ifndef __IMX6SX_RDC_H__
+#define __IMX6SX_RDC_H__
 
 #define RDC_SEMA_PROC_ID 2  /* The processor ID for main CPU */
 
@@ -152,4 +152,4 @@ enum {
 	RDC_MA_SDMA,
 };
 
-#endif	/* __MX6SX_RDC_H__*/
+#endif	/* __IMX6SX_RDC_H__*/

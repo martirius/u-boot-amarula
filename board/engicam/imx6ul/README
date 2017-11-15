@@ -1,4 +1,4 @@
-Hsow to use U-Boot on Engicam GEAM6UL and Is.IoT MX6UL Starter Kit:
+Hsow to use U-Boot on Engicam GEAM6UL and Is.IoT IMX6UL Starter Kit:
 -------------------------------------------------------------------
 
 $ make mrproper
@@ -6,7 +6,7 @@ $ make mrproper
 - Configure U-Boot for Engicam GEAM6UL:
 $ make imx6ul_geam_mmc_defconfig
 
-- Configure U-Boot for Engicam Is.IoT MX6UL:
+- Configure U-Boot for Engicam Is.IoT IMX6UL:
 $ make imx6ul_isiot_mmc_defconfig
 
 - Build U-Boot

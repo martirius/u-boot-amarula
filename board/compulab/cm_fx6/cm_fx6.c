@@ -318,11 +318,11 @@ static int cm_fx6_setup_i2c(void)
 static int cm_fx6_setup_i2c(void) { return 0; }
 #endif
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 #define WEAK_PULLDOWN	(PAD_CTL_PUS_100K_DOWN |		\
 			PAD_CTL_SPEED_MED | PAD_CTL_DSE_40ohm |	\
 			PAD_CTL_HYS | PAD_CTL_SRE_SLOW)
-#define MX6_USBNC_BASEADDR	0x2184800
+#define IMX6_USBNC_BASEADDR	0x2184800
 #define USBNC_USB_H1_PWR_POL	(1 << 9)
 
 static int cm_fx6_setup_usb_host(void)
@@ -366,7 +366,7 @@ int board_usb_phy_mode(int port)
 int board_ehci_hcd_init(int port)
 {
 	int ret;
-	u32 *usbnc_usb_uh1_ctrl = (u32 *)(MX6_USBNC_BASEADDR + 4);
+	u32 *usbnc_usb_uh1_ctrl = (u32 *)(IMX6_USBNC_BASEADDR + 4);
 
 	/* Only 1 host controller in use. port 0 is OTG & needs no attention */
 	if (port != 1)
@@ -678,7 +678,7 @@ int board_init(void)
 
 	cm_fx6_setup_display();
 
-	/* This should be done in the MMC driver when MX6 has a clock driver */
+	/* This should be done in the MMC driver when IMX6 has a clock driver */
 #ifdef CONFIG_FSL_ESDHC
 	if (IS_ENABLED(CONFIG_BLK)) {
 		int i;
@@ -720,7 +720,7 @@ int dram_init_banksize(void)
 		gd->bd->bi_dram[1].size = 0;
 		break;
 	case 0x40000000:
-		if (is_cpu_type(MXC_CPU_MX6SOLO)) { /* DDR_32BIT_1GB */
+		if (is_cpu_type(MXC_CPU_IMX6SOLO)) { /* DDR_32BIT_1GB */
 			gd->bd->bi_dram[0].size = 0x20000000;
 			gd->bd->bi_dram[1].size = 0x20000000;
 		} else { /* DDR_64BIT_1GB */

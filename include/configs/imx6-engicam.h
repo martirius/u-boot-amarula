@@ -2,7 +2,7 @@
  * Copyright (C) 2016 Amarula Solutions B.V.
  * Copyright (C) 2016 Engicam S.r.l.
  *
- * Configuration settings for the Engicam i.MX6 SOM Starter Kits.
+ * Configuration settings for the Engicam i.IMX6 SOM Starter Kits.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
@@ -109,7 +109,7 @@
 #define CONFIG_SYS_LOAD_ADDR		CONFIG_LOADADDR
 #define CONFIG_SYS_HZ			1000
 
-#ifdef CONFIG_MX6UL
+#ifdef CONFIG_IMX6UL
 # define DRAM_OFFSET(x)			0x87##x
 # define FDT_ADDR			__stringify(DRAM_OFFSET(800000))
 #else 
@@ -137,7 +137,7 @@
 
 /* UART */
 #ifdef CONFIG_MXC_UART
-# ifdef CONFIG_MX6UL
+# ifdef CONFIG_IMX6UL
 #  define CONFIG_MXC_UART_BASE		UART1_BASE
 # else
 #  define CONFIG_MXC_UART_BASE		UART4_BASE
@@ -169,7 +169,7 @@
 
 /* Ethernet */
 #ifdef CONFIG_FEC_MXC
-# ifdef CONFIG_TARGET_MX6Q_ICORE_RQS
+# ifdef CONFIG_TARGET_IMX6Q_ICORE_RQS
 #  define CONFIG_FEC_MXC_PHYADDR	3
 #  define CONFIG_FEC_XCV_TYPE		RGMII
 # else

@@ -1,7 +1,7 @@
 /*
  * Copyright 2014 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6SX Sabresd board.
+ * Configuration settings for the Freescale i.IMX6SX Sabresd board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
@@ -184,7 +184,7 @@
 #ifdef CONFIG_FSL_QSPI
 #define CONFIG_SYS_FSL_QSPI_LE
 #define CONFIG_SYS_FSL_QSPI_AHB
-#ifdef CONFIG_MX6SX_SABRESD_REVA
+#ifdef CONFIG_IMX6SX_SABRESD_REVA
 #define FSL_QSPI_FLASH_SIZE		SZ_16M
 #else
 #define FSL_QSPI_FLASH_SIZE		SZ_32M
@@ -201,7 +201,7 @@
 #define CONFIG_BMP_16BPP
 #define CONFIG_VIDEO_BMP_RLE8
 #define CONFIG_VIDEO_BMP_LOGO
-#define MXS_LCDIF_BASE MX6SX_LCDIF1_BASE_ADDR
+#define MXS_LCDIF_BASE IMX6SX_LCDIF1_BASE_ADDR
 #endif
 #endif
 

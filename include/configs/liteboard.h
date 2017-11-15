@@ -2,7 +2,7 @@
  * Copyright (C) 2015 Freescale Semiconductor, Inc.
  * Copyright (C) 2016 Grinn
  *
- * Configuration settings for the Grinn liteBoard (i.MX6UL).
+ * Configuration settings for the Grinn liteBoard (i.IMX6UL).
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */

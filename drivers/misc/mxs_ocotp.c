@@ -6,7 +6,7 @@
  * SPDX-License-Identifier:	GPL-2.0+
  *
  * Note: The i.MX23/i.MX28 OCOTP block is a predecessor to the OCOTP block
- *       used in i.MX6 . While these blocks are very similar at the first
+ *       used in i.IMX6 . While these blocks are very similar at the first
  *       glance, by digging deeper, one will notice differences (like the
  *       tight dependence on MXS power block, some completely new registers
  *       etc.) which would make common driver an ifdef nightmare :-(

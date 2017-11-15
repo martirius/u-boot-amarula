@@ -6,7 +6,7 @@
  * Based on:
  * Copyright (C) 2012 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6Q SabreSD board.
+ * Configuration settings for the Freescale i.IMX6Q SabreSD board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */

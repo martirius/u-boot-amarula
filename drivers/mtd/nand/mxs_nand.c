@@ -30,7 +30,7 @@
 #define	MXS_NAND_DMA_DESCRIPTOR_COUNT		4
 
 #define	MXS_NAND_CHUNK_DATA_CHUNK_SIZE		512
-#if (defined(CONFIG_MX6) || defined(CONFIG_MX7))
+#if (defined(CONFIG_IMX6) || defined(CONFIG_MX7))
 #define	MXS_NAND_CHUNK_DATA_CHUNK_SIZE_SHIFT	2
 #else
 #define	MXS_NAND_CHUNK_DATA_CHUNK_SIZE_SHIFT	0
@@ -156,7 +156,7 @@ static inline uint32_t mxs_nand_get_ecc_strength(uint32_t page_data_size,
 	int ecc_strength;
 	int max_ecc_strength_supported;
 
-	/* Refer to Chapter 17 for i.MX6DQ, Chapter 18 for i.MX6SX */
+	/* Refer to Chapter 17 for i.IMX6DQ, Chapter 18 for i.IMX6SX */
 	if (is_mx6sx() || is_mx7())
 		max_ecc_strength_supported = 62;
 	else

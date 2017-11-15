@@ -206,26 +206,26 @@ static void enable_lvds(struct display_info_t const *dev)
 
 static struct i2c_pads_info mx6q_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6Q_PAD_KEY_COL3__I2C2_SCL | I2C_PAD,
-		.gpio_mode = MX6Q_PAD_KEY_COL3__GPIO4_IO12 | I2C_PAD,
+		.i2c_mode = IMX6Q_PAD_KEY_COL3__I2C2_SCL | I2C_PAD,
+		.gpio_mode = IMX6Q_PAD_KEY_COL3__GPIO4_IO12 | I2C_PAD,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6Q_PAD_KEY_ROW3__I2C2_SDA | I2C_PAD,
-		.gpio_mode = MX6Q_PAD_KEY_ROW3__GPIO4_IO13 | I2C_PAD,
+		.i2c_mode = IMX6Q_PAD_KEY_ROW3__I2C2_SDA | I2C_PAD,
+		.gpio_mode = IMX6Q_PAD_KEY_ROW3__GPIO4_IO13 | I2C_PAD,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
 
 static struct i2c_pads_info mx6dl_i2c_pad_info1 = {
 	.scl = {
-		.i2c_mode = MX6DL_PAD_KEY_COL3__I2C2_SCL | I2C_PAD,
-		.gpio_mode = MX6DL_PAD_KEY_COL3__GPIO4_IO12 | I2C_PAD,
+		.i2c_mode = IMX6DL_PAD_KEY_COL3__I2C2_SCL | I2C_PAD,
+		.gpio_mode = IMX6DL_PAD_KEY_COL3__GPIO4_IO12 | I2C_PAD,
 		.gp = IMX_GPIO_NR(4, 12)
 	},
 	.sda = {
-		.i2c_mode = MX6DL_PAD_KEY_ROW3__I2C2_SDA | I2C_PAD,
-		.gpio_mode = MX6DL_PAD_KEY_ROW3__GPIO4_IO13 | I2C_PAD,
+		.i2c_mode = IMX6DL_PAD_KEY_ROW3__I2C2_SDA | I2C_PAD,
+		.gpio_mode = IMX6DL_PAD_KEY_ROW3__GPIO4_IO13 | I2C_PAD,
 		.gp = IMX_GPIO_NR(4, 13)
 	}
 };
@@ -559,7 +559,7 @@ int board_eth_init(bd_t *bis)
 	return cpu_eth_init(bis);
 }
 
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 #define USB_OTHERREGS_OFFSET	0x800
 #define UCTRL_PWR_POL		(1 << 9)
 
@@ -642,7 +642,7 @@ int board_init(void)
 #if defined(CONFIG_VIDEO_IPUV3)
 	setup_display();
 #endif
-#ifdef CONFIG_USB_EHCI_MX6
+#ifdef CONFIG_USB_EHCI_IMX6
 	setup_usb();
 #endif
 
@@ -706,11 +706,11 @@ int board_late_init(void)
 	env_set("board_name", "SABRESD");
 
 	if (is_mx6dqp())
-		env_set("board_rev", "MX6QP");
+		env_set("board_rev", "IMX6QP");
 	else if (is_mx6dq())
-		env_set("board_rev", "MX6Q");
+		env_set("board_rev", "IMX6Q");
 	else if (is_mx6sdl())
-		env_set("board_rev", "MX6DL");
+		env_set("board_rev", "IMX6DL");
 #endif
 
 	return 0;
@@ -718,7 +718,7 @@ int board_late_init(void)
 
 int checkboard(void)
 {
-	puts("Board: MX6-SabreSD\n");
+	puts("Board: IMX6-SabreSD\n");
 	return 0;
 }
 

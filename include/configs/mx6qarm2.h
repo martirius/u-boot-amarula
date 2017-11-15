@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2010-2011 Freescale Semiconductor, Inc.
  *
- * Configuration settings for the Freescale i.MX6Q Armadillo2 board.
+ * Configuration settings for the Freescale i.IMX6Q Armadillo2 board.
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
