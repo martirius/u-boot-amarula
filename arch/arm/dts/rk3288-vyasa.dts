@@ -287,6 +287,19 @@
 	};
 };
 
+&emmc {
+	broken-cd;
+	bus-width = <8>;
+	cap-mmc-highspeed;
+	disable-wp;
+	non-removable;
+	num-slots = <1>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&emmc_clk>, <&emmc_cmd>, <&emmc_pwr>, <&emmc_bus8>;
+	vmmc-supply = <&vcc_io>;
+	status = "okay";
+};
+
 &sdmmc {
 	u-boot,dm-pre-reloc;
 	status = "okay";
