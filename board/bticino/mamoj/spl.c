@@ -27,6 +27,17 @@ static iomux_v3_cfg_t const uart3_pads[] = {
 	IOMUX_PADS(PAD_EIM_D25__UART3_RX_DATA | MUX_PAD_CTRL(UART_PAD_CTRL)),
 };
 
+#ifdef CONFIG_SPL_OS_BOOT
+int spl_start_uboot(void)
+{
+	/* break into full u-boot on 'c' */
+	if (serial_tstc() && serial_getc() == 'c')
+		return 1;
+
+	return 0;
+}
+#endif
+
 static int mx6dl_dcd_table[] = {
 	0x020e0774, 0x000C0000, /* MX6_IOM_GRP_DDR_TYPE */
 	0x020e0754, 0x00000000, /* MX6_IOM_GRP_DDRPKE */
