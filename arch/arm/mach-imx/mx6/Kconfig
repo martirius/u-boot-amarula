@@ -337,6 +337,7 @@ config TARGET_MX6UL_ENGICAM
 	select BOARD_LATE_INIT
 	select MX6UL
 	select OF_CONTROL
+	select CLK_IMX
 	select DM
 	select DM_ETH
 	select DM_GPIO
