@@ -15,4 +15,11 @@ config CLK_IMX6Q
 	  This enables common clock driver support for platforms based
 	  on i.MX6 QDL SoC.
 
+config CLK_IMX6UL
+	bool "Clock driver for i.MX6UL"
+	default MX6UL
+	help
+	  This enables common clock driver support for platforms based
+	  on i.MX6 UL SoC.
+
 endif # CLK_IMX
