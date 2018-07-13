@@ -180,6 +180,7 @@ config MACH_SUN7I
 	select CPU_V7_HAS_VIRT
 	select ARCH_SUPPORT_PSCI
 	select DRAM_SUN4I
+	select DM_MMC if MMC
 	select PHY_SUN4I_USB
 	select SUNXI_GEN_SUN4I
 	select SUPPORT_SPL
