@@ -768,7 +768,7 @@ int misc_init_r(void)
 	} else if (boot == BOOT_DEVICE_MMC1) {
 		env_set("mmc_bootdev", "0");
 	} else if (boot == BOOT_DEVICE_MMC2) {
-		env_set("mmc_bootdev", "1");
+		env_set("mmc_bootdev", "2");
 	}
 
 	setup_environment(gd->fdt_blob);
