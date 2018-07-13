@@ -30,6 +30,7 @@ struct sunxi_mmc_priv {
 	unsigned fatal_err;
 	struct gpio_desc cd_gpio;	/* Change Detect GPIO */
 	int cd_inverted;		/* Inverted Card Detect */
+	u32 *reg_reset0;
 	struct sunxi_mmc *reg;
 	struct mmc_config cfg;
 };
@@ -528,6 +529,14 @@ struct mmc *sunxi_mmc_init(int sdc_no)
 }
 #else
 
+#define OFF_SUN6I_AHB_RESET0	0x2c0
+
+struct sunxi_mmc_config {
+	bool has_reset0;
+	u8 pos_reset0;
+	u32 off_reset0;
+};
+
 static int sunxi_mmc_set_ios(struct udevice *dev)
 {
 	struct sunxi_mmc_plat *plat = dev_get_platdata(dev);
@@ -569,6 +578,7 @@ static int sunxi_mmc_probe(struct udevice *dev)
 	struct sunxi_mmc_plat *plat = dev_get_platdata(dev);
 	struct sunxi_mmc_priv *priv = dev_get_priv(dev);
 	struct mmc_config *cfg = &plat->cfg;
+	const struct sunxi_mmc_config *data;
 	struct sunxi_ccm_reg *ccm;
 	struct ofnode_phandle_args args;
 	int bus_width, ret;
@@ -588,6 +598,7 @@ static int sunxi_mmc_probe(struct udevice *dev)
 	cfg->f_min = 400000;
 	cfg->f_max = 52000000;
 
+	data = (struct sunxi_mmc_config *)dev_get_driver_data(dev);
 	priv->reg = (void *)dev_read_addr(dev);
 	priv->mmc_no = (((uintptr_t)priv->reg / 0x1000) - 0x1C0F);
 
@@ -600,8 +611,14 @@ static int sunxi_mmc_probe(struct udevice *dev)
 	if (IS_ERR(ccm))
 		return PTR_ERR(ccm);
 
+	priv->reg_reset0 = (void *)ccm + data->off_reset0;
+
 	/* enable ahb gate */
 	setbits_le32(&ccm->ahb_gate0, BIT(AHB_GATE_OFFSET_MMC(priv->mmc_no)));
+
+	/* unassert reset */
+	if (data->has_reset0)
+		setbits_le32(priv->reg_reset0, BIT(data->pos_reset0 + priv->mmc_no));
 
 	/* find clock reg */
 	switch (priv->mmc_no) {
@@ -653,10 +670,23 @@ static int sunxi_mmc_bind(struct udevice *dev)
 	return mmc_bind(dev, &plat->mmc, &plat->cfg);
 }
 
+static const struct sunxi_mmc_config sun4i_a10_cfg = {
+	.has_reset0 = false,
+};
+
+static const struct sunxi_mmc_config sun7i_a20_cfg = {
+	.has_reset0 = true,
+	.pos_reset0 = 8,
+	.off_reset0 = OFF_SUN6I_AHB_RESET0,
+};
+
 static const struct udevice_id sunxi_mmc_ids[] = {
-	{ .compatible = "allwinner,sun4i-a10-mmc" },
-	{ .compatible = "allwinner,sun5i-a13-mmc" },
-	{ .compatible = "allwinner,sun7i-a20-mmc" },
+	{ .compatible = "allwinner,sun4i-a10-mmc",
+			.data = (ulong)&sun4i_a10_cfg },
+	{ .compatible = "allwinner,sun5i-a13-mmc",
+			.data = (ulong)&sun4i_a10_cfg },
+	{ .compatible = "allwinner,sun7i-a20-mmc",
+			.data = (ulong)&sun7i_a20_cfg },
 	{ }
 };
 
