@@ -88,7 +88,8 @@ config FASTBOOT_FLASH_MMC_DEV
 	int "Define FASTBOOT MMC FLASH default device"
 	depends on FASTBOOT_FLASH_MMC
 	default 0 if ARCH_SUNXI && MMC_SUNXI_SLOT_EXTRA = -1
-	default 1 if ARCH_SUNXI && MMC_SUNXI_SLOT_EXTRA != -1
+	default 1 if ARCH_SUNXI && !DM_MMC && MMC_SUNXI_SLOT_EXTRA != -1
+	default 2 if ARCH_SUNXI && DM_MMC && MMC_SUNXI_SLOT_EXTRA != -1
 	help
 	  The fastboot "flash" command requires additional information
 	  regarding the non-volatile storage device. Define this to
