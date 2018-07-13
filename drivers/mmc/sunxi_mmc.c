@@ -569,8 +569,8 @@ static int sunxi_mmc_probe(struct udevice *dev)
 	struct sunxi_mmc_plat *plat = dev_get_platdata(dev);
 	struct sunxi_mmc_priv *priv = dev_get_priv(dev);
 	struct mmc_config *cfg = &plat->cfg;
+	struct sunxi_ccm_reg *ccm;
 	struct ofnode_phandle_args args;
-	u32 *gate_reg;
 	int bus_width, ret;
 
 	cfg->name = dev->name;
@@ -589,21 +589,38 @@ static int sunxi_mmc_probe(struct udevice *dev)
 	cfg->f_max = 52000000;
 
 	priv->reg = (void *)dev_read_addr(dev);
-
-	/* We don't have a sunxi clock driver so find the clock address here */
-	ret = dev_read_phandle_with_args(dev, "clocks", "#clock-cells", 0,
-					  1, &args);
-	if (ret)
-		return ret;
-	priv->mclkreg = (u32 *)ofnode_get_addr(args.node);
+	priv->mmc_no = (((uintptr_t)priv->reg / 0x1000) - 0x1C0F);
 
 	ret = dev_read_phandle_with_args(dev, "clocks", "#clock-cells", 0,
-					  0, &args);
+					 0, &args);
 	if (ret)
 		return ret;
-	gate_reg = (u32 *)ofnode_get_addr(args.node);
-	setbits_le32(gate_reg, 1 << args.args[0]);
-	priv->mmc_no = args.args[0] - 8;
+
+	ccm = (struct sunxi_ccm_reg *)ofnode_get_addr(args.node);
+	if (IS_ERR(ccm))
+		return PTR_ERR(ccm);
+
+	/* enable ahb gate */
+	setbits_le32(&ccm->ahb_gate0, BIT(AHB_GATE_OFFSET_MMC(priv->mmc_no)));
+
+	/* find clock reg */
+	switch (priv->mmc_no) {
+	case 0:
+		priv->mclkreg = &ccm->sd0_clk_cfg;
+		break;
+	case 1:
+		priv->mclkreg = &ccm->sd1_clk_cfg;
+		break;
+	case 2:
+		priv->mclkreg = &ccm->sd2_clk_cfg;
+		break;
+	case 3:
+		priv->mclkreg = &ccm->sd3_clk_cfg;
+		break;
+	default:
+		printf("Wrong mmc number %d\n", priv->mmc_no);
+		return -EINVAL;
+	}
 
 	ret = mmc_set_mod_clk(priv, 24000000);
 	if (ret)
