@@ -238,6 +238,7 @@ config MACH_SUN8I_R40
 	select CPU_V7_HAS_NONSEC
 	select CPU_V7_HAS_VIRT
 	select ARCH_SUPPORT_PSCI
+	select DM_MMC if MMC
 	select SUNXI_GEN_SUN6I
 	select SUPPORT_SPL
 	select SUNXI_DRAM_DW
