@@ -687,6 +687,10 @@ static const struct udevice_id sunxi_mmc_ids[] = {
 			.data = (ulong)&sun4i_a10_cfg },
 	{ .compatible = "allwinner,sun7i-a20-mmc",
 			.data = (ulong)&sun7i_a20_cfg },
+	{ .compatible = "allwinner,sun50i-a64-mmc",
+			.data = (ulong)&sun7i_a20_cfg },
+	{ .compatible = "allwinner,sun50i-a64-emmc",
+			.data = (ulong)&sun7i_a20_cfg },
 	{ }
 };
 
