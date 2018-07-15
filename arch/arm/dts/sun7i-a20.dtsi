@@ -49,6 +49,7 @@
 
 #include <dt-bindings/clock/sun4i-a10-pll2.h>
 #include <dt-bindings/dma/sun4i-a10.h>
+#include <dt-bindings/clock/sun7i-a20-ccu.h>
 #include <dt-bindings/pinctrl/sun4i-a10.h>
 
 / {
@@ -417,46 +418,6 @@
 			reg = <0x01c20084 0x4>;
 			clocks = <&osc24M>, <&pll6 1>, <&pll5 1>;
 			clock-output-names = "ms";
-		};
-
-		mmc0_clk: clk@01c20088 {
-			#clock-cells = <1>;
-			compatible = "allwinner,sun4i-a10-mmc-clk";
-			reg = <0x01c20088 0x4>;
-			clocks = <&osc24M>, <&pll6 1>, <&pll5 1>;
-			clock-output-names = "mmc0",
-					     "mmc0_output",
-					     "mmc0_sample";
-		};
-
-		mmc1_clk: clk@01c2008c {
-			#clock-cells = <1>;
-			compatible = "allwinner,sun4i-a10-mmc-clk";
-			reg = <0x01c2008c 0x4>;
-			clocks = <&osc24M>, <&pll6 1>, <&pll5 1>;
-			clock-output-names = "mmc1",
-					     "mmc1_output",
-					     "mmc1_sample";
-		};
-
-		mmc2_clk: clk@01c20090 {
-			#clock-cells = <1>;
-			compatible = "allwinner,sun4i-a10-mmc-clk";
-			reg = <0x01c20090 0x4>;
-			clocks = <&osc24M>, <&pll6 1>, <&pll5 1>;
-			clock-output-names = "mmc2",
-					     "mmc2_output",
-					     "mmc2_sample";
-		};
-
-		mmc3_clk: clk@01c20094 {
-			#clock-cells = <1>;
-			compatible = "allwinner,sun4i-a10-mmc-clk";
-			reg = <0x01c20094 0x4>;
-			clocks = <&osc24M>, <&pll6 1>, <&pll5 1>;
-			clock-output-names = "mmc3",
-					     "mmc3_output",
-					     "mmc3_sample";
 		};
 
 		ts_clk: clk@01c20098 {
@@ -904,14 +865,13 @@
 			#size-cells = <0>;
 		};
 
-		mmc0: mmc@01c0f000 {
-			compatible = "allwinner,sun7i-a20-mmc",
-				     "allwinner,sun5i-a13-mmc";
+		mmc0: mmc@1c0f000 {
+			compatible = "allwinner,sun7i-a20-mmc";
 			reg = <0x01c0f000 0x1000>;
-			clocks = <&ahb_gates 8>,
-				 <&mmc0_clk 0>,
-				 <&mmc0_clk 1>,
-				 <&mmc0_clk 2>;
+			clocks = <&ccu CLK_AHB_MMC0>,
+				 <&ccu CLK_MMC0>,
+				 <&ccu CLK_MMC0_OUTPUT>,
+				 <&ccu CLK_MMC0_SAMPLE>;
 			clock-names = "ahb",
 				      "mmc",
 				      "output",
@@ -922,14 +882,13 @@
 			#size-cells = <0>;
 		};
 
-		mmc1: mmc@01c10000 {
-			compatible = "allwinner,sun7i-a20-mmc",
-				     "allwinner,sun5i-a13-mmc";
+		mmc1: mmc@1c10000 {
+			compatible = "allwinner,sun7i-a20-mmc";
 			reg = <0x01c10000 0x1000>;
-			clocks = <&ahb_gates 9>,
-				 <&mmc1_clk 0>,
-				 <&mmc1_clk 1>,
-				 <&mmc1_clk 2>;
+			clocks = <&ccu CLK_AHB_MMC1>,
+				 <&ccu CLK_MMC1>,
+				 <&ccu CLK_MMC1_OUTPUT>,
+				 <&ccu CLK_MMC1_SAMPLE>;
 			clock-names = "ahb",
 				      "mmc",
 				      "output",
@@ -940,14 +899,13 @@
 			#size-cells = <0>;
 		};
 
-		mmc2: mmc@01c11000 {
-			compatible = "allwinner,sun7i-a20-mmc",
-				     "allwinner,sun5i-a13-mmc";
+		mmc2: mmc@1c11000 {
+			compatible = "allwinner,sun7i-a20-mmc";
 			reg = <0x01c11000 0x1000>;
-			clocks = <&ahb_gates 10>,
-				 <&mmc2_clk 0>,
-				 <&mmc2_clk 1>,
-				 <&mmc2_clk 2>;
+			clocks = <&ccu CLK_AHB_MMC2>,
+				 <&ccu CLK_MMC2>,
+				 <&ccu CLK_MMC2_OUTPUT>,
+				 <&ccu CLK_MMC2_SAMPLE>;
 			clock-names = "ahb",
 				      "mmc",
 				      "output",
@@ -958,14 +916,13 @@
 			#size-cells = <0>;
 		};
 
-		mmc3: mmc@01c12000 {
-			compatible = "allwinner,sun7i-a20-mmc",
-				     "allwinner,sun5i-a13-mmc";
+		mmc3: mmc@1c12000 {
+			compatible = "allwinner,sun7i-a20-mmc";
 			reg = <0x01c12000 0x1000>;
-			clocks = <&ahb_gates 11>,
-				 <&mmc3_clk 0>,
-				 <&mmc3_clk 1>,
-				 <&mmc3_clk 2>;
+			clocks = <&ccu CLK_AHB_MMC3>,
+				 <&ccu CLK_MMC3>,
+				 <&ccu CLK_MMC3_OUTPUT>,
+				 <&ccu CLK_MMC3_SAMPLE>;
 			clock-names = "ahb",
 				      "mmc",
 				      "output",
@@ -1083,6 +1040,15 @@
 			status = "disabled";
 			#address-cells = <1>;
 			#size-cells = <0>;
+		};
+
+		ccu: clock@1c20000 {
+			compatible = "allwinner,sun7i-a20-ccu";
+			reg = <0x01c20000 0x400>;
+			clocks = <&osc24M>, <&osc32k>;
+			clock-names = "hosc", "losc";
+			#clock-cells = <1>;
+			#reset-cells = <1>;
 		};
 
 		pio: pinctrl@01c20800 {
