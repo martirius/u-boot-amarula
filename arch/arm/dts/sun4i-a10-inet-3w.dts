@@ -7,6 +7,8 @@
 
 /dts-v1/;
 #include "sun4i-a10.dtsi"
+#include "sunxi-common-regulators.dtsi"
+#include <dt-bindings/gpio/gpio.h>
 
 / {
 	model = "iNet 3W";
@@ -19,6 +21,13 @@
 	chosen {
 		stdout-path = "serial0:115200n8";
 	};
+};
+
+&mmc0 {
+	vmmc-supply = <&reg_vcc3v3>;
+	bus-width = <4>;
+	cd-gpios = <&pio 7 20 GPIO_ACTIVE_LOW>; /* PH20 */
+	status = "okay";
 };
 
 &uart0 {
