@@ -1,0 +1,18 @@
+config CLK_IMX
+	bool "Clock support for i.MX SoCs"
+	depends on ARCH_MX6
+	select CLK
+	help
+	  This enables support for common clock driver API on i.MX
+	  SoCs.
+
+if CLK_IMX
+
+config CLK_IMX6Q
+	bool "Clock driver for i.MX6QDL"
+	default MX6QDL
+	help
+	  This enables common clock driver support for platforms based
+	  on i.MX6 QDL SoC.
+
+endif # CLK_IMX
