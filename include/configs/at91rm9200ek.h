@@ -115,7 +115,6 @@
 #define CONFIG_DRIVER_AT91EMAC
 #define CONFIG_SYS_RX_ETH_BUFFER	16
 #define CONFIG_RMII
-#define CONFIG_MII
 
 /*
  * NOR Flash

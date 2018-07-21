@@ -66,7 +66,6 @@
 #define CONFIG_MTD_PARTITIONS
 
 /* Ethernet config options */
-#define CONFIG_MII
 #define CONFIG_PHY_RESET_DELAY			10000		/* in usec */
 
 #define CONFIG_SPEAR_GPIO

@@ -1066,6 +1066,7 @@ if NET
 menuconfig CMD_NET
 	bool "Network commands"
 	default y
+	imply NETDEVICES
 
 if CMD_NET
 

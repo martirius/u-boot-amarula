@@ -166,8 +166,6 @@
 #  define CONFIG_FEC_MXC_PHYADDR	0
 #  define CONFIG_FEC_XCV_TYPE		RMII
 # endif
-
-# define CONFIG_MII
 #endif
 
 /* Falcon Mode */
