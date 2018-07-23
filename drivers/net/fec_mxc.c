@@ -1232,8 +1232,9 @@ static const struct eth_ops fecmxc_ops = {
 	.read_rom_hwaddr	= fecmxc_read_rom_hwaddr,
 };
 
-static int fec_phy_init(struct fec_priv *priv, struct udevice *dev)
+static int fec_phy_init(struct udevice *dev)
 {
+	struct fec_priv *priv = dev_get_priv(dev);
 	struct phy_device *phydev;
 	int mask = 0xffffffff;
 
@@ -1292,7 +1293,7 @@ static int fecmxc_probe(struct udevice *dev)
 
 	priv->bus = bus;
 	priv->xcv_type = pdata->phy_interface;
-	ret = fec_phy_init(priv, dev);
+	ret = fec_phy_init(dev);
 	if (ret)
 		goto err_phy;
 
