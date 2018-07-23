@@ -35,7 +35,6 @@
 #define CONFIG_SYS_FSL_USDHC_NUM		1
 
 /* Ethernet config */
-#define CONFIG_FEC_MXC
 #define IMX_FEC_BASE				ENET_BASE_ADDR
 
 /* USB config */

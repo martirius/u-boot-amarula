@@ -39,7 +39,6 @@
 /* Eth Configs */
 #define CONFIG_HAS_ETH1
 
-#define CONFIG_FEC_MXC
 #define IMX_FEC_BASE	FEC_BASE_ADDR
 #define CONFIG_FEC_MXC_PHYADDR	0x1F
 

@@ -150,8 +150,6 @@
 #define CONFIG_SYS_I2C_SPEED		  100000
 
 /* Network */
-#define CONFIG_FEC_MXC
-
 #define IMX_FEC_BASE			ENET_BASE_ADDR
 #define CONFIG_FEC_MXC_PHYADDR          0x1
 

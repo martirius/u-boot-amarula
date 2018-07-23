@@ -24,7 +24,6 @@
 #define CONFIG_CSF_SIZE			0x4000
 
 /* Network */
-#define CONFIG_FEC_MXC
 #define CONFIG_FEC_XCV_TYPE             RGMII
 #define CONFIG_ETHPRIME                 "FEC"
 #define CONFIG_FEC_MXC_PHYADDR          0
