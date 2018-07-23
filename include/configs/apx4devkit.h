@@ -51,7 +51,6 @@
 
 /* FEC Ethernet on SoC */
 #ifdef CONFIG_CMD_NET
-#define CONFIG_FEC_MXC
 #define CONFIG_ETHPRIME			"FEC"
 #define CONFIG_FEC_MXC_PHYADDR		0
 #define IMX_FEC_BASE			MXS_ENET0_BASE

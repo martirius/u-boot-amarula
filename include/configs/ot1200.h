@@ -68,7 +68,6 @@
 #define CONFIG_SYS_SPI_U_BOOT_OFFS     (64 * 1024)
 #endif
 
-#define CONFIG_FEC_MXC
 #define IMX_FEC_BASE                    ENET_BASE_ADDR
 #define CONFIG_FEC_XCV_TYPE             MII100
 #define CONFIG_ETHPRIME                 "FEC"

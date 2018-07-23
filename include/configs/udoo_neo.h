@@ -95,8 +95,6 @@
 #define PFUZE3000_I2C_BUS	0
 
 /* Network */
-#define CONFIG_FEC_MXC
-
 #define CONFIG_FEC_ENET_DEV 0
 #define IMX_FEC_BASE			ENET_BASE_ADDR
 #define CONFIG_FEC_MXC_PHYADDR          0x0

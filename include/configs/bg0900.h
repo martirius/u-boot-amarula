@@ -17,7 +17,6 @@
 
 /* FEC Ethernet on SoC */
 #ifdef	CONFIG_CMD_NET
-#define CONFIG_FEC_MXC
 #endif
 
 /* SPI */
