@@ -15,6 +15,7 @@
 #include <miiphy.h>
 #include <net.h>
 #include <netdev.h>
+#include <phy.h>
 #include "fec_mxc.h"
 
 #include <asm/io.h>
@@ -46,7 +47,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #endif
 
 #ifndef CONFIG_FEC_XCV_TYPE
-#define CONFIG_FEC_XCV_TYPE MII100
+#define CONFIG_FEC_XCV_TYPE	PHY_INTERFACE_MODE_MII100
 #endif
 
 /*
@@ -397,11 +398,11 @@ static void fec_reg_setup(struct fec_priv *fec)
 
 	/* Start with frame length = 1518, common for all modes. */
 	rcntrl = PKTSIZE << FEC_RCNTRL_MAX_FL_SHIFT;
-	if (fec->xcv_type != SEVENWIRE)		/* xMII modes */
+	if (fec->xcv_type != PHY_INTERFACE_MODE_SEVENWIRE)		/* xMII modes */
 		rcntrl |= FEC_RCNTRL_FCE | FEC_RCNTRL_MII_MODE;
-	if (fec->xcv_type == RGMII)
+	if (fec->xcv_type == PHY_INTERFACE_MODE_RGMII)
 		rcntrl |= FEC_RCNTRL_RGMII;
-	else if (fec->xcv_type == RMII)
+	else if (fec->xcv_type == PHY_INTERFACE_MODE_RMII)
 		rcntrl |= FEC_RCNTRL_RMII;
 
 	writel(rcntrl, &fec->eth->r_cntrl);
@@ -552,7 +553,7 @@ static int fec_init(struct eth_device *dev, bd_t *bd)
 
 	fec_reg_setup(fec);
 
-	if (fec->xcv_type != SEVENWIRE)
+	if (fec->xcv_type != PHY_INTERFACE_MODE_SEVENWIRE)
 		fec_mii_setspeed(fec->bus->priv);
 
 	/* Set Opcode/Pause Duration Register */
@@ -583,7 +584,7 @@ static int fec_init(struct eth_device *dev, bd_t *bd)
 	writel((uint32_t)addr, &fec->eth->erdsr);
 
 #ifndef CONFIG_PHYLIB
-	if (fec->xcv_type != SEVENWIRE)
+	if (fec->xcv_type != PHY_INTERFACE_MODE_SEVENWIRE)
 		miiphy_restart_aneg(dev);
 #endif
 	fec_open(dev);
@@ -1233,7 +1234,7 @@ static int fec_phy_init(struct fec_priv *priv, struct udevice *dev)
 	mask = 1 << CONFIG_FEC_MXC_PHYADDR;
 #endif
 
-	phydev = phy_find_by_mask(priv->bus, mask, priv->interface);
+	phydev = phy_find_by_mask(priv->bus, mask, priv->xcv_type);
 	if (!phydev)
 		return -ENODEV;
 
@@ -1283,8 +1284,7 @@ static int fecmxc_probe(struct udevice *dev)
 	}
 
 	priv->bus = bus;
-	priv->xcv_type = CONFIG_FEC_XCV_TYPE;
-	priv->interface = pdata->phy_interface;
+	priv->xcv_type = pdata->phy_interface;
 	ret = fec_phy_init(priv, dev);
 	if (ret)
 		goto err_phy;

@@ -50,6 +50,7 @@
 
 typedef enum {
 	PHY_INTERFACE_MODE_MII,
+	PHY_INTERFACE_MODE_MII100,
 	PHY_INTERFACE_MODE_GMII,
 	PHY_INTERFACE_MODE_SGMII,
 	PHY_INTERFACE_MODE_SGMII_2500,
@@ -65,6 +66,7 @@ typedef enum {
 	PHY_INTERFACE_MODE_XAUI,
 	PHY_INTERFACE_MODE_RXAUI,
 	PHY_INTERFACE_MODE_SFI,
+	PHY_INTERFACE_MODE_SEVENWIRE,
 	PHY_INTERFACE_MODE_INTERNAL,
 	PHY_INTERFACE_MODE_NONE,	/* Must be last */
 
@@ -73,6 +75,7 @@ typedef enum {
 
 static const char *phy_interface_strings[] = {
 	[PHY_INTERFACE_MODE_MII]		= "mii",
+	[PHY_INTERFACE_MODE_MII100]		= "mii100",
 	[PHY_INTERFACE_MODE_GMII]		= "gmii",
 	[PHY_INTERFACE_MODE_SGMII]		= "sgmii",
 	[PHY_INTERFACE_MODE_SGMII_2500]		= "sgmii-2500",
@@ -88,6 +91,7 @@ static const char *phy_interface_strings[] = {
 	[PHY_INTERFACE_MODE_XAUI]		= "xaui",
 	[PHY_INTERFACE_MODE_RXAUI]		= "rxaui",
 	[PHY_INTERFACE_MODE_SFI]		= "sfi",
+	[PHY_INTERFACE_MODE_SEVENWIRE]		= "sevenwire",
 	[PHY_INTERFACE_MODE_INTERNAL]		= "internal",
 	[PHY_INTERFACE_MODE_NONE]		= "",
 };

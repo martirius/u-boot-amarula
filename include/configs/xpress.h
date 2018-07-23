@@ -68,7 +68,7 @@
 #define CONFIG_FEC_ENET_DEV		0
 #define IMX_FEC_BASE			ENET_BASE_ADDR
 #define CONFIG_FEC_MXC_PHYADDR          0x0
-#define CONFIG_FEC_XCV_TYPE             RMII
+#define CONFIG_FEC_XCV_TYPE             PHY_INTERFACE_MODE_RMII
 #define CONFIG_ETHPRIME			"FEC"
 #define CONFIG_PHY_SMSC
 

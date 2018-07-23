@@ -115,7 +115,7 @@
 #define CONFIG_ETHPRIME			"FEC0"
 #endif
 #ifndef CONFIG_FEC_XCV_TYPE
-#define CONFIG_FEC_XCV_TYPE		RMII
+#define CONFIG_FEC_XCV_TYPE		PHY_INTERFACE_MODE_RMII
 #endif
 #endif
 

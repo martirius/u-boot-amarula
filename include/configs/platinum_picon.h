@@ -12,7 +12,7 @@
 
 #include <configs/platinum.h>
 
-#define CONFIG_FEC_XCV_TYPE			RMII
+#define CONFIG_FEC_XCV_TYPE			PHY_INTERFACE_MODE_RMII
 #define CONFIG_FEC_MXC_PHYADDR			0
 
 #define CONFIG_HOSTNAME				"picon"
