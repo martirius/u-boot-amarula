@@ -223,19 +223,10 @@ struct fec_bd {
 	uint32_t data_pointer;		/* payload's buffer address */
 };
 
-/* Supported phy types on this platform */
-enum xceiver_type {
-	SEVENWIRE,	/* 7-wire       */
-	MII10,		/* MII 10Mbps   */
-	MII100,		/* MII 100Mbps  */
-	RMII,		/* RMII */
-	RGMII,		/* RGMII */
-};
-
 /* @brief i.MX27-FEC private structure */
 struct fec_priv {
 	struct ethernet_regs *eth;	/* pointer to register'S base */
-	enum xceiver_type xcv_type;	/* transceiver type */
+	phy_interface_t xcv_type;	/* transceiver type */
 	struct fec_bd *rbd_base;	/* RBD ring */
 	int rbd_index;			/* next receive BD to read */
 	struct fec_bd *tbd_base;	/* TBD ring */
@@ -249,10 +240,6 @@ struct fec_priv {
 #else
 	int phy_id;
 	int (*mii_postcall)(int);
-#endif
-
-#ifdef CONFIG_DM_ETH
-	u32 interface;
 #endif
 };
 

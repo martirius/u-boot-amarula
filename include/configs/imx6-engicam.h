@@ -161,10 +161,8 @@
 #ifdef CONFIG_FEC_MXC
 # ifdef CONFIG_TARGET_MX6Q_ICORE_RQS
 #  define CONFIG_FEC_MXC_PHYADDR	3
-#  define CONFIG_FEC_XCV_TYPE		RGMII
 # else
 #  define CONFIG_FEC_MXC_PHYADDR	0
-#  define CONFIG_FEC_XCV_TYPE		RMII
 # endif
 #endif
 
