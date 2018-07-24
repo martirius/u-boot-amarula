@@ -8,6 +8,7 @@
  */
 
 #include <common.h>
+#include <clk-uclass.h>
 #include <dm.h>
 #include <environment.h>
 #include <malloc.h>
@@ -1297,10 +1298,51 @@ static int fec_mdio_init(struct udevice *dev)
 	return mdio_register(bus);
 }
 
+#if CONFIG_IS_ENABLED(CLK)
+static int fec_clk_enable(struct fec_priv *priv)
+{
+	int ret;
+
+	ret = clk_enable(&priv->clk_ahb);
+	if (ret) {
+		printf("failed to enable ahb clk\n");
+		return ret;
+	}
+
+	if (generic_clk_valid(&priv->clk_ptp)) {
+		ret = clk_enable(&priv->clk_ptp);
+		if (ret) {
+			printf("failed to set 50MHz rate to ptp clk\n");
+			goto failed_clk_ahb;
+		}
+	}
+
+	if (generic_clk_valid(&priv->clk_enet_out)) {
+		ret = clk_enable(&priv->clk_enet_out);
+		if (ret) {
+			printf("failed to set 50MHz rate to enet_out clk\n");
+			goto failed_clk_ahb;
+		}
+	}
+
+	return 0;
+
+failed_clk_ahb:
+	clk_disable(&priv->clk_ahb);
+	return ret;
+}
+#endif
+
 static int fec_enet_init(struct fec_priv *priv)
 {
 	uint32_t start;
 	int ret;
+
+#if CONFIG_IS_ENABLED(CLK)
+	ret = fec_clk_enable(priv);
+	if (ret)
+		return ret;
+#endif
 
 	ret = fec_alloc_descs(priv);
 	if (ret)
@@ -1407,7 +1449,21 @@ static int fecmxc_ofdata_to_platdata(struct udevice *dev)
 	}
 #endif
 
-	return ret;
+#if CONFIG_IS_ENABLED(CLK)
+	ret = clk_get_by_name(dev, "ahb", &priv->clk_ahb);
+	if (ret)
+		ret = PTR_ERR(&priv->clk_ahb);
+
+	ret = clk_get_by_name(dev, "ptp", &priv->clk_ptp);
+	if (ret)
+		dev_dbg(dev, "Warning: failed to get ptp clk\n");
+
+	ret = clk_get_by_name(dev, "enet_out", &priv->clk_enet_out);
+	if (ret)
+		dev_dbg(dev, "Warning: failed to get enet_out clk\n");
+#endif
+
+	return 0;
 }
 
 static const struct udevice_id fecmxc_ids[] = {

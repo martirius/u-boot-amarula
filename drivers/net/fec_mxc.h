@@ -250,6 +250,11 @@ struct fec_priv {
 	struct gpio_desc reset_gpio;
 	uint32_t reset_delay;
 # endif
+#if CONFIG_IS_ENABLED(CLK)
+	struct clk clk_ahb;
+	struct clk clk_ptp;
+	struct clk clk_enet_out;
+# endif
 #endif
 };
 
