@@ -1254,11 +1254,8 @@ static int fec_phy_init(struct udevice *dev)
 	return 0;
 }
 
-static int fecmxc_probe(struct udevice *dev)
+static int fec_enet_init(struct fec_priv *priv)
 {
-	struct eth_pdata *pdata = dev_get_platdata(dev);
-	struct fec_priv *priv = dev_get_priv(dev);
-	struct mii_dev *bus = NULL;
 	uint32_t start;
 	int ret;
 
@@ -1279,6 +1276,24 @@ static int fecmxc_probe(struct udevice *dev)
 	}
 
 	fec_reg_setup(priv);
+
+	return 0;
+
+err_timeout:
+	fec_free_descs(priv);
+	return ret;
+}
+
+static int fecmxc_probe(struct udevice *dev)
+{
+	struct eth_pdata *pdata = dev_get_platdata(dev);
+	struct fec_priv *priv = dev_get_priv(dev);
+	struct mii_dev *bus = NULL;
+	int ret;
+
+	ret = fec_enet_init(priv);
+	if (ret)
+		return ret;
 
 	priv->dev_id = dev->seq;
 #ifdef CONFIG_FEC_MXC_MDIO_BASE
@@ -1303,7 +1318,6 @@ err_phy:
 	mdio_unregister(bus);
 	free(bus);
 err_mii:
-err_timeout:
 	fec_free_descs(priv);
 	return ret;
 }
