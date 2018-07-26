@@ -16,7 +16,6 @@
 #include <net.h>
 #include <netdev.h>
 #include <phy.h>
-#include "fec_mxc.h"
 
 #include <asm/io.h>
 #include <linux/errno.h>
@@ -25,6 +24,9 @@
 #include <asm/arch/clock.h>
 #include <asm/arch/imx-regs.h>
 #include <asm/mach-imx/sys_proto.h>
+#include <asm-generic/gpio.h>
+
+#include "fec_mxc.h"
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -1245,6 +1247,33 @@ static int fec_phy_init(struct udevice *dev)
 	return 0;
 }
 
+#if defined(CONFIG_DM_GPIO)
+static int fec_mdio_reset(struct mii_dev *bus)
+{
+	struct udevice *dev = bus->priv;
+	struct fec_priv *priv = dev_get_priv(dev);
+	int ret;
+
+	if (!dm_gpio_is_valid(&priv->reset_gpio))
+		return 0;
+
+	ret = dm_gpio_set_value(&priv->reset_gpio, 1);
+	if (ret)
+		return ret;
+
+	if (priv->reset_delay > 20)
+		mdelay(priv->reset_delay);
+	else
+		udelay(priv->reset_delay * 1000);
+
+	ret = dm_gpio_set_value(&priv->reset_gpio, 0);
+	if (ret)
+		return ret;
+
+	return 0;
+}
+#endif
+
 static int fec_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
 {
 	struct udevice *dev = bus->priv;
@@ -1275,6 +1304,9 @@ static int fec_mdio_init(struct udevice *dev)
 	bus->read = fec_mdio_read;
 	bus->write = fec_mdio_write;
 	snprintf(bus->name, sizeof(bus->name), "%s", dev->name);
+#if defined(CONFIG_DM_GPIO)
+	bus->reset = fec_mdio_reset;
+#endif
 	bus->priv = dev;
 
 	return mdio_register(bus);
@@ -1365,6 +1397,7 @@ static int fecmxc_ofdata_to_platdata(struct udevice *dev)
 	struct eth_pdata *pdata = dev_get_platdata(dev);
 	struct fec_priv *priv = dev_get_priv(dev);
 	const char *phy_mode;
+	int ret = 0;
 
 	pdata->iobase = (phys_addr_t)devfdt_get_addr(dev);
 	priv->eth = (struct ethernet_regs *)pdata->iobase;
@@ -1379,12 +1412,17 @@ static int fecmxc_ofdata_to_platdata(struct udevice *dev)
 		return -EINVAL;
 	}
 
-	/* TODO
-	 * Need to get the reset-gpio and related properties from DT
-	 * and implemet the enet reset code on .probe call
-	 */
+#ifdef CONFIG_DM_GPIO
+	ret = gpio_request_by_name(dev, "phy-reset-gpios", dev->seq,
+		&priv->reset_gpio, GPIOD_IS_OUT);
+	if (ret == 0) {
+		priv->reset_delay = dev_read_u32_default(dev, "phy-reset-duration", 1);
+	} else if (ret == -ENOENT) {
+		ret = 0;
+	}
+#endif
 
-	return 0;
+	return ret;
 }
 
 static const struct udevice_id fecmxc_ids[] = {

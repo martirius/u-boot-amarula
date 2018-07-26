@@ -241,6 +241,13 @@ struct fec_priv {
 	int phy_id;
 	int (*mii_postcall)(int);
 #endif
+
+#ifdef CONFIG_DM_ETH
+# if CONFIG_IS_ENABLED(DM_GPIO)
+	struct gpio_desc reset_gpio;
+	uint32_t reset_delay;
+# endif
+#endif
 };
 
 void imx_get_mac_from_fuse(int dev_id, unsigned char *mac);
