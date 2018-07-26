@@ -91,11 +91,8 @@ static void swap_packet(uint32_t *packet, int length)
 #endif
 
 /* MII-interface related functions */
-static int fec_mdio_read(struct ethernet_regs *eth, uint8_t phyaddr,
-		uint8_t regaddr)
+static int _fec_mdio_read(struct ethernet_regs *eth, int addr, int reg)
 {
-	uint32_t reg;		/* convenient holder for the PHY register */
-	uint32_t phy;		/* convenient holder for the PHY */
 	uint32_t start;
 	int val;
 
@@ -104,11 +101,10 @@ static int fec_mdio_read(struct ethernet_regs *eth, uint8_t phyaddr,
 	 * programming the FEC's MII data register.
 	 */
 	writel(FEC_IEVENT_MII, &eth->ievent);
-	reg = regaddr << FEC_MII_DATA_RA_SHIFT;
-	phy = phyaddr << FEC_MII_DATA_PA_SHIFT;
 
 	writel(FEC_MII_DATA_ST | FEC_MII_DATA_OP_RD | FEC_MII_DATA_TA |
-			phy | reg, &eth->mii_data);
+	       (addr << FEC_MII_DATA_PA_SHIFT) | (reg << FEC_MII_DATA_RA_SHIFT),
+	       &eth->mii_data);
 
 	/* wait for the related interrupt */
 	start = get_timer(0);
@@ -124,8 +120,8 @@ static int fec_mdio_read(struct ethernet_regs *eth, uint8_t phyaddr,
 
 	/* it's now safe to read the PHY's register */
 	val = (unsigned short)readl(&eth->mii_data);
-	debug("%s: phy: %02x reg:%02x val:%#x\n", __func__, phyaddr,
-	      regaddr, val);
+	debug("%s: phy: %02x reg:%02x val:%#x\n", __func__, addr,
+	      reg, val);
 	return val;
 }
 
@@ -156,18 +152,14 @@ static void fec_mii_setspeed(struct ethernet_regs *eth)
 	debug("%s: mii_speed %08x\n", __func__, readl(&eth->mii_speed));
 }
 
-static int fec_mdio_write(struct ethernet_regs *eth, uint8_t phyaddr,
-		uint8_t regaddr, uint16_t data)
+static int _fec_mdio_write(struct ethernet_regs *eth, int addr, int reg,
+			   u16 val)
 {
-	uint32_t reg;		/* convenient holder for the PHY register */
-	uint32_t phy;		/* convenient holder for the PHY */
 	uint32_t start;
 
-	reg = regaddr << FEC_MII_DATA_RA_SHIFT;
-	phy = phyaddr << FEC_MII_DATA_PA_SHIFT;
-
-	writel(FEC_MII_DATA_ST | FEC_MII_DATA_OP_WR |
-		FEC_MII_DATA_TA | phy | reg | data, &eth->mii_data);
+	writel(FEC_MII_DATA_ST | FEC_MII_DATA_OP_WR | FEC_MII_DATA_TA |
+	       (addr << FEC_MII_DATA_PA_SHIFT) | (reg << FEC_MII_DATA_RA_SHIFT) |
+	       val, &eth->mii_data);
 
 	/* wait for the MII interrupt */
 	start = get_timer(0);
@@ -180,22 +172,10 @@ static int fec_mdio_write(struct ethernet_regs *eth, uint8_t phyaddr,
 
 	/* clear MII interrupt bit */
 	writel(FEC_IEVENT_MII, &eth->ievent);
-	debug("%s: phy: %02x reg:%02x val:%#x\n", __func__, phyaddr,
-	      regaddr, data);
+	debug("%s: phy: %02x reg:%02x val:%#x\n", __func__, addr,
+	      reg, val);
 
 	return 0;
-}
-
-static int fec_phy_read(struct mii_dev *bus, int phyaddr, int dev_addr,
-			int regaddr)
-{
-	return fec_mdio_read(bus->priv, phyaddr, regaddr);
-}
-
-static int fec_phy_write(struct mii_dev *bus, int phyaddr, int dev_addr,
-			 int regaddr, u16 data)
-{
-	return fec_mdio_write(bus->priv, phyaddr, regaddr, data);
 }
 
 #ifndef CONFIG_PHYLIB
@@ -211,17 +191,17 @@ static int miiphy_restart_aneg(struct eth_device *dev)
 	 * Reset PHY, then delay 300ns
 	 */
 #ifdef CONFIG_MX27
-	fec_mdio_write(eth, fec->phy_id, MII_DCOUNTER, 0x00FF);
+	_fec_mdio_write(eth, fec->phy_id, MII_DCOUNTER, 0x00FF);
 #endif
-	fec_mdio_write(eth, fec->phy_id, MII_BMCR, BMCR_RESET);
+	_fec_mdio_write(eth, fec->phy_id, MII_BMCR, BMCR_RESET);
 	udelay(1000);
 
 	/* Set the auto-negotiation advertisement register bits */
-	fec_mdio_write(eth, fec->phy_id, MII_ADVERTISE,
-		       LPA_100FULL | LPA_100HALF | LPA_10FULL |
-		       LPA_10HALF | PHY_ANLPAR_PSB_802_3);
-	fec_mdio_write(eth, fec->phy_id, MII_BMCR,
-		       BMCR_ANENABLE | BMCR_ANRESTART);
+	_fec_mdio_write(eth, fec->phy_id, MII_ADVERTISE,
+			LPA_100FULL | LPA_100HALF | LPA_10FULL |
+			LPA_10HALF | PHY_ANLPAR_PSB_802_3);
+	_fec_mdio_write(eth, fec->phy_id, MII_BMCR,
+			BMCR_ANENABLE | BMCR_ANRESTART);
 
 	if (fec->mii_postcall)
 		ret = fec->mii_postcall(fec->phy_id);
@@ -246,7 +226,7 @@ static int miiphy_wait_aneg(struct eth_device *dev)
 			return -1;
 		}
 
-		status = fec_mdio_read(eth, fec->phy_id, MII_BMSR);
+		status = _fec_mdio_read(eth, fec->phy_id, MII_BMSR);
 		if (status < 0) {
 			printf("%s: Autonegotiation failed. status: %d\n",
 			       dev->name, status);
@@ -562,7 +542,7 @@ static int fec_init(struct eth_device *dev, bd_t *bd)
 	fec_reg_setup(fec);
 
 	if (fec->xcv_type != PHY_INTERFACE_MODE_SEVENWIRE)
-		fec_mii_setspeed(fec->bus->priv);
+		fec_mii_setspeed(fec->eth);
 
 	/* Set Opcode/Pause Duration Register */
 	writel(0x00010020, &fec->eth->op_pause);	/* FIXME 0xffff0020; */
@@ -940,11 +920,6 @@ static int fec_recv(struct eth_device *dev)
 	return len;
 }
 
-static void fec_set_dev_name(char *dest, int dev_id)
-{
-	sprintf(dest, (dev_id == -1) ? "FEC" : "FEC%i", dev_id);
-}
-
 static int fec_alloc_descs(struct fec_priv *fec)
 {
 	unsigned int size;
@@ -1020,6 +995,23 @@ static void fec_free_descs(struct fec_priv *fec)
 	free(fec->tbd_base);
 }
 
+#ifndef CONFIG_DM_ETH
+static int fec_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
+{
+	return _fec_mdio_read(bus->priv, addr, reg);
+}
+
+static int fec_mdio_write(struct mii_dev *bus, int addr, int devad, int reg,
+			  u16 val)
+{
+	return _fec_mdio_write(bus->priv, addr, reg, val);
+}
+
+static void fec_set_dev_name(char *dest, int dev_id)
+{
+	sprintf(dest, (dev_id == -1) ? "FEC" : "FEC%i", dev_id);
+}
+
 struct mii_dev *fec_get_miibus(ulong base_addr, int dev_id)
 {
 	struct ethernet_regs *eth = (struct ethernet_regs *)base_addr;
@@ -1031,8 +1023,8 @@ struct mii_dev *fec_get_miibus(ulong base_addr, int dev_id)
 		printf("mdio_alloc failed\n");
 		return NULL;
 	}
-	bus->read = fec_phy_read;
-	bus->write = fec_phy_write;
+	bus->read = fec_mdio_read;
+	bus->write = fec_mdio_write;
 	bus->priv = eth;
 	fec_set_dev_name(bus->name, dev_id);
 
@@ -1046,7 +1038,6 @@ struct mii_dev *fec_get_miibus(ulong base_addr, int dev_id)
 	return bus;
 }
 
-#ifndef CONFIG_DM_ETH
 #ifdef CONFIG_PHYLIB
 int fec_probe(bd_t *bd, int dev_id, uint32_t base_addr,
 		struct mii_dev *bus, struct phy_device *phydev)
@@ -1254,6 +1245,41 @@ static int fec_phy_init(struct udevice *dev)
 	return 0;
 }
 
+static int fec_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
+{
+	struct udevice *dev = bus->priv;
+	struct fec_priv *priv = dev_get_priv(dev);
+
+	return _fec_mdio_read(priv->eth, addr, reg);
+}
+
+static int fec_mdio_write(struct mii_dev *bus, int addr, int devad, int reg,
+			  u16 val)
+{
+	struct udevice *dev = bus->priv;
+	struct fec_priv *priv = dev_get_priv(dev);
+
+	return _fec_mdio_write(priv->eth, addr, reg, val);
+}
+
+static int fec_mdio_init(struct udevice *dev)
+{
+	struct mii_dev *bus;
+
+	bus = mdio_alloc();
+	if (!bus) {
+		printf("failed to allocate mdio\n");
+		return -ENOMEM;
+	}
+
+	bus->read = fec_mdio_read;
+	bus->write = fec_mdio_write;
+	snprintf(bus->name, sizeof(bus->name), "%s", dev->name);
+	bus->priv = dev;
+
+	return mdio_register(bus);
+}
+
 static int fec_enet_init(struct fec_priv *priv)
 {
 	uint32_t start;
@@ -1288,26 +1314,26 @@ static int fecmxc_probe(struct udevice *dev)
 {
 	struct eth_pdata *pdata = dev_get_platdata(dev);
 	struct fec_priv *priv = dev_get_priv(dev);
-	struct mii_dev *bus = NULL;
 	int ret;
 
 	ret = fec_enet_init(priv);
 	if (ret)
 		return ret;
 
-	priv->dev_id = dev->seq;
-#ifdef CONFIG_FEC_MXC_MDIO_BASE
-	bus = fec_get_miibus((ulong)CONFIG_FEC_MXC_MDIO_BASE, dev->seq);
-#else
-	bus = fec_get_miibus((ulong)priv->eth, dev->seq);
-#endif
-	if (!bus) {
-		ret = -ENOMEM;
-		goto err_mii;
-	}
+	ret = fec_mdio_init(dev);
+	if (ret)
+		goto err_enet;
 
-	priv->bus = bus;
+#ifdef CONFIG_FEC_MXC_MDIO_BASE
+	fec_mii_setspeed((struct ethernet_regs *)CONFIG_FEC_MXC_MDIO_BASE);
+#else
+	fec_mii_setspeed(priv->eth);
+#endif
+
+	priv->bus = miiphy_get_dev_by_name(dev->name);
+	priv->dev_id = dev->seq;
 	priv->xcv_type = pdata->phy_interface;
+
 	ret = fec_phy_init(dev);
 	if (ret)
 		goto err_phy;
@@ -1315,9 +1341,9 @@ static int fecmxc_probe(struct udevice *dev)
 	return 0;
 
 err_phy:
-	mdio_unregister(bus);
-	free(bus);
-err_mii:
+	mdio_unregister(priv->bus);
+	mdio_free(priv->bus);
+err_enet:
 	fec_free_descs(priv);
 	return ret;
 }
