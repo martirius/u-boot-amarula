@@ -235,6 +235,9 @@ struct fec_priv {
 	uint8_t *tdb_ptr;
 	int dev_id;
 	struct mii_dev *bus;
+#ifndef CONFIG_DM_ETH
+	struct eth_device *edev;
+#endif
 #ifdef CONFIG_PHYLIB
 	struct phy_device *phydev;
 #else

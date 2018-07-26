@@ -345,21 +345,8 @@ static int fec_get_hwaddr(int dev_id, unsigned char *mac)
 	return !is_valid_ethaddr(mac);
 }
 
-#ifdef CONFIG_DM_ETH
-static int fecmxc_set_hwaddr(struct udevice *dev)
-#else
-static int fec_set_hwaddr(struct eth_device *dev)
-#endif
+static int _fec_set_hwaddr(struct fec_priv *fec, u8 *mac)
 {
-#ifdef CONFIG_DM_ETH
-	struct fec_priv *fec = dev_get_priv(dev);
-	struct eth_pdata *pdata = dev_get_platdata(dev);
-	uchar *mac = pdata->enetaddr;
-#else
-	uchar *mac = dev->enetaddr;
-	struct fec_priv *fec = (struct fec_priv *)dev->priv;
-#endif
-
 	writel(0, &fec->eth->iaddr1);
 	writel(0, &fec->eth->iaddr2);
 	writel(0, &fec->eth->gaddr1);
@@ -402,17 +389,8 @@ static void fec_reg_setup(struct fec_priv *fec)
  * Start the FEC engine
  * @param[in] dev Our device to handle
  */
-#ifdef CONFIG_DM_ETH
-static int fec_open(struct udevice *dev)
-#else
-static int fec_open(struct eth_device *edev)
-#endif
+static int fec_open(struct fec_priv *fec)
 {
-#ifdef CONFIG_DM_ETH
-	struct fec_priv *fec = dev_get_priv(dev);
-#else
-	struct fec_priv *fec = (struct fec_priv *)edev->priv;
-#endif
 	int speed;
 	ulong addr, size;
 	int i;
@@ -487,9 +465,9 @@ static int fec_open(struct eth_device *edev)
 #elif CONFIG_FEC_FIXED_SPEED
 	speed = CONFIG_FEC_FIXED_SPEED;
 #else
-	miiphy_wait_aneg(edev);
-	speed = miiphy_speed(edev->name, fec->phy_id);
-	miiphy_duplex(edev->name, fec->phy_id);
+	miiphy_wait_aneg(fec->edev);
+	speed = miiphy_speed(fec->edev->name, fec->phy_id);
+	miiphy_duplex(fec->edev->name, fec->phy_id);
 #endif
 
 #ifdef FEC_QUIRK_ENET_MAC
@@ -513,27 +491,13 @@ static int fec_open(struct eth_device *edev)
 	return 0;
 }
 
-#ifdef CONFIG_DM_ETH
-static int fecmxc_init(struct udevice *dev)
-#else
-static int fec_init(struct eth_device *dev, bd_t *bd)
-#endif
+static int _fec_init(struct fec_priv *fec, u8 *enetaddr)
 {
-#ifdef CONFIG_DM_ETH
-	struct fec_priv *fec = dev_get_priv(dev);
-#else
-	struct fec_priv *fec = (struct fec_priv *)dev->priv;
-#endif
 	u8 *mib_ptr = (uint8_t *)&fec->eth->rmon_t_drop;
 	u8 *i;
 	ulong addr;
 
-	/* Initialize MAC address */
-#ifdef CONFIG_DM_ETH
-	fecmxc_set_hwaddr(dev);
-#else
-	fec_set_hwaddr(dev);
-#endif
+	_fec_set_hwaddr(fec, enetaddr);
 
 	/* Setup transmit descriptors, there are two in total. */
 	fec_tbd_init(fec);
@@ -575,9 +539,9 @@ static int fec_init(struct eth_device *dev, bd_t *bd)
 
 #ifndef CONFIG_PHYLIB
 	if (fec->xcv_type != PHY_INTERFACE_MODE_SEVENWIRE)
-		miiphy_restart_aneg(dev);
+		miiphy_restart_aneg(fec->edev);
 #endif
-	fec_open(dev);
+	fec_open(fec);
 	return 0;
 }
 
@@ -585,17 +549,8 @@ static int fec_init(struct eth_device *dev, bd_t *bd)
  * Halt the FEC engine
  * @param[in] dev Our device to handle
  */
-#ifdef CONFIG_DM_ETH
-static void fecmxc_halt(struct udevice *dev)
-#else
-static void fec_halt(struct eth_device *dev)
-#endif
+static void _fec_halt(struct fec_priv *fec)
 {
-#ifdef CONFIG_DM_ETH
-	struct fec_priv *fec = dev_get_priv(dev);
-#else
-	struct fec_priv *fec = (struct fec_priv *)dev->priv;
-#endif
 	int counter = 0xffff;
 
 	/* issue graceful stop command to the FEC transmitter if necessary */
@@ -629,11 +584,7 @@ static void fec_halt(struct eth_device *dev)
  * @param[in] length Data count in bytes
  * @return 0 on success
  */
-#ifdef CONFIG_DM_ETH
-static int fecmxc_send(struct udevice *dev, void *packet, int length)
-#else
-static int fec_send(struct eth_device *dev, void *packet, int length)
-#endif
+static int _fec_send(struct fec_priv *fec, void *packet, int length)
 {
 	unsigned int status;
 	u32 size;
@@ -645,12 +596,6 @@ static int fec_send(struct eth_device *dev, void *packet, int length)
 	 * This routine transmits one frame.  This routine only accepts
 	 * 6-byte Ethernet addresses.
 	 */
-#ifdef CONFIG_DM_ETH
-	struct fec_priv *fec = dev_get_priv(dev);
-#else
-	struct fec_priv *fec = (struct fec_priv *)dev->priv;
-#endif
-
 	/*
 	 * Check for valid length of data.
 	 */
@@ -780,17 +725,8 @@ out:
  * @param[in] dev Our ethernet device to handle
  * @return Length of packet read
  */
-#ifdef CONFIG_DM_ETH
-static int fecmxc_recv(struct udevice *dev, int flags, uchar **packetp)
-#else
-static int fec_recv(struct eth_device *dev)
-#endif
+static int _fec_recv(struct fec_priv *fec, uchar **packetp, u8 *enetaddr)
 {
-#ifdef CONFIG_DM_ETH
-	struct fec_priv *fec = dev_get_priv(dev);
-#else
-	struct fec_priv *fec = (struct fec_priv *)dev->priv;
-#endif
 	struct fec_bd *rbd = &fec->rbd_base[fec->rbd_index];
 	unsigned long ievent;
 	int frame_length, len = 0;
@@ -798,28 +734,13 @@ static int fec_recv(struct eth_device *dev)
 	ulong addr, size, end;
 	int i;
 
-#ifdef CONFIG_DM_ETH
-	*packetp = memalign(ARCH_DMA_MINALIGN, FEC_MAX_PKT_SIZE);
-	if (*packetp == 0) {
-		printf("%s: error allocating packetp\n", __func__);
-		return -ENOMEM;
-	}
-#else
-	ALLOC_CACHE_ALIGN_BUFFER(uchar, buff, FEC_MAX_PKT_SIZE);
-#endif
-
 	/* Check if any critical events have happened */
 	ievent = readl(&fec->eth->ievent);
 	writel(ievent, &fec->eth->ievent);
 	debug("fec_recv: ievent 0x%lx\n", ievent);
 	if (ievent & FEC_IEVENT_BABR) {
-#ifdef CONFIG_DM_ETH
-		fecmxc_halt(dev);
-		fecmxc_init(dev);
-#else
-		fec_halt(dev);
-		fec_init(dev, fec->bd);
-#endif
+		_fec_halt(fec);
+		_fec_init(fec, enetaddr);
 		printf("some error: 0x%08lx\n", ievent);
 		return 0;
 	}
@@ -831,18 +752,10 @@ static int fec_recv(struct eth_device *dev)
 	if (ievent & FEC_IEVENT_GRA) {
 		/* Graceful stop complete */
 		if (readl(&fec->eth->x_cntrl) & 0x00000001) {
-#ifdef CONFIG_DM_ETH
-			fecmxc_halt(dev);
-#else
-			fec_halt(dev);
-#endif
+			_fec_halt(fec);
 			writel(~0x00000001 & readl(&fec->eth->x_cntrl),
 			       &fec->eth->x_cntrl);
-#ifdef CONFIG_DM_ETH
-			fecmxc_init(dev);
-#else
-			fec_init(dev, fec->bd);
-#endif
+			_fec_init(fec, enetaddr);
 		}
 	}
 
@@ -882,13 +795,7 @@ static int fec_recv(struct eth_device *dev)
 #ifdef CONFIG_FEC_MXC_SWAP_PACKET
 			swap_packet((uint32_t *)addr, frame_length);
 #endif
-
-#ifdef CONFIG_DM_ETH
 			memcpy(*packetp, (char *)addr, frame_length);
-#else
-			memcpy(buff, (char *)addr, frame_length);
-			net_process_received_packet(buff, frame_length);
-#endif
 			len = frame_length;
 		} else {
 			if (bd_status & FEC_RBD_ERR)
@@ -998,6 +905,39 @@ static void fec_free_descs(struct fec_priv *fec)
 }
 
 #ifndef CONFIG_DM_ETH
+static int fec_set_hwaddr(struct eth_device *dev)
+{
+	return _fec_set_hwaddr(dev->priv, dev->enetaddr);
+}
+
+static void fec_halt(struct eth_device *dev)
+{
+	_fec_halt(dev->priv);
+}
+
+static int fec_recv(struct eth_device *dev)
+{
+	ALLOC_CACHE_ALIGN_BUFFER(uchar, packet, FEC_MAX_PKT_SIZE);
+	int length;
+
+	length = _fec_recv(dev->priv, &packet, dev->enetaddr);
+	if (length == -EAGAIN)
+		return 0;
+	net_process_received_packet(packet, length);
+
+	return 0;
+}
+
+static int fec_send(struct eth_device *dev, void *packet, int length)
+{
+	return _fec_send(dev->priv, packet, length);
+}
+
+static int fec_init(struct eth_device *dev, bd_t *bd)
+{
+	return _fec_init(dev->priv, dev->enetaddr);
+}
+
 static int fec_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
 {
 	return _fec_mdio_read(bus->priv, addr, reg);
@@ -1084,6 +1024,7 @@ static int fec_probe(bd_t *bd, int dev_id, uint32_t base_addr,
 	edev->halt = fec_halt;
 	edev->write_hwaddr = fec_set_hwaddr;
 
+	fec->edev = edev;
 	fec->eth = (struct ethernet_regs *)(ulong)base_addr;
 	fec->bd = bd;
 
@@ -1199,7 +1140,7 @@ int fecmxc_register_mii_postcall(struct eth_device *dev, int (*cb)(int))
 
 #else
 
-static int fecmxc_read_rom_hwaddr(struct udevice *dev)
+static int fec_read_rom_hwaddr(struct udevice *dev)
 {
 	struct fec_priv *priv = dev_get_priv(dev);
 	struct eth_pdata *pdata = dev_get_platdata(dev);
@@ -1207,7 +1148,22 @@ static int fecmxc_read_rom_hwaddr(struct udevice *dev)
 	return fec_get_hwaddr(priv->dev_id, pdata->enetaddr);
 }
 
-static int fecmxc_free_pkt(struct udevice *dev, uchar *packet, int length)
+static int fec_set_hwaddr(struct udevice *dev)
+{
+	struct fec_priv *priv = dev_get_priv(dev);
+	struct eth_pdata *pdata = dev_get_platdata(dev);
+
+	return _fec_set_hwaddr(priv, pdata->enetaddr);
+}
+
+static void fec_halt(struct udevice *dev)
+{
+	struct fec_priv *priv = dev_get_priv(dev);
+
+	_fec_halt(priv);
+}
+
+static int fec_free_pkt(struct udevice *dev, uchar *packet, int length)
 {
 	if (packet)
 		free(packet);
@@ -1215,14 +1171,43 @@ static int fecmxc_free_pkt(struct udevice *dev, uchar *packet, int length)
 	return 0;
 }
 
-static const struct eth_ops fecmxc_ops = {
-	.start			= fecmxc_init,
-	.send			= fecmxc_send,
-	.recv			= fecmxc_recv,
-	.free_pkt		= fecmxc_free_pkt,
-	.stop			= fecmxc_halt,
-	.write_hwaddr		= fecmxc_set_hwaddr,
-	.read_rom_hwaddr	= fecmxc_read_rom_hwaddr,
+static int fec_recv(struct udevice *dev, int flags, uchar **packetp)
+{
+	struct fec_priv *priv = dev_get_priv(dev);
+	struct eth_pdata *pdata = dev_get_platdata(dev);
+
+	*packetp = memalign(ARCH_DMA_MINALIGN, FEC_MAX_PKT_SIZE);
+	if (*packetp == 0) {
+		printf("%s: error allocating packetp\n", __func__);
+		return -ENOMEM;
+	}
+
+	return _fec_recv(priv, packetp, pdata->enetaddr);
+}
+
+static int fec_send(struct udevice *dev, void *packet, int length)
+{
+	struct fec_priv *priv = dev_get_priv(dev);
+
+	return _fec_send(priv, packet, length);
+}
+
+static int fec_start(struct udevice *dev)
+{
+	struct fec_priv *priv = dev_get_priv(dev);
+	struct eth_pdata *pdata = dev_get_platdata(dev);
+
+	return _fec_init(priv, pdata->enetaddr);
+}
+
+static const struct eth_ops fec_ops = {
+	.start			= fec_start,
+	.send			= fec_send,
+	.recv			= fec_recv,
+	.free_pkt		= fec_free_pkt,
+	.stop			= fec_halt,
+	.write_hwaddr		= fec_set_hwaddr,
+	.read_rom_hwaddr	= fec_read_rom_hwaddr,
 };
 
 static int fec_phy_init(struct udevice *dev)
@@ -1441,7 +1426,7 @@ U_BOOT_DRIVER(fecmxc_gem) = {
 	.ofdata_to_platdata = fecmxc_ofdata_to_platdata,
 	.probe	= fecmxc_probe,
 	.remove	= fecmxc_remove,
-	.ops	= &fecmxc_ops,
+	.ops	= &fec_ops,
 	.priv_auto_alloc_size = sizeof(struct fec_priv),
 	.platdata_auto_alloc_size = sizeof(struct eth_pdata),
 };
