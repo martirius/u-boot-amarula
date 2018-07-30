@@ -188,11 +188,6 @@
 #define CONFIG_MTD_PARTITIONS
 
 /*
- * Ethernet (on SOC imx FEC)
- */
-#define CONFIG_FEC_MXC_PHYADDR		0x1f
-
-/*
  * FPGA
  */
 #define CONFIG_FPGA_COUNT		1

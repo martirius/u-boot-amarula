@@ -34,7 +34,6 @@
 /* Eth Configs */
 
 #define IMX_FEC_BASE	FEC_BASE_ADDR
-#define CONFIG_FEC_MXC_PHYADDR	0x1F
 
 /* USB Configs */
 #define CONFIG_USB_EHCI_MX5

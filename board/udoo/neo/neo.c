@@ -303,7 +303,7 @@ int board_eth_init(bd_t *bis)
 	if (!bus)
 		return -EINVAL;
 
-	phydev = phy_find_by_mask(bus, (0x1 << CONFIG_FEC_MXC_PHYADDR),
+	phydev = phy_find_by_mask(bus, (0x1 << CONFIG_PHY_ADDR),
 					PHY_INTERFACE_MODE_RMII);
 	if (!phydev) {
 		free(bus);

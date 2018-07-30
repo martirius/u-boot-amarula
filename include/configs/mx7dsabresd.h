@@ -21,7 +21,6 @@
 /* Network */
 #define CONFIG_FEC_XCV_TYPE             PHY_INTERFACE_MODE_RGMII
 #define CONFIG_ETHPRIME                 "FEC"
-#define CONFIG_FEC_MXC_PHYADDR          0
 
 #define CONFIG_PHY_BROADCOM
 /* ENET1 */

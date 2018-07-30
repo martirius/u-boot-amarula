@@ -47,7 +47,6 @@
 /* Eth Configs */
 
 #define IMX_FEC_BASE	FEC_BASE_ADDR
-#define CONFIG_FEC_MXC_PHYADDR	0x1F
 
 /* allow to overwrite serial and ethaddr */
 #define CONFIG_ENV_OVERWRITE

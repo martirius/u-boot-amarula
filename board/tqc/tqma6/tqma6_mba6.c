@@ -294,7 +294,7 @@ int board_eth_init(bd_t *bis)
 	if (!bus)
 		return -EINVAL;
 	/* scan phy */
-	phydev = phy_find_by_mask(bus, (0xf << CONFIG_FEC_MXC_PHYADDR),
+	phydev = phy_find_by_mask(bus, (0xf << CONFIG_PHY_ADDR),
 					PHY_INTERFACE_MODE_RGMII);
 
 	if (!phydev) {

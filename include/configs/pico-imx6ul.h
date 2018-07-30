@@ -16,7 +16,6 @@
 /* Network support */
 
 #define IMX_FEC_BASE			ENET2_BASE_ADDR
-#define CONFIG_FEC_MXC_PHYADDR		0x1
 #define CONFIG_FEC_XCV_TYPE		PHY_INTERFACE_MODE_RMII
 
 /* Size of malloc() pool */

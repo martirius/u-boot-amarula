@@ -157,8 +157,7 @@ int board_eth_init(bd_t *bis)
 	gpio_set_value(PHY_RESET, 1);
 	mdelay(1);
 
-	ret = fecmxc_initialize_multi(bis, 0, CONFIG_FEC_MXC_PHYADDR,
-					IMX_FEC_BASE);
+	ret = fecmxc_initialize_multi(bis, 0, CONFIG_PHY_ADDR, IMX_FEC_BASE);
 	if (ret)
 		goto eth_fail;
 

@@ -59,7 +59,6 @@
 
 #define IMX_FEC_BASE	        FEC_BASE_ADDR
 #define CONFIG_ETHPRIME		"FEC"
-#define CONFIG_FEC_MXC_PHYADDR	0
 
 /* allow to overwrite serial and ethaddr */
 #define CONFIG_ENV_OVERWRITE		/* disable vendor parameters protection (serial#, ethaddr) */

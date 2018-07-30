@@ -21,7 +21,6 @@
 #define IMX_FEC_BASE				ENET_BASE_ADDR
 #define CONFIG_FEC_XCV_TYPE			PHY_INTERFACE_MODE_RGMII
 #define CONFIG_ETHPRIME				"FEC"
-#define CONFIG_FEC_MXC_PHYADDR			0x10
 #define CONFIG_FEC_FIXED_SPEED			1000 /* No autoneg, fix Gb */
 
 #endif                         /*__EL6Q_CONFIG_H */

@@ -41,11 +41,6 @@
 #define CONFIG_MXC_UART_BASE	UART2_BASE
 
 /*
- * Ethernet
- */
-#define CONFIG_FEC_MXC_PHYADDR		0x00
-
-/*
  * BOOTP options
  */
 #define CONFIG_BOOTP_BOOTFILESIZE

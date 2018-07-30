@@ -84,7 +84,6 @@
  * Ethernet on SOC (FEC)
  */
 #define IMX_FEC_BASE	FEC_BASE_ADDR
-#define CONFIG_FEC_MXC_PHYADDR	0x1F
 
 #define CONFIG_ARP_TIMEOUT	200UL
 

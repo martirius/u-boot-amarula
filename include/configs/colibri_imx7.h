@@ -22,7 +22,6 @@
 /* Network */
 #define CONFIG_FEC_XCV_TYPE             PHY_INTERFACE_MODE_RMII
 #define CONFIG_ETHPRIME                 "FEC"
-#define CONFIG_FEC_MXC_PHYADDR          0
 
 #define CONFIG_IP_DEFRAG
 #define CONFIG_TFTP_BLOCKSIZE		16352

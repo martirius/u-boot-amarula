@@ -517,7 +517,7 @@ int board_eth_init(bd_t *bis)
 	setup_iomux_fec(CONFIG_FEC_ENET_DEV);
 
 	return fecmxc_initialize_multi(bis, CONFIG_FEC_ENET_DEV,
-				       CONFIG_FEC_MXC_PHYADDR, IMX_FEC_BASE);
+				       CONFIG_PHY_ADDR, IMX_FEC_BASE);
 }
 
 static int setup_fec(int fec_id)

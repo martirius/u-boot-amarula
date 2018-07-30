@@ -23,7 +23,6 @@
 
 /* Ethernet Configs */
 #define CONFIG_ETHPRIME                "FEC"
-#define CONFIG_FEC_MXC_PHYADDR         0
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"script=boot.scr\0" \

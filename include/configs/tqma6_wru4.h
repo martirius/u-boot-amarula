@@ -9,7 +9,6 @@
 /* Ethernet */
 #define CONFIG_FEC_XCV_TYPE		PHY_INTERFACE_MODE_RMII
 #define CONFIG_ETHPRIME			"FEC"
-#define CONFIG_FEC_MXC_PHYADDR		0x01
 #define CONFIG_PHY_SMSC
 
 /* UART */

@@ -51,7 +51,11 @@ DECLARE_GLOBAL_DATA_PTR;
 #endif
 
 #if defined(CONFIG_TARGET_APX4DEVKIT) || defined(CONFIG_TARGET_MX6QARM2)
-# define CONFIG_FEC_MXC_PHY_ADDR	0
+# define CONFIG_PHY_ADDR	0
+#endif
+
+#ifdef CONFIG_TARGET_SC_SPS_1
+# undef CONFIG_PHY_ADDR
 #endif
 
 /*
@@ -1184,11 +1188,10 @@ int fecmxc_initialize_multi(bd_t *bd, int dev_id, int phy_id, uint32_t addr)
 	return ret;
 }
 
-#ifdef CONFIG_FEC_MXC_PHYADDR
+#ifdef CONFIG_PHY_ADDR
 int fecmxc_initialize(bd_t *bd)
 {
-	return fecmxc_initialize_multi(bd, -1, CONFIG_FEC_MXC_PHYADDR,
-			IMX_FEC_BASE);
+	return fecmxc_initialize_multi(bd, -1, CONFIG_PHY_ADDR, IMX_FEC_BASE);
 }
 #endif
 
@@ -1234,8 +1237,8 @@ static int fec_phy_init(struct fec_priv *priv, struct udevice *dev)
 	struct phy_device *phydev;
 	int mask = 0xffffffff;
 
-#ifdef CONFIG_FEC_MXC_PHYADDR
-	mask = 1 << CONFIG_FEC_MXC_PHYADDR;
+#ifdef CONFIG_PHY_ADDR
+	mask = 1 << CONFIG_PHY_ADDR;
 #endif
 
 	phydev = phy_find_by_mask(priv->bus, mask, priv->xcv_type);

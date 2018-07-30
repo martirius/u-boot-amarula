@@ -16,7 +16,6 @@
 #include <configs/platinum.h>
 
 #define CONFIG_FEC_XCV_TYPE			PHY_INTERFACE_MODE_RGMII
-#define CONFIG_FEC_MXC_PHYADDR			4
 
 #define CONFIG_PHY_RESET_DELAY			1000
 

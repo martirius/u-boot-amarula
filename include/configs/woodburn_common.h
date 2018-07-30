@@ -77,7 +77,6 @@
  * Ethernet on SOC (FEC)
  */
 #define IMX_FEC_BASE	FEC_BASE_ADDR
-#define CONFIG_FEC_MXC_PHYADDR	0x1
 
 #define CONFIG_DISCOVER_PHY
 
