@@ -8,6 +8,9 @@
 
 #include <linux/mtd/mtd.h>
 
+struct udevice;
+
+#if defined(CONFIG_MTD)
 /*
  * Get mtd_info structure of the dev, which is stored as uclass private.
  *
@@ -20,5 +23,10 @@ static inline struct mtd_info *mtd_get_info(struct udevice *dev)
 }
 
 int mtd_probe(struct udevice *dev);
+#else
+
+#endif /* CONFIG_MTD */
+
+int mtd_probe_devices(void);
 
 #endif	/* _MTD_H_ */
