@@ -19,7 +19,7 @@
 #endif
 
 /* CONFIG_HARD_SPI triggers SPI bus initialization in PowerPC */
-#if defined(CONFIG_MPC8XXX_SPI) || defined(CONFIG_FSL_ESPI)
+#if defined(CONFIG_MPC8XXX_SPI)
 # ifndef CONFIG_HARD_SPI
 #  define CONFIG_HARD_SPI
 # endif

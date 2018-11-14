@@ -402,16 +402,6 @@ combinations. this should be removed later
 #define CONFIG_RTC_DS3231
 #define CONFIG_SYS_I2C_RTC_ADDR		0x68
 
-/*
- * SPI interface will not be available in case of NAND boot SPI CS0 will be
- * used for SLIC
- */
-/* eSPI - Enhanced SPI */
-#ifdef CONFIG_FSL_ESPI
-#define CONFIG_SF_DEFAULT_SPEED		10000000
-#define CONFIG_SF_DEFAULT_MODE		SPI_MODE_0
-#endif
-
 #if defined(CONFIG_TSEC_ENET)
 
 #define CONFIG_MII_DEFAULT_TSEC	1	/* Allow unregistered phys */

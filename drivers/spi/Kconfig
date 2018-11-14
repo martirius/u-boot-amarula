@@ -279,13 +279,6 @@ config CF_SPI
 	  Enable the ColdFire SPI driver. This driver can be used on
 	  some m68k SoCs.
 
-config FSL_ESPI
-	bool "Freescale eSPI driver"
-	help
-	  Enable the Freescale eSPI driver. This driver can be used to
-	  access the SPI interface and SPI NOR flash on platforms embedding
-	  this Freescale eSPI IP core.
-
 config FSL_QSPI
 	bool "Freescale QSPI driver"
 	help
