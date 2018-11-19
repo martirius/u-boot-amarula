@@ -28,7 +28,6 @@ obj-$(CONFIG_FSL_ESPI) += fsl_espi.o
 obj-$(CONFIG_FSL_QSPI) += fsl_qspi.o
 obj-$(CONFIG_ICH_SPI) +=  ich.o
 obj-$(CONFIG_KIRKWOOD_SPI) += kirkwood_spi.o
-obj-$(CONFIG_MPC8XX_SPI) += mpc8xx_spi.o
 obj-$(CONFIG_MPC8XXX_SPI) += mpc8xxx_spi.o
 obj-$(CONFIG_MT7621_SPI) += mt7621_spi.o
 obj-$(CONFIG_MVEBU_A3700_SPI) += mvebu_a3700_spi.o
