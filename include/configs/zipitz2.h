@@ -58,21 +58,14 @@
 /*
  * SPI and LCD
  */
-#ifdef	CONFIG_CMD_SPI
-#define	CONFIG_SOFT_SPI
 #define	CONFIG_LCD_ROTATION
 #define	CONFIG_PXA_LCD
 #define	CONFIG_LMS283GF05
 
-#define	SPI_DELAY	udelay(10)
-#define	SPI_SDA(val)	zipitz2_spi_sda(val)
-#define	SPI_SCL(val)	zipitz2_spi_scl(val)
-#define	SPI_READ	zipitz2_spi_read()
 #ifndef	__ASSEMBLY__
 void zipitz2_spi_sda(int);
 void zipitz2_spi_scl(int);
 unsigned char zipitz2_spi_read(void);
-#endif
 #endif
 
 #define	CONFIG_SYS_DEVICE_NULLDEV	1
