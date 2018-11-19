@@ -320,9 +320,6 @@
 #define CONFIG_SYS_FSL_I2C2_OFFSET	0x3100
 #define CONFIG_SYS_I2C_NOPROBES		{ {0, 0x69} }
 
-/* SPI */
-#undef CONFIG_SOFT_SPI			/* SPI bit-banged */
-
 /* GPIOs.  Used as SPI chip selects */
 #define CONFIG_SYS_GPIO1_PRELIM
 #define CONFIG_SYS_GPIO1_DIR		0xC0000000  /* SPI CS on 0, LED on 1 */
