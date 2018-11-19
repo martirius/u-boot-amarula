@@ -41,7 +41,6 @@ obj-$(CONFIG_PL022_SPI) += pl022_spi.o
 obj-$(CONFIG_RENESAS_RPC_SPI) += renesas_rpc_spi.o
 obj-$(CONFIG_ROCKCHIP_SPI) += rk_spi.o
 obj-$(CONFIG_SANDBOX_SPI) += sandbox_spi.o
-obj-$(CONFIG_SH_SPI) += sh_spi.o
 obj-$(CONFIG_SH_QSPI) += sh_qspi.o
 obj-$(CONFIG_STM32_QSPI) += stm32_qspi.o
 obj-$(CONFIG_SUN4I_SPI) += sun4i_spi.o
