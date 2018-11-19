@@ -110,11 +110,6 @@
 #define CONFIG_LPC32XX_GPIO
 
 /*
- * SSP/SPI/DISPLAY
- */
-
-#define CONFIG_LPC32XX_SSP_TIMEOUT 100000
-/*
  * Environment
  */
 
