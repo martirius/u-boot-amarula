@@ -25,7 +25,6 @@ obj-$(CONFIG_BCM63XX_HSSPI) += bcm63xx_hsspi.o
 obj-$(CONFIG_BCM63XX_SPI) += bcm63xx_spi.o
 obj-$(CONFIG_BCMSTB_SPI) += bcmstb_spi.o
 obj-$(CONFIG_CADENCE_QSPI) += cadence_qspi.o cadence_qspi_apb.o
-obj-$(CONFIG_CF_SPI) += cf_spi.o
 obj-$(CONFIG_DESIGNWARE_SPI) += designware_spi.o
 obj-$(CONFIG_EXYNOS_SPI) += exynos_spi.o
 obj-$(CONFIG_FSL_DSPI) += fsl_dspi.o
