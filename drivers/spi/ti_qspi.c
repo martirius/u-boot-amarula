@@ -340,11 +340,6 @@ void spi_cs_deactivate(struct spi_slave *slave)
 	ti_qspi_cs_deactivate(priv);
 }
 
-void spi_init(void)
-{
-	/* nothing to do */
-}
-
 static void ti_spi_setup_spi_register(struct ti_qspi_priv *priv)
 {
 	u32 memval = 0;
