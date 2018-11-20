@@ -919,7 +919,7 @@ ifeq ($(CONFIG_DM_I2C_COMPAT)$(CONFIG_SANDBOX),y)
 	@echo "===================================================="
 endif
 ifeq ($(CONFIG_DM_SPI),)
-ifeq ($(CONFIG_DAVINCI_SPI),y)
+ifeq ($(filter $(CONFIG_DAVINCI_SPI) $(CONFIG_KIRKWOOD_SPI),y),y)
 	@echo "===================== WARNING ======================"
 	@echo "This board uses SPI driver from drivers/spi/ without"
 	@echo "enabling CONFIG_DM_SPI. Please enable CONFIG_DM_SPI"

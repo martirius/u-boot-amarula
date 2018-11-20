@@ -39,7 +39,9 @@ void *spi_do_alloc_slave(int offset, int size, unsigned int bus,
 	return ptr;
 }
 
-#if !defined(CONFIG_DM_SPI) && defined(CONFIG_DAVINCI_SPI)
+#if !defined(CONFIG_DM_SPI) && \
+	defined(CONFIG_DAVINCI_SPI) || \
+	defined(CONFIG_KIRKWOOD_SPI)
 void spi_cs_activate(struct spi_slave *slave)
 {
 }

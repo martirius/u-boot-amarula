@@ -7,6 +7,7 @@
 ifdef CONFIG_DM_SPI
 obj-y += spi-uclass.o
 obj-$(CONFIG_DAVINCI_SPI) += davinci_spi.o
+obj-$(CONFIG_KIRKWOOD_SPI) += kirkwood_spi.o
 obj-$(CONFIG_SANDBOX) += spi-emul-uclass.o
 obj-$(CONFIG_SOFT_SPI) += soft_spi.o
 obj-$(CONFIG_SPI_MEM) += spi-mem.o
@@ -29,7 +30,6 @@ obj-$(CONFIG_FSL_DSPI) += fsl_dspi.o
 obj-$(CONFIG_FSL_ESPI) += fsl_espi.o
 obj-$(CONFIG_FSL_QSPI) += fsl_qspi.o
 obj-$(CONFIG_ICH_SPI) +=  ich.o
-obj-$(CONFIG_KIRKWOOD_SPI) += kirkwood_spi.o
 obj-$(CONFIG_LPC32XX_SSP) += lpc32xx_ssp.o
 obj-$(CONFIG_MPC8XX_SPI) += mpc8xx_spi.o
 obj-$(CONFIG_MPC8XXX_SPI) += mpc8xxx_spi.o
