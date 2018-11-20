@@ -6,6 +6,7 @@
 # There are many options which enable SPI, so make this library available
 ifdef CONFIG_DM_SPI
 obj-y += spi-uclass.o
+obj-$(CONFIG_DAVINCI_SPI) += davinci_spi.o
 obj-$(CONFIG_SANDBOX) += spi-emul-uclass.o
 obj-$(CONFIG_SOFT_SPI) += soft_spi.o
 obj-$(CONFIG_SPI_MEM) += spi-mem.o
@@ -22,7 +23,6 @@ obj-$(CONFIG_BCM63XX_SPI) += bcm63xx_spi.o
 obj-$(CONFIG_BCMSTB_SPI) += bcmstb_spi.o
 obj-$(CONFIG_CADENCE_QSPI) += cadence_qspi.o cadence_qspi_apb.o
 obj-$(CONFIG_CF_SPI) += cf_spi.o
-obj-$(CONFIG_DAVINCI_SPI) += davinci_spi.o
 obj-$(CONFIG_DESIGNWARE_SPI) += designware_spi.o
 obj-$(CONFIG_EXYNOS_SPI) += exynos_spi.o
 obj-$(CONFIG_FSL_DSPI) += fsl_dspi.o

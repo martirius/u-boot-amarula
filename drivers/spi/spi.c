@@ -38,3 +38,38 @@ void *spi_do_alloc_slave(int offset, int size, unsigned int bus,
 
 	return ptr;
 }
+
+#if !defined(CONFIG_DM_SPI) && defined(CONFIG_DAVINCI_SPI)
+void spi_cs_activate(struct spi_slave *slave)
+{
+}
+
+void spi_cs_deactivate(struct spi_slave *slave)
+{
+}
+
+struct spi_slave *spi_setup_slave(unsigned int bus, unsigned int cs,
+				  unsigned int max_hz, unsigned int mode)
+{
+	return NULL;
+}
+
+void spi_free_slave(struct spi_slave *slave)
+{
+}
+
+int spi_xfer(struct spi_slave *slave, unsigned int bitlen,
+	     const void *dout, void *din, unsigned long flags)
+{
+	return 0;
+}
+
+int spi_claim_bus(struct spi_slave *slave)
+{
+	return 0;
+}
+
+void spi_release_bus(struct spi_slave *slave)
+{
+}
+#endif
