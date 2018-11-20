@@ -262,7 +262,6 @@ __weak int init_func_vid(void)
 static int init_func_spi(void)
 {
 	puts("SPI:   ");
-	spi_init();
 	puts("ready\n");
 	return 0;
 }
