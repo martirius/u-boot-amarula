@@ -11,6 +11,7 @@ obj-$(CONFIG_KIRKWOOD_SPI) += kirkwood_spi.o
 obj-$(CONFIG_SANDBOX) += spi-emul-uclass.o
 obj-$(CONFIG_SOFT_SPI) += soft_spi.o
 obj-$(CONFIG_SPI_MEM) += spi-mem.o
+obj-$(CONFIG_TI_QSPI) += ti_qspi.o
 else
 obj-y += spi.o
 obj-$(CONFIG_SOFT_SPI) += soft_spi_legacy.o
@@ -52,7 +53,6 @@ obj-$(CONFIG_TEGRA114_SPI) += tegra114_spi.o
 obj-$(CONFIG_TEGRA20_SFLASH) += tegra20_sflash.o
 obj-$(CONFIG_TEGRA20_SLINK) += tegra20_slink.o
 obj-$(CONFIG_TEGRA210_QSPI) += tegra210_qspi.o
-obj-$(CONFIG_TI_QSPI) += ti_qspi.o
 obj-$(CONFIG_XILINX_SPI) += xilinx_spi.o
 obj-$(CONFIG_ZYNQ_SPI) += zynq_spi.o
 obj-$(CONFIG_ZYNQ_QSPI) += zynq_qspi.o
