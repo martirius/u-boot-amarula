@@ -43,6 +43,12 @@ void spi_set_speed(struct spi_slave *slave, uint hz)
 	/* TO DO: It's actially have to be in spi/ */
 }
 
+int spi_cs_is_valid(unsigned int bus, unsigned int cs)
+{
+	/* do nothing, there is no spi driver */
+	return 0;
+}
+
 /*
  * To be compatible with cmd_gpio
  */
