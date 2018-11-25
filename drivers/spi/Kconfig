@@ -370,12 +370,6 @@ config MXC_SPI
 	  Enable the MXC SPI controller driver. This driver can be used
 	  on various i.MX SoCs such as i.MX31/35/51/6/7.
 
-config MXS_SPI
-	bool "MXS SPI Driver"
-	help
-	  Enable the MXS SPI controller driver. This driver can be used
-	  on the i.MX23 and i.MX28 SoCs.
-
 config OMAP3_SPI
 	bool "McSPI driver for OMAP"
 	help
