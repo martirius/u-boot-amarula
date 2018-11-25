@@ -59,7 +59,6 @@
  * SPI and LCD
  */
 #ifdef	CONFIG_CMD_SPI
-#define	CONFIG_SOFT_SPI
 #define	CONFIG_LCD_ROTATION
 #define	CONFIG_PXA_LCD
 #define	CONFIG_LMS283GF05
