@@ -59,9 +59,6 @@
 /* Gigabit Ether */
 #define SH7757LCR_GIGA_ETHERNET_NUM_CH	2
 
-/* SPI */
-#define CONFIG_SH_SPI_BASE		0xfe002000
-
 /* MMCIF */
 #define CONFIG_SH_MMCIF_ADDR		0xffcb0000
 #define CONFIG_SH_MMCIF_CLK		48000000
