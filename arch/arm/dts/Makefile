@@ -89,6 +89,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += \
 	rk3399-gru-bob.dtb \
 	rk3399-nanopc-t4.dtb \
 	rk3399-nanopi-m4.dtb \
+	rk3399-nanopi-neo4.dtb \
 	rk3399-orangepi.dtb \
 	rk3399-puma-ddr1333.dtb \
 	rk3399-puma-ddr1600.dtb \
