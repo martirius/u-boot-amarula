@@ -526,6 +526,52 @@ config ARCH_FIXUP_FDT_MEMORY
 
 endmenu		# Boot images
 
+config SKIP_BROKEN
+	bool
+
+if !SKIP_BROKEN
+
+config BROKEN
+	bool
+	help
+	  This option is selected automatically when your old .config
+	  uses an option that no longer exists in current uboot. In
+	  that case, the build will fail. Look for config options which
+	  are selected in the menu below: they no longer exist and
+	  should be replaced by something else.
+
+comment "Broken detected: check the content of the menu below"
+	depends on BROKEN
+
+menu "Broken configs"
+
+if BROKEN
+comment "------------------------------------------------------"
+comment "Your configuration uses broekn options that no longer "
+comment "useful or exist in U-Boot, as indicated in the menu   "
+comment "below. As long as these options stay selected, or in  "
+comment "case of string options are non-empty, the build       "
+comment "will fail.                                            "
+comment "*                                                     "
+comment "These broken configurations would comes under below   "
+comment "category:					       "
+comment "- legacy driver that would need dm conversion.	       "
+comment "- legacy driver that doesn't have proper update since "
+comment "from the releases.				       "
+comment "------------------------------------------------------"
+endif
+
+config MXS_SPI
+	bool "MXS SPI Driver"
+	select BROKEN
+	help
+	  Enable the MXS SPI controller driver. This driver can be used
+	  on the i.MX23 and i.MX28 SoCs.
+
+endmenu		# Broken configs
+
+endif		# !SKIP_BROKEN
+
 source "api/Kconfig"
 
 source "common/Kconfig"

@@ -1,0 +1,3 @@
+ifeq ($(CONFIG_BROKEN),y)
+$(error "You have broken configuration in your .config! Please check your configuration.")
+endif

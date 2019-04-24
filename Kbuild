@@ -66,3 +66,5 @@ arch/$(ARCH)/lib/asm-offsets.s: arch/$(ARCH)/lib/asm-offsets.c FORCE
 
 $(obj)/$(offsets-file): arch/$(ARCH)/lib/asm-offsets.s FORCE
 	$(call filechk,offsets,__ASM_OFFSETS_H__)
+
+-include Makefile.broken
