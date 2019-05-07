@@ -9,7 +9,6 @@
 #include <dm/uclass-internal.h>
 #include <asm/arch-rockchip/periph.h>
 #include <power/regulator.h>
-#include <spl.h>
 
 int board_init(void)
 {
@@ -64,31 +63,4 @@ int board_init(void)
 
 out:
 	return 0;
-}
-
-void spl_board_init(void)
-{
-	struct udevice *pinctrl;
-	int ret;
-
-	ret = uclass_get_device(UCLASS_PINCTRL, 0, &pinctrl);
-	if (ret) {
-		debug("%s: Cannot find pinctrl device\n", __func__);
-		goto err;
-	}
-
-	/* Enable debug UART */
-	ret = pinctrl_request_noflags(pinctrl, PERIPH_ID_UART_DBG);
-	if (ret) {
-		debug("%s: Failed to set up console UART\n", __func__);
-		goto err;
-	}
-
-	preloader_console_init();
-	return;
-err:
-	printf("%s: Error %d\n", __func__, ret);
-
-	/* No way to report error here */
-	hang();
 }
