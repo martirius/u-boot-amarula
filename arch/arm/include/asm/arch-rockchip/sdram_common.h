@@ -75,6 +75,9 @@
 				     (4 + 2 * (ch)); \
 		} while (0)
 
+#define SYS_REG_CS1_COL_SHIFT(ch)	(0 + 2 * (ch))
+#define SYS_REG_ENC_CS1_COL(n, ch)      (((n) - 9) << SYS_REG_CS1_COL_SHIFT(ch))
+
 /* Get sdram size decode from reg */
 size_t rockchip_sdram_size(phys_addr_t reg);
 
