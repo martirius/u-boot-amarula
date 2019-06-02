@@ -121,7 +121,7 @@ struct rk3399_sdram_channel {
 	struct rk3399_msch_timings noc_timings;
 };
 
-struct rk3399_base_params {
+struct sdram_base_params {
 	unsigned int ddr_freq;
 	unsigned int dramtype;
 	unsigned int num_channels;
@@ -131,7 +131,7 @@ struct rk3399_base_params {
 
 struct rk3399_sdram_params {
 	struct rk3399_sdram_channel ch[2];
-	struct rk3399_base_params base;
+	struct sdram_base_params base;
 	struct rk3399_ddr_pctl_regs pctl_regs;
 	struct rk3399_ddr_pi_regs pi_regs;
 	struct rk3399_ddr_publ_regs phy_regs;
