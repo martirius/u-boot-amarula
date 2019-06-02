@@ -1027,7 +1027,7 @@ static void dram_all_config(struct dram_info *dram,
 		sys_reg |= SYS_REG_ENC_BK(info->bk, channel);
 		sys_reg |= SYS_REG_ENC_CS0_ROW(info->cs0_row, channel);
 		sys_reg |= SYS_REG_ENC_CS1_ROW(info->cs1_row, channel);
-		sys_reg |= (2 >> info->bw) << SYS_REG_BW_SHIFT(channel);
+		sys_reg |= SYS_REG_ENC_BW(info->bw, channel);
 		sys_reg |= SYS_REG_ENC_DBW(info->dbw, channel);
 
 		ddr_msch_regs = dram->chan[channel].msch;
