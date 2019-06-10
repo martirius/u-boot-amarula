@@ -28,6 +28,7 @@
  * [1:0]	dbw_ch0
 */
 #define SYS_REG_DDRTYPE_SHIFT		13
+#define DDR_SYS_REG_VERSION		2
 #define SYS_REG_DDRTYPE_MASK		7
 #define SYS_REG_NUM_CH_SHIFT		12
 #define SYS_REG_NUM_CH_MASK		1
@@ -61,6 +62,7 @@
 #define SYS_REG_DBW_MASK		3
 #define SYS_REG_ENC_DBW(n, ch)		((2 >> (n)) << SYS_REG_DBW_SHIFT(ch))
 
+#define SYS_REG_ENC_VERSION(n)		((n) << 28)
 #define SYS_REG_ENC_CS0_ROW(n, os_reg2, os_reg3, ch) do { \
 			(os_reg2) |= (((n) - 13) & 0x3) << (6 + 16 * (ch)); \
 			(os_reg3) |= ((((n) - 13) & 0x4) >> 2) << \
