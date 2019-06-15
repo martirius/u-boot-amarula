@@ -1248,6 +1248,8 @@ static unsigned char calculate_stride(struct rk3399_sdram_params *params)
 		}
 	}
 
+	sdram_print_stride(stride);
+
 	return stride;
 }
 
@@ -1354,11 +1356,14 @@ static int sdram_init(struct dram_info *dram,
 		debug("Channel ");
 		debug(channel ? "1: " : "0: ");
 
+		sdram_print_ddr_info(cap_info, &params->base);
+
 		set_ddrconfig(chan, params, channel, cap_info->ddrconfig);
 	}
 
 	if (params->base.num_channels == 0) {
 		printf("%s: ", __func__);
+		sdram_print_dram_type(params->base.dramtype);
 		printf(" - %dMHz failed!\n", params->base.ddr_freq);
 		return -EINVAL;
 	}
