@@ -1004,11 +1004,11 @@ static void set_ddrconfig(const struct chan_info *chan,
 static void dram_all_config(struct dram_info *dram,
 			    const struct rk3399_sdram_params *params)
 {
-	u32 sys_reg = 0;
+	u32 sys_reg2 = 0;
 	unsigned int channel, idx;
 
-	sys_reg |= SYS_REG_ENC_DDRTYPE(params->base.dramtype);
-	sys_reg |= SYS_REG_ENC_NUM_CH(params->base.num_channels);
+	sys_reg2 |= SYS_REG_ENC_DDRTYPE(params->base.dramtype);
+	sys_reg2 |= SYS_REG_ENC_NUM_CH(params->base.num_channels);
 
 	for (channel = 0, idx = 0;
 	     (idx < params->base.num_channels) && (channel < 2);
@@ -1020,15 +1020,15 @@ static void dram_all_config(struct dram_info *dram,
 		if (params->ch[channel].col == 0)
 			continue;
 		idx++;
-		sys_reg |= SYS_REG_ENC_ROW_3_4(info->row_3_4, channel);
-		sys_reg |= SYS_REG_ENC_CHINFO(channel);
-		sys_reg |= SYS_REG_ENC_RANK(info->rank, channel);
-		sys_reg |= SYS_REG_ENC_COL(info->col, channel);
-		sys_reg |= SYS_REG_ENC_BK(info->bk, channel);
-		sys_reg |= SYS_REG_ENC_CS0_ROW(info->cs0_row, channel);
-		sys_reg |= SYS_REG_ENC_CS1_ROW(info->cs1_row, channel);
-		sys_reg |= SYS_REG_ENC_BW(info->bw, channel);
-		sys_reg |= SYS_REG_ENC_DBW(info->dbw, channel);
+		sys_reg2 |= SYS_REG_ENC_ROW_3_4(info->row_3_4, channel);
+		sys_reg2 |= SYS_REG_ENC_CHINFO(channel);
+		sys_reg2 |= SYS_REG_ENC_RANK(info->rank, channel);
+		sys_reg2 |= SYS_REG_ENC_COL(info->col, channel);
+		sys_reg2 |= SYS_REG_ENC_BK(info->bk, channel);
+		sys_reg2 |= SYS_REG_ENC_CS0_ROW(info->cs0_row, channel);
+		sys_reg2 |= SYS_REG_ENC_CS1_ROW(info->cs1_row, channel);
+		sys_reg2 |= SYS_REG_ENC_BW(info->bw, channel);
+		sys_reg2 |= SYS_REG_ENC_DBW(info->dbw, channel);
 
 		ddr_msch_regs = dram->chan[channel].msch;
 		noc_timing = &params->ch[channel].noc_timings;
@@ -1049,7 +1049,7 @@ static void dram_all_config(struct dram_info *dram,
 				     1 << 17);
 	}
 
-	writel(sys_reg, &dram->pmugrf->os_reg2);
+	writel(sys_reg2, &dram->pmugrf->os_reg2);
 	rk_clrsetreg(&dram->pmusgrf->soc_con4, 0x1f << 10,
 		     params->base.stride << 10);
 
