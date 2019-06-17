@@ -1008,7 +1008,7 @@ static void dram_all_config(struct dram_info *dram,
 	unsigned int channel, idx;
 
 	sys_reg |= SYS_REG_ENC_DDRTYPE(params->base.dramtype);
-	sys_reg |= (params->base.num_channels - 1) << SYS_REG_NUM_CH_SHIFT;
+	sys_reg |= SYS_REG_ENC_NUM_CH(params->base.num_channels);
 
 	for (channel = 0, idx = 0;
 	     (idx < params->base.num_channels) && (channel < 2);
